@@ -1,0 +1,35 @@
+name: Quality Checks
+
+on: [workflow_dispatch, pull_request]
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Install pnpm first, so it's available for Node.js setup
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 10.3.0
+
+      # Install Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.7.0
+          cache: "pnpm" # Automatically caches node_modules (no need for actions/cache@v4)
+
+      # Install dependencies
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+        env:
+          NODE_ENV: test
+
+      # Run quality checks
+      - name: Run linter
+        run: pnpm lint
+        env:
+          NODE_ENV: test
