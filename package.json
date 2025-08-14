@@ -9,6 +9,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "lint": "expo lint",
+    "format": "prettier --write \"**/*.{js,ts,tsx,json,md,yml,yaml}\"",
     "test": "jest --passWithNoTests",
     "check:type": "tsc --noEmit",
     "prepare": "husky"
@@ -54,6 +55,7 @@
     "husky": "^9.1.7",
     "jest": "^30.0.5",
     "jest-expo": "^53.0.9",
+    "prettier": "^3.6.2",
     "typescript": "~5.8.3"
   },
   "private": true,

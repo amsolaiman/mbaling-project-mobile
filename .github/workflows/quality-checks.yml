@@ -20,7 +20,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22.7.0
-          cache: "pnpm" # Automatically caches node_modules (no need for actions/cache@v4)
+          cache: 'pnpm' # Automatically caches node_modules (no need for actions/cache@v4)
 
       # Install dependencies
       - name: Install dependencies
