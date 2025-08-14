@@ -34,6 +34,11 @@ jobs:
         env:
           NODE_ENV: test
 
+      - name: Run type check
+        run: pnpm check:type
+        env:
+          NODE_ENV: test
+
       - name: Run Jest unit tests
         run: pnpm test
         env:
