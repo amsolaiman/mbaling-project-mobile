@@ -9,6 +9,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "lint": "expo lint",
+    "format": "prettier --write \"**/*.{js,ts,tsx,json,md,yml,yaml}\"",
     "test": "jest --passWithNoTests",
     "check:type": "tsc --noEmit",
     "prepare": "husky"
