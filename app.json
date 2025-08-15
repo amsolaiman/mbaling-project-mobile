@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "mbaling-project-mobile",
-    "slug": "mbaling-project-mobile",
+    "name": "mBALING App",
+    "slug": "mbaling-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "mbalingprojectmobile",
+    "scheme": "mbalingapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
