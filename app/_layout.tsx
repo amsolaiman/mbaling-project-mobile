@@ -1,12 +1,17 @@
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import { useEffect } from 'react';
+import { MD3DarkTheme, MD3LightTheme, PaperProvider, configureFonts } from 'react-native-paper';
+import 'react-native-reanimated';
+// @expo
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
 
+// hooks
 import { useColorScheme } from '@/hooks/useColorScheme';
+
+// ----------------------------------------------------------------------
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -29,6 +34,20 @@ export default function RootLayout() {
     }
   }, [loaded, error]);
 
+  const NativePaperTheme = colorScheme === 'light' ? MD3LightTheme : MD3DarkTheme;
+
+  const paperTheme = {
+    ...NativePaperTheme,
+    colors: {
+      ...NativePaperTheme.colors,
+    },
+    fonts: configureFonts({
+      config: {
+        fontFamily: 'Metropolis400',
+      },
+    }),
+  };
+
   if (!loaded && !error) {
     // Async font loading only occurs in development.
     return null;
@@ -36,11 +55,13 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
+      <PaperProvider theme={paperTheme}>
+        <Stack>
+          <Stack.Screen name="index" options={{ headerShown: false }} />
+          <Stack.Screen name="+not-found" />
+        </Stack>
+        <StatusBar style="auto" />
+      </PaperProvider>
     </ThemeProvider>
   );
 }
