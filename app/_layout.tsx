@@ -1,15 +1,21 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import {
+  DarkTheme as NativeDarkTheme,
+  DefaultTheme as NativeDefaultTheme,
+  ThemeProvider,
+} from '@react-navigation/native';
 import { useEffect } from 'react';
 import { MD3DarkTheme, MD3LightTheme, PaperProvider, configureFonts } from 'react-native-paper';
 import 'react-native-reanimated';
-import '../styles/global.css';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 // @expo
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import { StatusBar } from 'expo-status-bar';
 // hooks
 import { useColorScheme } from '@/hooks/use-color-scheme';
+// styles
+import fontConfig from '@/styles/font-config';
+import '@/styles/global.css';
 
 // ----------------------------------------------------------------------
 
@@ -45,23 +51,47 @@ export default function RootLayout() {
     ...NativePaperTheme,
     colors: {
       ...NativePaperTheme.colors,
+      primary: '#be282d',
     },
     fonts: configureFonts({
-      config: {
-        fontFamily: 'Metropolis400',
-      },
+      config: fontConfig,
     }),
   };
 
+  const DefaultTheme = {
+    ...NativeDefaultTheme,
+    colors: {
+      ...NativeDefaultTheme.colors,
+      background: '#ffffff',
+    },
+  };
+
+  const DarkTheme = {
+    ...NativeDarkTheme,
+    colors: {
+      ...NativeDarkTheme.colors,
+      background: '#151718',
+    },
+  };
+
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <PaperProvider theme={paperTheme}>
-        <Stack>
-          <Stack.Screen name="index" options={{ headerShown: false }} />
-          <Stack.Screen name="+not-found" />
-        </Stack>
-        <StatusBar style="auto" />
-      </PaperProvider>
-    </ThemeProvider>
+    <SafeAreaProvider>
+      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+        <PaperProvider theme={paperTheme}>
+          <Routes />
+        </PaperProvider>
+      </ThemeProvider>
+    </SafeAreaProvider>
+  );
+}
+
+function Routes() {
+  return (
+    <SafeAreaView className="flex-1">
+      <Stack>
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="+not-found" />
+      </Stack>
+    </SafeAreaView>
   );
 }
