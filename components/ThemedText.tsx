@@ -2,7 +2,7 @@ import { Text, type TextProps } from 'react-native';
 // hooks
 import { useThemeColor } from '@/hooks/useThemeColor';
 // constants
-import Fonts from '@/constants/Fonts';
+import Fonts from '@/styles/constants/Fonts';
 
 // ----------------------------------------------------------------------
 
