@@ -1,4 +1,3 @@
-import { StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
 // components
 import { ThemedText } from '@/components/ThemedText';
@@ -8,8 +7,8 @@ import { ThemedView } from '@/components/ThemedView';
 
 export default function HomeScreen() {
   return (
-    <ThemedView style={styles.titleContainer}>
-      <ThemedText font="600" style={styles.title}>
+    <ThemedView className="flex-1 items-center justify-center">
+      <ThemedText font="600" className="mb-6 text-4xl">
         Welcome!
       </ThemedText>
 
@@ -19,15 +18,3 @@ export default function HomeScreen() {
     </ThemedView>
   );
 }
-
-const styles = StyleSheet.create({
-  titleContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 32,
-    marginBottom: 24,
-  },
-});
