@@ -2,6 +2,7 @@ import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native
 import { useEffect } from 'react';
 import { MD3DarkTheme, MD3LightTheme, PaperProvider, configureFonts } from 'react-native-paper';
 import 'react-native-reanimated';
+import '../styles/global.css';
 // @expo
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';

@@ -18,6 +18,11 @@
     "release:minor": "standard-version --release-as minor",
     "release:major": "standard-version --release-as major"
   },
+  "expo": {
+    "web": {
+      "bundler": "metro"
+    }
+  },
   "dependencies": {
     "@expo/vector-icons": "^14.1.0",
     "@react-navigation/bottom-tabs": "^7.3.10",
@@ -36,12 +41,13 @@
     "expo-symbols": "~0.4.5",
     "expo-system-ui": "~5.0.11",
     "expo-web-browser": "~14.2.0",
+    "nativewind": "^4.1.23",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-native": "0.79.6",
     "react-native-gesture-handler": "~2.24.0",
     "react-native-paper": "^5.14.5",
-    "react-native-reanimated": "~3.17.4",
+    "react-native-reanimated": "~3.17.5",
     "react-native-safe-area-context": "5.4.0",
     "react-native-screens": "~4.11.1",
     "react-native-web": "~0.20.0",
@@ -70,7 +76,9 @@
     "lint-staged": "^16.1.5",
     "madge": "^8.0.0",
     "prettier": "^3.6.2",
+    "prettier-plugin-tailwindcss": "^0.5.11",
     "standard-version": "^9.5.0",
+    "tailwindcss": "^3.4.17",
     "typescript": "~5.8.3"
   },
   "private": true,
