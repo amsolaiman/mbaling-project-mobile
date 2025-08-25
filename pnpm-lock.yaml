@@ -70,6 +70,9 @@ importers:
       react-native-gesture-handler:
         specifier: ~2.24.0
         version: 2.24.0(react-native@0.79.6(@babel/core@7.28.3)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
+      react-native-paper:
+        specifier: ^5.14.5
+        version: 5.14.5(react-native-safe-area-context@5.4.0(react-native@0.79.6(@babel/core@7.28.3)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.6(@babel/core@7.28.3)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
       react-native-reanimated:
         specifier: ~3.17.4
         version: 3.17.5(@babel/core@7.28.3)(react-native@0.79.6(@babel/core@7.28.3)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
@@ -959,6 +962,14 @@ packages:
       {
         integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==,
       }
+
+  '@callstack/react-theme-provider@3.0.9':
+    resolution:
+      {
+        integrity: sha512-tTQ0uDSCL0ypeMa8T/E9wAZRGKWj8kXP7+6RYgPTfOPs9N07C9xM8P02GJ3feETap4Ux5S69D9nteq9mEj86NA==,
+      }
+    peerDependencies:
+      react: '>=16.3.0'
 
   '@commitlint/cli@19.8.1':
     resolution:
@@ -3399,6 +3410,12 @@ packages:
         integrity: sha512-shrVawQFojnZv6xM40anx4CkoDP+fZsw/ZerEMsW/pyzsRbElpsL/DBVW7q3ExxwusdNXI3lXpuhEZkzs8p5Eg==,
       }
 
+  color@3.2.1:
+    resolution:
+      {
+        integrity: sha512-aBl7dZI9ENN6fUGC7mWpMTPNHmWUSNan9tuWN6ahh5ZLNk9baLJOnSMlrQkHcrfFgz2/RigjUVAjdx36VcemKA==,
+      }
+
   color@4.2.3:
     resolution:
       {
@@ -3873,6 +3890,13 @@ packages:
       {
         integrity: sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==,
       }
+
+  deepmerge@3.3.0:
+    resolution:
+      {
+        integrity: sha512-GRQOafGHwMHpjPx9iCvTgpu9NojZ49q794EEL94JVEw6VaeA8XTUyBKvAkOOjBX9oJNiV6G3P+T+tihFjo2TqA==,
+      }
+    engines: { node: '>=0.10.0' }
 
   deepmerge@4.3.1:
     resolution:
@@ -8012,6 +8036,16 @@ packages:
       react: '*'
       react-native: '*'
 
+  react-native-paper@5.14.5:
+    resolution:
+      {
+        integrity: sha512-eaIH5bUQjJ/mYm4AkI6caaiyc7BcHDwX6CqNDi6RIxfxfWxROsHpll1oBuwn/cFvknvA8uEAkqLk/vzVihI3AQ==,
+      }
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+      react-native-safe-area-context: '*'
+
   react-native-reanimated@3.17.5:
     resolution:
       {
@@ -10606,6 +10640,12 @@ snapshots:
 
   '@bcoe/v8-coverage@0.2.3': {}
 
+  '@callstack/react-theme-provider@3.0.9(react@19.0.0)':
+    dependencies:
+      deepmerge: 3.3.0
+      hoist-non-react-statics: 3.3.2
+      react: 19.0.0
+
   '@commitlint/cli@19.8.1(@types/node@24.3.0)(typescript@5.8.3)':
     dependencies:
       '@commitlint/format': 19.8.1
@@ -12599,6 +12639,11 @@ snapshots:
       color-name: 1.1.4
       simple-swizzle: 0.2.2
 
+  color@3.2.1:
+    dependencies:
+      color-convert: 1.9.3
+      color-string: 1.9.1
+
   color@4.2.3:
     dependencies:
       color-convert: 2.0.1
@@ -12905,6 +12950,8 @@ snapshots:
   deep-extend@0.6.0: {}
 
   deep-is@0.1.4: {}
+
+  deepmerge@3.3.0: {}
 
   deepmerge@4.3.1: {}
 
@@ -15923,6 +15970,15 @@ snapshots:
     dependencies:
       react: 19.0.0
       react-native: 0.79.6(@babel/core@7.28.3)(@types/react@19.0.14)(react@19.0.0)
+
+  react-native-paper@5.14.5(react-native-safe-area-context@5.4.0(react-native@0.79.6(@babel/core@7.28.3)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.6(@babel/core@7.28.3)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0):
+    dependencies:
+      '@callstack/react-theme-provider': 3.0.9(react@19.0.0)
+      color: 3.2.1
+      react: 19.0.0
+      react-native: 0.79.6(@babel/core@7.28.3)(@types/react@19.0.14)(react@19.0.0)
+      react-native-safe-area-context: 5.4.0(react-native@0.79.6(@babel/core@7.28.3)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
+      use-latest-callback: 0.2.4(react@19.0.0)
 
   react-native-reanimated@3.17.5(@babel/core@7.28.3)(react-native@0.79.6(@babel/core@7.28.3)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0):
     dependencies:
