@@ -1,7 +1,7 @@
 {
   "name": "mbaling-project-mobile",
   "main": "expo-router/entry",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -13,7 +13,10 @@
     "test": "jest --passWithNoTests",
     "check:type": "tsc --noEmit",
     "check:circular-deps": "madge -c --extensions ts,tsx .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "release:patch": "standard-version",
+    "release:minor": "standard-version --release-as minor",
+    "release:major": "standard-version --release-as major"
   },
   "dependencies": {
     "@expo/vector-icons": "^14.1.0",
@@ -66,6 +69,7 @@
     "lint-staged": "^16.1.5",
     "madge": "^8.0.0",
     "prettier": "^3.6.2",
+    "standard-version": "^9.5.0",
     "typescript": "~5.8.3"
   },
   "private": true,
