@@ -1,7 +1,6 @@
 import { Button } from 'react-native-paper';
 // components
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import { ThemedText, ThemedView } from '@/components/themed-native';
 
 // ----------------------------------------------------------------------
 
