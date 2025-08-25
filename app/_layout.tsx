@@ -1,5 +1,6 @@
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useEffect } from 'react';
+import { MD3DarkTheme, MD3LightTheme, PaperProvider, configureFonts } from 'react-native-paper';
 import 'react-native-reanimated';
 // @expo
 import { useFonts } from 'expo-font';
@@ -37,13 +38,29 @@ export default function RootLayout() {
     return null;
   }
 
+  const NativePaperTheme = colorScheme === 'light' ? MD3LightTheme : MD3DarkTheme;
+
+  const paperTheme = {
+    ...NativePaperTheme,
+    colors: {
+      ...NativePaperTheme.colors,
+    },
+    fonts: configureFonts({
+      config: {
+        fontFamily: 'Metropolis400',
+      },
+    }),
+  };
+
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
+      <PaperProvider theme={paperTheme}>
+        <Stack>
+          <Stack.Screen name="index" options={{ headerShown: false }} />
+          <Stack.Screen name="+not-found" />
+        </Stack>
+        <StatusBar style="auto" />
+      </PaperProvider>
     </ThemeProvider>
   );
 }
