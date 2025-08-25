@@ -1,18 +1,18 @@
 import { Text, type TextProps } from 'react-native';
-// hooks
-import { useThemeColor } from '@/hooks/useThemeColor';
 // constants
-import Fonts from '@/constants/Fonts';
+import Fonts from '@/styles/constants/Fonts';
+//
+import { useThemeColor } from './use-theme-color';
 
 // ----------------------------------------------------------------------
 
-export type ThemedTextProps = TextProps & {
+type ThemedTextProps = TextProps & {
   lightColor?: string;
   darkColor?: string;
   font?: '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900';
 };
 
-export function ThemedText({
+export default function ThemedText({
   style,
   lightColor,
   darkColor,
