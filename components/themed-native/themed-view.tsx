@@ -1,21 +1,27 @@
 import { View, type ViewProps } from 'react-native';
-//
-import { useThemeColor } from './use-theme-color';
+// utils
+import { cn } from '@/utils/tw-merge';
+// components
+import SpinnerOverlay from '../spinner-overlay';
 
 // ----------------------------------------------------------------------
 
-type ThemedViewProps = ViewProps & {
-  lightColor?: string;
-  darkColor?: string;
+type Props = ViewProps & {
+  loadingState?: boolean;
+  loadingCaption?: string;
 };
 
 export default function ThemedView({
-  style,
-  lightColor,
-  darkColor,
-  ...otherProps
-}: ThemedViewProps) {
-  const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, 'background');
+  className,
+  loadingState = false,
+  loadingCaption,
+  ...rest
+}: Props) {
+  return (
+    <>
+      <SpinnerOverlay state={loadingState} caption={loadingCaption} />
 
-  return <View style={[{ backgroundColor }, style]} {...otherProps} />;
+      <View className={cn('bg-light-theme dark:bg-dark-theme', className)} {...rest} />
+    </>
+  );
 }
