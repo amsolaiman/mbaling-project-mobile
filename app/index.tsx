@@ -1,24 +1,25 @@
 import { View } from 'react-native';
 import { Button } from 'react-native-paper';
+// hooks
+import { useBoolean } from '@/hooks/use-boolean';
 // components
 import Logo from '@/components/logo';
 import { ThemedText, ThemedView } from '@/components/themed-native';
-import { useState } from 'react';
 
 // ----------------------------------------------------------------------
 
 export default function HomeScreen() {
-  const [loading, setLoading] = useState<boolean>(false);
+  const loading = useBoolean(false);
 
   const handleClick = () => {
-    setLoading(true);
+    loading.onTrue();
     setTimeout(() => {
-      setLoading(false);
+      loading.onFalse();
     }, 2000);
   };
 
   return (
-    <ThemedView loadingState={loading} className="flex-1 items-center justify-center">
+    <ThemedView loadingState={loading.value} className="flex-1 items-center justify-center">
       <View className="mb-4">
         <Logo color="dark" />
       </View>
