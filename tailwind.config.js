@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
+const fonts = require('./styles/overrides/fonts').default;
 const colors = require('./styles/overrides/colors').default;
 
 module.exports = {
@@ -39,9 +40,13 @@ module.exports = {
       },
     },
   },
+  corePlugins: {
+    fontWeight: false,
+  },
   plugins: [
     function ({ addUtilities }) {
       addUtilities({
+        ...fonts,
         ...colors,
       });
     },
