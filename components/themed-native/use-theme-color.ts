@@ -6,7 +6,7 @@
 // hooks
 import { useColorScheme } from '@/hooks/use-color-scheme';
 // styles
-import { Colors } from '@/styles/constants/Colors';
+import Colors from '@/styles/constants/Colors';
 
 // ----------------------------------------------------------------------
 
