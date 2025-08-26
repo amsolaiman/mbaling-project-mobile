@@ -1,3 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --crimson-50: #fceded;
+  --crimson-100: #fadbdc;
+  --crimson-200: #f6babb; /* accent */
+  --crimson-300: #f39395;
+  --crimson-400: #f16669;
+  --crimson-500: #ea343a;
+  --crimson-600: #be282d; /* primary */
+  --crimson-700: #921c20;
+  --crimson-800: #661113;
+  --crimson-900: #400709;
+  --crimson-950: #290304;
+
+  --gray-50: #f1f4f7;
+  --gray-100: #e0e6ed;
+  --gray-200: #c3d0dd;
+  --gray-300: #a4b9cb;
+  --gray-400: #8ba0b3;
+  --gray-500: #768999;
+  --gray-600: #637381;
+  --gray-700: #4a5661;
+  --gray-800: #313a42;
+  --gray-900: #1a2025;
+  --gray-950: #101417;
+
+  --color-light-text: #11181c;
+  --color-light-background: #ffffff;
+  --color-light-card: #ffffff;
+
+  --color-dark-text: #ecedee;
+  --color-dark-background: #151718;
+  --color-dark-card: #1f1f1f;
+}

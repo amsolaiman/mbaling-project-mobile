@@ -7,7 +7,7 @@ import { ThemedText, ThemedView } from '@/components/themed-native';
 export default function HomeScreen() {
   return (
     <ThemedView className="flex-1 items-center justify-center">
-      <ThemedText font="600" className="mb-6 text-4xl">
+      <ThemedText font="600" className="mb-6 text-4xl !text-primary">
         Welcome!
       </ThemedText>
 
