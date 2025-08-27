@@ -89,7 +89,8 @@ function Routes() {
   return (
     <SafeAreaView className="flex-1">
       <Stack>
-        <Stack.Screen name="(app)" options={{ headerShown: false }} />
+        <Stack.Screen name="login" options={{ headerShown: false, animation: 'fade' }} />
+        <Stack.Screen name="(app)" options={{ headerShown: false, animation: 'fade' }} />
         <Stack.Screen name="+not-found" />
       </Stack>
     </SafeAreaView>
