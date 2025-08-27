@@ -26,4 +26,6 @@ export type AuthContextType = {
   unauthenticated: boolean;
   login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
+  isStudent: boolean;
+  isLandlord: boolean;
 };
