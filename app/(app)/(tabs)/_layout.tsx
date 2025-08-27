@@ -3,6 +3,7 @@ import { Dimensions, StyleSheet } from 'react-native';
 // @expo
 import { Tabs } from 'expo-router';
 // hooks
+import { useAuthContext } from '@/auth/hooks';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 // styles
 import Colors from '@/styles/constants/Colors';
@@ -14,9 +15,23 @@ import { IconHome, IconManage, IconSearch, IconSettings, IconUser } from '@/asse
 export default function TabLayout() {
   const colorScheme = useColorScheme() ?? 'light';
 
+  const { isStudent, isLandlord } = useAuthContext();
+
+  const tabItemsDisplay = (route: string) => {
+    if (route === 'search' && isLandlord) {
+      return 'none';
+    }
+
+    if (route === 'manage' && isStudent) {
+      return 'none';
+    }
+
+    return 'flex';
+  };
+
   return (
     <Tabs
-      screenOptions={() => ({
+      screenOptions={({ route }) => ({
         headerShown: false,
         tabBarShowLabel: false,
         tabBarActiveTintColor: Colors.primary,
@@ -30,7 +45,7 @@ export default function TabLayout() {
             backgroundColor: Colors[colorScheme].card,
           },
         ],
-        tabBarItemStyle: styles.tabItem,
+        tabBarItemStyle: [styles.tabItem, { display: tabItemsDisplay(route.name) }],
         tabBarHideOnKeyboard: true,
       })}
     >

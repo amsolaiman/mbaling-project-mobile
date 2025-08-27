@@ -179,6 +179,9 @@ export function AuthProvider({ children }: Props) {
       //
       login,
       logout,
+      //
+      isStudent: state.user?.role === 'student',
+      isLandlord: state.user?.role === 'landlord',
     }),
     [login, logout, state.user, status]
   );
