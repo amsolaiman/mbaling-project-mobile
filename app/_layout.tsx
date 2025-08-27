@@ -89,7 +89,7 @@ function Routes() {
   return (
     <SafeAreaView className="flex-1">
       <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="(app)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
       </Stack>
     </SafeAreaView>
