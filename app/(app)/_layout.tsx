@@ -1,9 +1,17 @@
 // @expo
-import { Stack } from 'expo-router';
+import { Redirect, Stack } from 'expo-router';
+// auth
+import { useAuthContext } from '@/auth/hooks';
 
 // ----------------------------------------------------------------------
 
 export default function MainLayout() {
+  const { unauthenticated } = useAuthContext();
+
+  if (unauthenticated) {
+    return <Redirect href="/login" />;
+  }
+
   return (
     <Stack>
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />

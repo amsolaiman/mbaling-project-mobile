@@ -11,6 +11,8 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
+// auth
+import { AuthConsumer, AuthProvider } from '@/auth/context';
 // hooks
 import { useColorScheme } from '@/hooks/use-color-scheme';
 // styles
@@ -75,13 +77,17 @@ export default function RootLayout() {
   };
 
   return (
-    <SafeAreaProvider>
-      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <PaperProvider theme={paperTheme}>
-          <Routes />
-        </PaperProvider>
-      </ThemeProvider>
-    </SafeAreaProvider>
+    <AuthProvider>
+      <SafeAreaProvider>
+        <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+          <PaperProvider theme={paperTheme}>
+            <AuthConsumer>
+              <Routes />
+            </AuthConsumer>
+          </PaperProvider>
+        </ThemeProvider>
+      </SafeAreaProvider>
+    </AuthProvider>
   );
 }
 

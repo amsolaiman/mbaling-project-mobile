@@ -6,6 +6,8 @@ import { Button } from 'react-native-paper';
 import * as Yup from 'yup';
 // @expo
 import { router } from 'expo-router';
+// auth
+import { useAuthContext } from '@/auth/hooks';
 // styles
 import Colors from '@/styles/constants/Colors';
 // components
@@ -24,6 +26,8 @@ type FormValuesProps = {
 };
 
 export default function LoginView() {
+  const { login } = useAuthContext();
+
   const LoginSchema = Yup.object().shape({
     username: Yup.string().required('Username is required'),
     password: Yup.string().required('Password is required'),
@@ -48,6 +52,7 @@ export default function LoginView() {
   const onSubmit = useCallback(
     async (data: FormValuesProps) => {
       try {
+        await login?.(data.username, data.password);
         reset();
         router.replace('/');
         console.info('DATA', data);
@@ -58,7 +63,7 @@ export default function LoginView() {
         console.error(message);
       }
     },
-    [reset]
+    [login, reset]
   );
 
   return (
