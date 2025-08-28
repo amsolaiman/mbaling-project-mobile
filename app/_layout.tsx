@@ -18,6 +18,8 @@ import { useColorScheme } from '@/hooks/use-color-scheme';
 // styles
 import fontConfig from '@/styles/font-config';
 import '@/styles/global.css';
+// components
+import { CustomAlertProvider } from '@/components/custom-alert';
 
 // ----------------------------------------------------------------------
 
@@ -81,9 +83,11 @@ export default function RootLayout() {
       <SafeAreaProvider>
         <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
           <PaperProvider theme={paperTheme}>
-            <AuthConsumer>
-              <Routes />
-            </AuthConsumer>
+            <CustomAlertProvider>
+              <AuthConsumer>
+                <Routes />
+              </AuthConsumer>
+            </CustomAlertProvider>
           </PaperProvider>
         </ThemeProvider>
       </SafeAreaProvider>
