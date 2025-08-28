@@ -18,4 +18,7 @@ export const API_ENDPOINTS = {
     me: '/api/auth/me',
     login: '/api/auth/login',
   },
+  post: {
+    list: '/api/post/list',
+  },
 };
