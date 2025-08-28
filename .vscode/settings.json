@@ -6,7 +6,7 @@
     "source.organizeImports": "explicit",
     "source.sortMembers": "explicit"
   },
-  "conventionalCommits.scopes": ["auth", "config"],
+  "conventionalCommits.scopes": ["auth", "config", "component"],
   "files.associations": {
     "*.css": "tailwindcss"
   }
