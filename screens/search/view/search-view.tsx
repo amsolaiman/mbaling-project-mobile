@@ -1,6 +1,6 @@
 import { useCallback, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Animated, Keyboard, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import { Animated, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { TextInput } from 'react-native-paper';
 // @expo
 import { useFocusEffect } from 'expo-router';
@@ -98,8 +98,8 @@ export default function SearchView() {
     <FormProvider methods={methods}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <ThemedKeyboardAvoidingView>
-          <ThemedView loadingState={isSubmitting} style={styles.container}>
-            <Animated.View style={[styles.header, { padding: headerPadding }]}>
+          <ThemedView loadingState={isSubmitting} className="flex-1">
+            <Animated.View style={{ padding: headerPadding }}>
               <RHFTextField
                 name="input"
                 placeholder="Search"
@@ -130,12 +130,3 @@ export default function SearchView() {
     </FormProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  header: {
-    position: 'fixed',
-  },
-});
