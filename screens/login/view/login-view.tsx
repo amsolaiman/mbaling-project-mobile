@@ -11,6 +11,7 @@ import { useAuthContext } from '@/auth/hooks';
 // styles
 import Colors from '@/styles/constants/Colors';
 // components
+import useCustomAlert from '@/components/custom-alert';
 import FormProvider from '@/components/hook-form';
 import Logo from '@/components/logo';
 import { ThemedKeyboardAvoidingView, ThemedView } from '@/components/themed-native';
@@ -27,6 +28,8 @@ type FormValuesProps = {
 
 export default function LoginView() {
   const { login } = useAuthContext();
+
+  const { alert } = useCustomAlert();
 
   const LoginSchema = Yup.object().shape({
     username: Yup.string().required('Username is required'),
@@ -59,11 +62,10 @@ export default function LoginView() {
       } catch (error: any) {
         const message = typeof error === 'string' ? error : error.message;
 
-        alert(message);
-        console.error(message);
+        alert({ title: 'Unable to login!', message: message });
       }
     },
-    [login, reset]
+    [alert, login, reset]
   );
 
   return (

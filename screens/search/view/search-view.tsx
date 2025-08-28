@@ -15,7 +15,8 @@ import { ThemedKeyboardAvoidingView, ThemedView } from '@/components/themed-nati
 import { IconSearch } from '@/assets/icons';
 // types
 import { PostResponse } from '@/types/posts';
-// sections
+// components
+import useCustomAlert from '@/components/custom-alert';
 import { PostCardProps } from '@/screens/_components/post-card';
 //
 import SearchResult from '../search-result';
@@ -27,6 +28,8 @@ type FormValuesProps = {
 };
 
 export default function SearchView() {
+  const { alert } = useCustomAlert();
+
   const [data, setData] = useState<PostCardProps[]>();
 
   const defaultValues = {
@@ -43,28 +46,31 @@ export default function SearchView() {
     formState: { isSubmitting },
   } = methods;
 
-  const getData = useCallback(async (query: string) => {
-    try {
-      const response = await axios.get(API_ENDPOINTS.post.search(query));
+  const getData = useCallback(
+    async (query: string) => {
+      try {
+        const response = await axios.get(API_ENDPOINTS.post.search(query));
 
-      const posts: PostResponse[] = response.data;
+        const posts: PostResponse[] = response.data;
 
-      const _data = posts.map(({ id, title, uploads, landlordDetails }) => ({
-        id,
-        title,
-        imageUrl: uploads[0].imgUrl,
-        userId: landlordDetails.id,
-        name: landlordDetails.housingDetails.housingName,
-        avatarUrl: landlordDetails.avatarUrl,
-      }));
+        const _data = posts.map(({ id, title, uploads, landlordDetails }) => ({
+          id,
+          title,
+          imageUrl: uploads[0].imgUrl,
+          userId: landlordDetails.id,
+          name: landlordDetails.housingDetails.housingName,
+          avatarUrl: landlordDetails.avatarUrl,
+        }));
 
-      setData(_data);
-    } catch (error: any) {
-      const message = typeof error === 'string' ? error : error.message;
+        setData(_data);
+      } catch (error: any) {
+        const message = typeof error === 'string' ? error : error.message;
 
-      alert(message);
-    }
-  }, []);
+        alert({ title: 'Oops!', message });
+      }
+    },
+    [alert]
+  );
 
   const onSubmit = useCallback(
     async (data: FormValuesProps) => {
