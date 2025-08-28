@@ -10,6 +10,7 @@ type Props = {
 };
 
 const IconQuestionMark = ({ variant = 'solid', size = 24, color }: Props) => {
+  // solar:question-circle-bold
   const renderSolid = (
     <Path
       fill={color}
@@ -19,6 +20,7 @@ const IconQuestionMark = ({ variant = 'solid', size = 24, color }: Props) => {
     />
   );
 
+  // solar:question-circle-outline
   const renderOutline = (
     <Path
       fill={color}
@@ -28,6 +30,7 @@ const IconQuestionMark = ({ variant = 'solid', size = 24, color }: Props) => {
     />
   );
 
+  // solar:question-circle-bold-duotone
   const renderDuotone = (
     <>
       <Path
@@ -53,4 +56,4 @@ const IconQuestionMark = ({ variant = 'solid', size = 24, color }: Props) => {
   );
 };
 
-export default memo(IconQuestionMark); // Icons from solar:question-circle
+export default memo(IconQuestionMark);
