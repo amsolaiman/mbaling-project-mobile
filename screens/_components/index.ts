@@ -1,1 +1,3 @@
 export { default as PostCard } from './post-card';
+export { default as UserBanner } from './user-banner';
+export { default as UserCard } from './user-card';
