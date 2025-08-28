@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.2](https://github.com/amsolaiman/mbaling-project-mobile/compare/v0.1.1...v0.1.2) (2025-08-28)
+
+### Features
+
+- **auth:** add auth context & hook ([#29](https://github.com/amsolaiman/mbaling-project-mobile/issues/29)) ([6f29e65](https://github.com/amsolaiman/mbaling-project-mobile/commit/6f29e6501eb79bce14365adaca02ee5dead51676))
+- **auth:** add role-based guard ([#31](https://github.com/amsolaiman/mbaling-project-mobile/issues/31)) ([aefac31](https://github.com/amsolaiman/mbaling-project-mobile/commit/aefac314e46c61a98c981b1a3fe4fb43c315393a))
+- **auth:** apply auth workflow on screens & layouts ([#30](https://github.com/amsolaiman/mbaling-project-mobile/issues/30)) ([be3773b](https://github.com/amsolaiman/mbaling-project-mobile/commit/be3773b6f8d85c49e2649f83bb53cb7cff2811fb))
+
 ### 0.1.1 (2025-08-27)
 
 ### Features
