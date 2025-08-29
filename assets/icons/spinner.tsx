@@ -27,4 +27,4 @@ const IconSpinner = ({ size = 24, color }: Props) => {
   );
 };
 
-export default memo(IconSpinner); // Icon from mingcute:loading-3-line
+export default memo(IconSpinner); // mingcute:loading-3-line

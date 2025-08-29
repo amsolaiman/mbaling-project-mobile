@@ -10,6 +10,7 @@ type Props = {
 };
 
 const IconSettings = ({ variant = 'solid', size = 24, color }: Props) => {
+  // solar:settings-minimalistic-bold
   const renderSolid = (
     <Path
       fill={color}
@@ -19,6 +20,7 @@ const IconSettings = ({ variant = 'solid', size = 24, color }: Props) => {
     />
   );
 
+  // solar:settings-minimalistic-outline
   const renderOutline = (
     <G fill={color} fillRule="evenodd" clipRule="evenodd">
       <Path d="M12 8.25a3.75 3.75 0 1 0 0 7.5a3.75 3.75 0 0 0 0-7.5M9.75 12a2.25 2.25 0 1 1 4.5 0a2.25 2.25 0 0 1-4.5 0" />
@@ -26,6 +28,7 @@ const IconSettings = ({ variant = 'solid', size = 24, color }: Props) => {
     </G>
   );
 
+  // solar:settings-minimalistic-bold-duotone
   const renderDuotone = (
     <>
       <Path
@@ -50,4 +53,4 @@ const IconSettings = ({ variant = 'solid', size = 24, color }: Props) => {
   );
 };
 
-export default memo(IconSettings); // Icons from solar:settings-minimalistic-bold solar:settings-minimalistic-outline solar:settings-minimalistic-bold-duotone
+export default memo(IconSettings);

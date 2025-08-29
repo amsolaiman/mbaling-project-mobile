@@ -1,4 +1,6 @@
+export * from './actions';
 export * from './base';
+export * from './socials';
 
 export { default as IconSpinner } from './spinner';
 

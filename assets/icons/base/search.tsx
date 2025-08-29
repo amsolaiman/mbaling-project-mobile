@@ -10,6 +10,7 @@ type Props = {
 };
 
 const IconSearch = ({ variant = 'solid', size = 24, color }: Props) => {
+  // solar:magnifer-bold
   const renderSolid = (
     <Path
       fill={color}
@@ -19,6 +20,7 @@ const IconSearch = ({ variant = 'solid', size = 24, color }: Props) => {
     />
   );
 
+  // solar:magnifer-outline
   const renderOutline = (
     <Path
       fill={color}
@@ -28,6 +30,7 @@ const IconSearch = ({ variant = 'solid', size = 24, color }: Props) => {
     />
   );
 
+  // solar:magnifer-bold-duotone
   const renderDuotone = (
     <>
       <Path
@@ -53,4 +56,4 @@ const IconSearch = ({ variant = 'solid', size = 24, color }: Props) => {
   );
 };
 
-export default memo(IconSearch); // Icons from solar:magnifer-bold solar:magnifer-outline solar:magnifer-bold-duotone
+export default memo(IconSearch);

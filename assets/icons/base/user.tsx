@@ -10,6 +10,7 @@ type Props = {
 };
 
 const IconUser = ({ variant = 'solid', size = 24, color }: Props) => {
+  // solar:user-bold
   const renderSolid = (
     <>
       <Circle fill={color} cx="12" cy="6" r="4" />
@@ -20,6 +21,7 @@ const IconUser = ({ variant = 'solid', size = 24, color }: Props) => {
     </>
   );
 
+  // solar:user-outline
   const renderOutline = (
     <Path
       fill={color}
@@ -29,6 +31,7 @@ const IconUser = ({ variant = 'solid', size = 24, color }: Props) => {
     />
   );
 
+  // solar:user-bold-duotone
   const renderDuotone = (
     <>
       <Circle fill={color} cx="12" cy="6" r="4" />
@@ -51,4 +54,4 @@ const IconUser = ({ variant = 'solid', size = 24, color }: Props) => {
   );
 };
 
-export default memo(IconUser); // Icons from solar:user-bold solar:user-outline solar:user-bold-duotone
+export default memo(IconUser);
