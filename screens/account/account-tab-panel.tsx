@@ -15,6 +15,7 @@ import Fonts from '@/styles/constants/Fonts';
 import { IconBookmark, IconSettings } from '@/assets/icons';
 //
 import AccountLandlordList from './account-landlord-list';
+import AccountLandlordSetup from './account-landlord-setup';
 
 // ----------------------------------------------------------------------
 
@@ -121,7 +122,7 @@ export default function AccountTabPanel() {
       </View>
 
       <View style={styles.tabPage}>
-        {currentTab === 'setup' && <View />}
+        {currentTab === 'setup' && <AccountLandlordSetup />}
 
         {currentTab === 'list' && (
           <AccountLandlordList pendingList={pending} currentList={current} />
