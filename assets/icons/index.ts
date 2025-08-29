@@ -1,3 +1,4 @@
+export * from './actions';
 export * from './base';
 
 export { default as IconSpinner } from './spinner';
