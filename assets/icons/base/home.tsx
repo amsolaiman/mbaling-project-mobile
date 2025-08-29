@@ -10,6 +10,7 @@ type Props = {
 };
 
 const IconHome = ({ variant = 'solid', size = 24, color }: Props) => {
+  // solar:home-2-bold
   const renderSolid = (
     <Path
       fill={color}
@@ -19,6 +20,7 @@ const IconHome = ({ variant = 'solid', size = 24, color }: Props) => {
     />
   );
 
+  // solar:home-2-outline
   const renderOutline = (
     <>
       <Path fill={color} d="M11.25 18a.75.75 0 0 0 1.5 0v-3a.75.75 0 0 0-1.5 0z" />
@@ -31,6 +33,7 @@ const IconHome = ({ variant = 'solid', size = 24, color }: Props) => {
     </>
   );
 
+  // solar:home-2-bold-duotone
   const renderDuotone = (
     <>
       <Path
@@ -53,4 +56,4 @@ const IconHome = ({ variant = 'solid', size = 24, color }: Props) => {
   );
 };
 
-export default memo(IconHome); // Icons from solar:home-2-bold solar:home-2-outline solar:home-2-bold-duotone
+export default memo(IconHome);

@@ -10,6 +10,7 @@ type Props = {
 };
 
 const IconManage = ({ variant = 'solid', size = 24, color }: Props) => {
+  // solar:pen-bold
   const renderSolid = (
     <Path
       fill={color}
@@ -17,6 +18,7 @@ const IconManage = ({ variant = 'solid', size = 24, color }: Props) => {
     />
   );
 
+  // solar:pen-outline
   const renderOutline = (
     <Path
       fill={color}
@@ -26,6 +28,7 @@ const IconManage = ({ variant = 'solid', size = 24, color }: Props) => {
     />
   );
 
+  // solar:pen-bold-duotone
   const renderDuotone = (
     <>
       <Path
@@ -51,4 +54,4 @@ const IconManage = ({ variant = 'solid', size = 24, color }: Props) => {
   );
 };
 
-export default memo(IconManage); // Icons from solar:pen-bold solar:pen-outline solar:pen-bold-duotone
+export default memo(IconManage);
