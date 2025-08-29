@@ -20,7 +20,7 @@ export default function SearchResult({ data, onScroll }: Props) {
     <Animated.FlatList
       data={data}
       keyExtractor={(item) => item.id}
-      renderItem={({ item }) => <PostCard item={item} />}
+      renderItem={({ item }) => <PostCard hideProfile item={item} />}
       //
       numColumns={2}
       columnWrapperStyle={styles.columnWrapper}
