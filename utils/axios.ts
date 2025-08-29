@@ -18,6 +18,10 @@ export const API_ENDPOINTS = {
     me: '/api/auth/me',
     login: '/api/auth/login',
   },
+  landlord: {
+    tenants: (id: string) => `/api/landlord/list/${id}/tenants`,
+    applicants: (id: string) => `/api/landlord/list/${id}/applicants`,
+  },
   student: {
     housing: (id: string) => `/api/student/list/${id}/housing`,
     application: (id: string) => `/api/student/list/${id}/application`,

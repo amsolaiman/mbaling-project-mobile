@@ -1,6 +1,12 @@
-import { UserLandlordResponse } from './users';
+import { UserLandlordResponse, UserStudentResponse } from './users';
 
 // ----------------------------------------------------------------------
+
+export type HousingApplicantResponse = IApplicationItem & {
+  studentDetails: UserStudentResponse;
+};
+
+export type HousingTenantResponse = UserStudentResponse;
 
 export type StudentApplicationResponse = IApplicationItem & {
   housingDetails: UserLandlordResponse;
