@@ -14,7 +14,10 @@
         "dark": "./assets/images/ios-dark.png",
         "tinted": "./assets/images/ios-tinted.png"
       },
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "LSApplicationQueriesSchemes": ["discord", "fb-messenger", "tg", "viber", "whatsapp"]
+      }
     },
     "android": {
       "adaptiveIcon": {
