@@ -28,6 +28,7 @@ export const API_ENDPOINTS = {
   },
   post: {
     list: '/api/post/list',
+    user: (id: string) => `/api/post/user?id=${id}`,
     search: (query: string) => `/api/post/search?query=${query}`,
   },
 };
