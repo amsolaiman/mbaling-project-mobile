@@ -15,6 +15,8 @@ export default function MainLayout() {
   return (
     <Stack>
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+
+      <Stack.Screen name="post/[id]" options={{ headerShown: false }} />
     </Stack>
   );
 }
