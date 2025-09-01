@@ -29,7 +29,7 @@ export default function FooterActions({ children, leftAction, rightAction }: Pro
         styles.container,
         {
           backgroundColor: Colors[colorScheme].card,
-          borderTopColor: colorScheme === 'light' ? Colors.grey[300] : Colors.common.white[40],
+          borderTopColor: colorScheme === 'light' ? Colors.grey[100] : Colors.common.white[40],
         },
       ]}
     >
@@ -53,10 +53,6 @@ export default function FooterActions({ children, leftAction, rightAction }: Pro
 const styles = StyleSheet.create({
   container: {
     minHeight: 64,
-    position: 'fixed',
-    bottom: 0,
-    left: 0,
-    right: 0,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
