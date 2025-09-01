@@ -19,6 +19,7 @@ export const API_ENDPOINTS = {
     login: '/api/auth/login',
   },
   landlord: {
+    get: (id: string) => `/api/landlord/list/${id}`,
     tenants: (id: string) => `/api/landlord/list/${id}/tenants`,
     applicants: (id: string) => `/api/landlord/list/${id}/applicants`,
   },

@@ -1,5 +1,7 @@
 import { useCallback } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
+// @expo
+import { router } from 'expo-router';
 // hooks
 import { useColorScheme } from '@/hooks/use-color-scheme';
 // styles
@@ -24,7 +26,7 @@ export default function PostAvatar({ userId, name, username, avatarUrl }: Props)
   const colorScheme = useColorScheme() ?? 'light';
 
   const handlePress = useCallback(() => {
-    console.log('User: ', userId);
+    router.push(`/profile/${userId}`);
   }, [userId]);
 
   return (
