@@ -8,6 +8,8 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+// @expo
+import { router } from 'expo-router';
 // hooks
 import { useColorScheme } from '@/hooks/use-color-scheme';
 // styles
@@ -46,7 +48,7 @@ export default function PostCard({ item, hideProfile = false }: Props) {
   const colorScheme = useColorScheme() ?? 'light';
 
   const handlePressPost = useCallback(() => {
-    console.log('Post: ', id);
+    router.push(`/post/${id}`);
   }, [id]);
 
   const handlePressProfile = useCallback(() => {
