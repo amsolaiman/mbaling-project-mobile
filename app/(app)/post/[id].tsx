@@ -1,4 +1,4 @@
-// sections
+// screens
 import { PostView } from '@/screens/post/detail/view';
 
 // ----------------------------------------------------------------------

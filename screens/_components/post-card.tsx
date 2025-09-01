@@ -11,6 +11,7 @@ import {
 // @expo
 import { router } from 'expo-router';
 // hooks
+import { useAuthContext } from '@/auth/hooks';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 // styles
 import Colors from '@/styles/constants/Colors';
@@ -41,6 +42,8 @@ type Props = {
 // ----------------------------------------------------------------------
 
 export default function PostCard({ item, hideProfile = false }: Props) {
+  const { user } = useAuthContext();
+
   const { id, title, imageUrl, userId, name, avatarUrl } = item;
 
   const sheetRef = useRef<ActionSheetRef>(null);
@@ -52,8 +55,12 @@ export default function PostCard({ item, hideProfile = false }: Props) {
   }, [id]);
 
   const handlePressProfile = useCallback(() => {
-    console.log('User: ', userId);
-  }, [userId]);
+    if (user?.id === userId) {
+      router.push(`/account`);
+    } else {
+      router.push(`/profile/${userId}`);
+    }
+  }, [user?.id, userId]);
 
   const meta = {
     title,
