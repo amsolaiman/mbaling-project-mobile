@@ -35,9 +35,13 @@ export default function PostCarousel({ data }: Props) {
   const config = useRef([{ viewabilityConfig, onViewableItemsChanged }]);
 
   const renderItem = ({ item }: { item: Omit<IPostUploads, 'postId'> }) => (
-    <Pressable onPress={() => handleOpenModal(item.imgUrl)}>
-      <Image source={{ uri: item.imgUrl }} style={styles.image} />
-    </Pressable>
+    <>
+      <Pressable onPress={() => handleOpenModal(item.imgUrl)}>
+        <Image source={{ uri: item.imgUrl }} style={styles.image} />
+      </Pressable>
+
+      {modalImg && <ImageModal src={modalImg} open={open.value} onClose={handleCloseModal} />}
+    </>
   );
 
   const handleOpenModal = (imgUrl: string) => {
@@ -51,37 +55,33 @@ export default function PostCarousel({ data }: Props) {
   };
 
   return (
-    <>
-      <View style={styles.container}>
-        <FlatList
-          data={data}
-          keyExtractor={(item) => item.id}
-          renderItem={renderItem}
-          //
-          horizontal
-          pagingEnabled
-          showsHorizontalScrollIndicator={false}
-          //
-          viewabilityConfigCallbackPairs={config.current}
-        />
+    <View style={styles.container}>
+      <FlatList
+        data={data}
+        keyExtractor={(item) => item.id}
+        renderItem={renderItem}
+        //
+        horizontal
+        pagingEnabled
+        showsHorizontalScrollIndicator={false}
+        //
+        viewabilityConfigCallbackPairs={config.current}
+      />
 
-        <View style={styles.pagination}>
-          {data.map((_, index) => (
-            <View
-              key={index}
-              style={[
-                styles.dot,
-                {
-                  backgroundColor: pageIndex === index ? Colors.primary : Colors.grey[50],
-                },
-              ]}
-            />
-          ))}
-        </View>
+      <View style={styles.pagination}>
+        {data.map((_, index) => (
+          <View
+            key={index}
+            style={[
+              styles.dot,
+              {
+                backgroundColor: pageIndex === index ? Colors.primary : Colors.grey[50],
+              },
+            ]}
+          />
+        ))}
       </View>
-
-      {modalImg && <ImageModal src={modalImg} open={open.value} onClose={handleCloseModal} />}
-    </>
+    </View>
   );
 }
 
