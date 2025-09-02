@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { FlatList, RefreshControl, StyleSheet, View } from 'react-native';
 // hooks
+import { useAuthContext } from '@/auth/hooks';
 import { useBoolean } from '@/hooks/use-boolean';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 // utils
@@ -12,12 +13,15 @@ import { PostResponse } from '@/types/posts';
 // components
 import { Spinner } from '@/components/spinner-overlay';
 import { ThemedText } from '@/components/themed-native';
-//
 import PostCard, { PostCardProps } from '@/screens/_components/post-card';
+//
+import HomePostButton from '../home-post-button';
 
 // ----------------------------------------------------------------------
 
 export default function HomeView() {
+  const { isLandlord } = useAuthContext();
+
   const colorScheme = useColorScheme() ?? 'light';
 
   const refreshing = useBoolean();
@@ -67,6 +71,8 @@ export default function HomeView() {
 
   return (
     <View style={styles.container}>
+      {isLandlord && <HomePostButton />}
+
       <FlatList
         data={data}
         keyExtractor={(item) => item.id}
