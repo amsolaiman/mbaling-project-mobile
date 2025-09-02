@@ -20,6 +20,8 @@ export default function PostCarousel({ data }: Props) {
 
   const [pageIndex, setPageIndex] = useState<number>(0);
 
+  const [modalImg, setModalImg] = useState<string | null>(null);
+
   const viewabilityConfig = {
     itemVisiblePercentThreshold: 50,
   };
@@ -33,43 +35,53 @@ export default function PostCarousel({ data }: Props) {
   const config = useRef([{ viewabilityConfig, onViewableItemsChanged }]);
 
   const renderItem = ({ item }: { item: Omit<IPostUploads, 'postId'> }) => (
-    <>
-      <Pressable onPress={open.onTrue}>
-        <Image source={{ uri: item.imgUrl }} style={styles.image} />
-      </Pressable>
-
-      <ImageModal src={item.imgUrl} open={open.value} onClose={open.onFalse} />
-    </>
+    <Pressable onPress={() => handleOpenModal(item.imgUrl)}>
+      <Image source={{ uri: item.imgUrl }} style={styles.image} />
+    </Pressable>
   );
 
-  return (
-    <View style={styles.container}>
-      <FlatList
-        data={data}
-        keyExtractor={(item) => item.id}
-        renderItem={renderItem}
-        //
-        horizontal
-        pagingEnabled
-        showsHorizontalScrollIndicator={false}
-        //
-        viewabilityConfigCallbackPairs={config.current}
-      />
+  const handleOpenModal = (imgUrl: string) => {
+    setModalImg(imgUrl);
+    open.onTrue();
+  };
 
-      <View style={styles.pagination}>
-        {data.map((_, index) => (
-          <View
-            key={index}
-            style={[
-              styles.dot,
-              {
-                backgroundColor: pageIndex === index ? Colors.primary : Colors.grey[50],
-              },
-            ]}
-          />
-        ))}
+  const handleCloseModal = () => {
+    setModalImg(null);
+    open.onFalse();
+  };
+
+  return (
+    <>
+      <View style={styles.container}>
+        <FlatList
+          data={data}
+          keyExtractor={(item) => item.id}
+          renderItem={renderItem}
+          //
+          horizontal
+          pagingEnabled
+          showsHorizontalScrollIndicator={false}
+          //
+          viewabilityConfigCallbackPairs={config.current}
+        />
+
+        <View style={styles.pagination}>
+          {data.map((_, index) => (
+            <View
+              key={index}
+              style={[
+                styles.dot,
+                {
+                  backgroundColor: pageIndex === index ? Colors.primary : Colors.grey[50],
+                },
+              ]}
+            />
+          ))}
+        </View>
       </View>
-    </View>
+
+      {modalImg && <ImageModal src={modalImg} open={open.value} onClose={handleCloseModal} />}
+    </>
   );
 }
 
