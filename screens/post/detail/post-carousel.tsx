@@ -1,9 +1,13 @@
 import { useRef, useState } from 'react';
-import { Dimensions, FlatList, Image, StyleSheet, View, ViewToken } from 'react-native';
+import { Dimensions, FlatList, Image, Pressable, StyleSheet, View, ViewToken } from 'react-native';
+// hooks
+import { useBoolean } from '@/hooks/use-boolean';
 // styles
 import Colors from '@/styles/constants/Colors';
 // types
 import { IPostUploads } from '@/types/posts';
+// components
+import ImageModal from '@/components/image-modal';
 
 // ----------------------------------------------------------------------
 
@@ -12,6 +16,8 @@ type Props = {
 };
 
 export default function PostCarousel({ data }: Props) {
+  const open = useBoolean();
+
   const [pageIndex, setPageIndex] = useState<number>(0);
 
   const viewabilityConfig = {
@@ -27,7 +33,13 @@ export default function PostCarousel({ data }: Props) {
   const config = useRef([{ viewabilityConfig, onViewableItemsChanged }]);
 
   const renderItem = ({ item }: { item: Omit<IPostUploads, 'postId'> }) => (
-    <Image source={{ uri: item.imgUrl }} style={styles.image} />
+    <>
+      <Pressable onPress={open.onTrue}>
+        <Image source={{ uri: item.imgUrl }} style={styles.image} />
+      </Pressable>
+
+      <ImageModal src={item.imgUrl} open={open.value} onClose={open.onFalse} />
+    </>
   );
 
   return (
