@@ -18,6 +18,7 @@ export default function MainLayout() {
 
       <Stack.Screen name="post/new" options={{ headerShown: false }} />
       <Stack.Screen name="post/[id]" options={{ headerShown: false }} />
+      <Stack.Screen name="post/[id]/edit" options={{ headerShown: false }} />
       <Stack.Screen name="profile/[id]" options={{ headerShown: false }} />
     </Stack>
   );
