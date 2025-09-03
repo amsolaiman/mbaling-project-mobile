@@ -1,5 +1,7 @@
 import { useCallback } from 'react';
 import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+// @expo
+import { router } from 'expo-router';
 // styles
 import Colors from '@/styles/constants/Colors';
 import Fonts from '@/styles/constants/Fonts';
@@ -30,7 +32,7 @@ export default function ManageCard({ item }: Props) {
   const { id, title, imageUrl } = item;
 
   const handleEdit = useCallback(() => {
-    console.log('Post: ', id);
+    router.push(`/post/${id}/edit`);
   }, [id]);
 
   const handleDelete = () => {
