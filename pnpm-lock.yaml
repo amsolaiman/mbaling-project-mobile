@@ -13,6 +13,9 @@ importers:
       '@hookform/resolvers':
         specifier: ^5.2.1
         version: 5.2.1(react-hook-form@7.62.0(react@19.0.0))
+      '@react-native-community/datetimepicker':
+        specifier: ^8.4.4
+        version: 8.4.4(expo@53.0.22(@babel/core@7.28.3)(@expo/metro-runtime@5.0.4(react-native@0.79.5(@babel/core@7.28.3)(@types/react@19.0.14)(react@19.0.0)))(react-native-webview@13.13.5(react-native@0.79.5(@babel/core@7.28.3)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.5(@babel/core@7.28.3)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.5(@babel/core@7.28.3)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
       '@react-navigation/bottom-tabs':
         specifier: ^7.3.10
         version: 7.4.6(@react-navigation/native@7.1.17(react-native@0.79.5(@babel/core@7.28.3)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native-safe-area-context@5.4.0(react-native@0.79.5(@babel/core@7.28.3)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native-screens@4.11.1(react-native@0.79.5(@babel/core@7.28.3)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.5(@babel/core@7.28.3)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
@@ -1746,6 +1749,22 @@ packages:
       react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
     peerDependenciesMeta:
       '@types/react':
+        optional: true
+
+  '@react-native-community/datetimepicker@8.4.4':
+    resolution:
+      {
+        integrity: sha512-bc4ZixEHxZC9/qf5gbdYvIJiLZ5CLmEsC3j+Yhe1D1KC/3QhaIfGDVdUcid0PdlSoGOSEq4VlB93AWyetEyBSQ==,
+      }
+    peerDependencies:
+      expo: '>=52.0.0'
+      react: '*'
+      react-native: '*'
+      react-native-windows: '*'
+    peerDependenciesMeta:
+      expo:
+        optional: true
+      react-native-windows:
         optional: true
 
   '@react-native/assets-registry@0.79.5':
@@ -11793,6 +11812,14 @@ snapshots:
       react: 19.0.0
     optionalDependencies:
       '@types/react': 19.0.14
+
+  '@react-native-community/datetimepicker@8.4.4(expo@53.0.22(@babel/core@7.28.3)(@expo/metro-runtime@5.0.4(react-native@0.79.5(@babel/core@7.28.3)(@types/react@19.0.14)(react@19.0.0)))(react-native-webview@13.13.5(react-native@0.79.5(@babel/core@7.28.3)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.5(@babel/core@7.28.3)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.5(@babel/core@7.28.3)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)':
+    dependencies:
+      invariant: 2.2.4
+      react: 19.0.0
+      react-native: 0.79.5(@babel/core@7.28.3)(@types/react@19.0.14)(react@19.0.0)
+    optionalDependencies:
+      expo: 53.0.22(@babel/core@7.28.3)(@expo/metro-runtime@5.0.4(react-native@0.79.5(@babel/core@7.28.3)(@types/react@19.0.14)(react@19.0.0)))(react-native-webview@13.13.5(react-native@0.79.5(@babel/core@7.28.3)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.5(@babel/core@7.28.3)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
 
   '@react-native/assets-registry@0.79.5': {}
 
