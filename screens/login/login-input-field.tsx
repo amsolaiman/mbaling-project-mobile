@@ -24,7 +24,7 @@ export default function LoginInputField({ name, label, secureTextEntry = false }
       name={name}
       control={control}
       render={({ field }) => (
-        <View className="relative items-center justify-center">
+        <View style={styles.container}>
           <TextInput
             {...field}
             value={field.value}
@@ -48,6 +48,11 @@ export default function LoginInputField({ name, label, secureTextEntry = false }
 }
 
 const styles = StyleSheet.create({
+  container: {
+    position: 'relative',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   input: {
     width: '60%',
     height: 48,
