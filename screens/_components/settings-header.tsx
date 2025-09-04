@@ -16,7 +16,7 @@ type Props = {
 
 export default function SettingsHeader({ title, actionLeft, actionRight }: Props) {
   return (
-    <ThemedView style={[styles.container, styles.fixed]}>
+    <ThemedView style={styles.container}>
       <View style={styles.actionLeft}>{actionLeft}</View>
 
       <View style={styles.label}>
@@ -36,12 +36,6 @@ const styles = StyleSheet.create({
     position: 'relative',
     flexDirection: 'row',
     justifyContent: 'space-between',
-  },
-  fixed: {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    right: 0,
   },
   label: {
     padding: 16,
