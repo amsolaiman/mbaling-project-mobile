@@ -31,7 +31,7 @@ export const SettingsConfig = (): SettingsRouteConfig[] => {
         },
         {
           label: 'Account settings',
-          onClick: () => alert({ title: 'Oops!', message: 'This page is not yet available.' }),
+          onClick: () => router.push('/settings/account'),
         },
         {
           label: 'Privacy',
