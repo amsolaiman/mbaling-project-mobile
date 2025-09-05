@@ -1,3 +1,5 @@
+// @expo
+import { router } from 'expo-router';
 // auth
 import { useAuthContext } from '@/auth/hooks';
 // components
@@ -30,11 +32,11 @@ export const SettingAccountConfig = (): SettingsAccountRouteConfig[] => {
       data: [
         {
           label: 'Username',
-          onClick: () => alert({ title: 'Oops!', message: 'This page is not yet available.' }),
+          onClick: () => router.push('/settings/account/username'),
         },
         {
           label: 'Password',
-          onClick: () => alert({ title: 'Oops!', message: 'This page is not yet available.' }),
+          onClick: () => router.push('/settings/account/password'),
         },
         {
           label: 'E-mail',

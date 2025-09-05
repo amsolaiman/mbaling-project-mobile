@@ -13,6 +13,7 @@ export { default as IconChatRound } from './chat-round';
 export { default as IconCheckCircle } from './check-circle';
 export { default as IconCloseCircle } from './close-circle';
 export { default as IconDownload } from './download';
+export { default as IconEye } from './eye';
 export { default as IconGallerySend } from './gallery-send';
 export { default as IconMapPoint } from './map-point';
 export { default as IconMenuDots } from './menu-dots';
