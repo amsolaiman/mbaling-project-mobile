@@ -2,6 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useCallback, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { Keyboard, Pressable, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
+import { TextInput } from 'react-native-paper';
 import * as Yup from 'yup';
 // @expo
 import { router } from 'expo-router';
@@ -23,10 +24,10 @@ import { IconArrowAlt } from '@/assets/icons';
 // ----------------------------------------------------------------------
 
 type FormValuesProps = {
-  username: string;
+  phoneNumber: string;
 };
 
-export default function SettingsAccountUsernameView() {
+export default function SettingsAccountMobileView() {
   const colorScheme = useColorScheme() ?? 'light';
 
   const edit = useBoolean();
@@ -36,14 +37,15 @@ export default function SettingsAccountUsernameView() {
   const { user } = useAuthContext();
 
   const AccountSettingsSchema = Yup.object().shape({
-    username: Yup.string()
-      .required('Username is required')
-      .min(8, 'Username must be at least 8 characters'),
+    phoneNumber: Yup.string()
+      .required('Mobile number is required')
+      .matches(/^\d+$/, 'Must be a valid mobile number')
+      .min(10, 'Must be a valid mobile number'),
   });
 
   const defaultValues = useMemo(
     () => ({
-      username: user?.username || '',
+      phoneNumber: user?.phoneNumber?.replace(/^\+63/, '') || '',
     }),
     [user]
   );
@@ -98,7 +100,7 @@ export default function SettingsAccountUsernameView() {
             style={styles.container}
           >
             <SettingsHeader
-              title="Username"
+              title="Mobile number"
               actionLeft={
                 <Pressable onPress={handleReturn}>
                   <IconArrowAlt
@@ -118,11 +120,15 @@ export default function SettingsAccountUsernameView() {
 
             <View style={styles.formContainer}>
               <RHFTextField
-                name="username"
-                label="Enter username"
+                name="phoneNumber"
+                label="Enter mobile number"
+                placeholder="XXXXXXXXXX"
+                type="number"
+                keyboardType="numeric"
                 //
                 mode="flat"
                 disabled={!edit.value}
+                left={<TextInput.Affix text="+63 " />}
               />
             </View>
           </ThemedView>
