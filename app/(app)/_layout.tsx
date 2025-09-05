@@ -23,6 +23,8 @@ export default function MainLayout() {
 
       <Stack.Screen name="settings/profile" options={{ headerShown: false }} />
       <Stack.Screen name="settings/account" options={{ headerShown: false }} />
+      <Stack.Screen name="settings/account/username" options={{ headerShown: false }} />
+      <Stack.Screen name="settings/account/password" options={{ headerShown: false }} />
     </Stack>
   );
 }
