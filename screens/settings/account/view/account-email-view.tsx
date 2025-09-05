@@ -23,10 +23,10 @@ import { IconArrowAlt } from '@/assets/icons';
 // ----------------------------------------------------------------------
 
 type FormValuesProps = {
-  username: string;
+  email: string;
 };
 
-export default function SettingsAccountUsernameView() {
+export default function SettingsAccountEmailView() {
   const colorScheme = useColorScheme() ?? 'light';
 
   const edit = useBoolean();
@@ -36,14 +36,12 @@ export default function SettingsAccountUsernameView() {
   const { user } = useAuthContext();
 
   const AccountSettingsSchema = Yup.object().shape({
-    username: Yup.string()
-      .required('Username is required')
-      .min(8, 'Username must be at least 8 characters'),
+    email: Yup.string().required('Email is required').email('Must be a valid email address'),
   });
 
   const defaultValues = useMemo(
     () => ({
-      username: user?.username || '',
+      email: user?.email || '',
     }),
     [user]
   );
@@ -98,7 +96,7 @@ export default function SettingsAccountUsernameView() {
             style={styles.container}
           >
             <SettingsHeader
-              title="Username"
+              title="E-mail"
               actionLeft={
                 <Pressable onPress={handleReturn}>
                   <IconArrowAlt
@@ -118,8 +116,9 @@ export default function SettingsAccountUsernameView() {
 
             <View style={styles.formContainer}>
               <RHFTextField
-                name="username"
-                label="Enter username"
+                name="email"
+                label="Enter e-mail"
+                keyboardType="email-address"
                 //
                 mode="flat"
                 disabled={!edit.value}

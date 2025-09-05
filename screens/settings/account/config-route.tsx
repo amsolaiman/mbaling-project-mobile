@@ -40,11 +40,11 @@ export const SettingAccountConfig = (): SettingsAccountRouteConfig[] => {
         },
         {
           label: 'E-mail',
-          onClick: () => alert({ title: 'Oops!', message: 'This page is not yet available.' }),
+          onClick: () => router.push('/settings/account/email'),
         },
         {
           label: 'Mobile number',
-          onClick: () => alert({ title: 'Oops!', message: 'This page is not yet available.' }),
+          onClick: () => router.push('/settings/account/mobile'),
         },
       ],
     },
