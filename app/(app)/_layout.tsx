@@ -22,6 +22,7 @@ export default function MainLayout() {
       <Stack.Screen name="profile/[id]" options={{ headerShown: false }} />
 
       <Stack.Screen name="settings/profile" options={{ headerShown: false }} />
+      <Stack.Screen name="settings/account" options={{ headerShown: false }} />
     </Stack>
   );
 }

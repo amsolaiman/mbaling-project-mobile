@@ -1,0 +1,85 @@
+// auth
+import { useAuthContext } from '@/auth/hooks';
+// components
+import useCustomAlert from '@/components/custom-alert';
+
+// ----------------------------------------------------------------------
+
+export type SettingsAccountRouteConfig = {
+  title: string;
+  showHeader: boolean;
+  data: SettingsAccountRouteDataType[];
+};
+
+export type SettingsAccountRouteDataType = {
+  label: string;
+  onClick: VoidFunction;
+};
+
+// ----------------------------------------------------------------------
+
+export const SettingAccountConfig = (): SettingsAccountRouteConfig[] => {
+  const { isLandlord } = useAuthContext();
+
+  const { alert } = useCustomAlert();
+
+  return [
+    {
+      title: 'Account information',
+      showHeader: false,
+      data: [
+        {
+          label: 'Username',
+          onClick: () => alert({ title: 'Oops!', message: 'This page is not yet available.' }),
+        },
+        {
+          label: 'Password',
+          onClick: () => alert({ title: 'Oops!', message: 'This page is not yet available.' }),
+        },
+        {
+          label: 'E-mail',
+          onClick: () => alert({ title: 'Oops!', message: 'This page is not yet available.' }),
+        },
+        {
+          label: 'Mobile number',
+          onClick: () => alert({ title: 'Oops!', message: 'This page is not yet available.' }),
+        },
+      ],
+    },
+    ...[
+      isLandlord
+        ? {
+            title: 'Housing information',
+            showHeader: true,
+            data: [
+              {
+                label: 'Housing name',
+                onClick: () =>
+                  alert({ title: 'Oops!', message: 'This page is not yet available.' }),
+              },
+              {
+                label: 'Address',
+                onClick: () =>
+                  alert({ title: 'Oops!', message: 'This page is not yet available.' }),
+              },
+            ],
+          }
+        : {
+            title: 'Address information',
+            showHeader: true,
+            data: [
+              {
+                label: 'Campus housing',
+                onClick: () =>
+                  alert({ title: 'Oops!', message: 'This page is not yet available.' }),
+              },
+              {
+                label: 'Address',
+                onClick: () =>
+                  alert({ title: 'Oops!', message: 'This page is not yet available.' }),
+              },
+            ],
+          },
+    ],
+  ];
+};
