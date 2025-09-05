@@ -1,3 +1,5 @@
+// @expo
+import { router } from 'expo-router';
 // components
 import useCustomAlert from '@/components/custom-alert';
 
@@ -25,7 +27,7 @@ export const SettingsConfig = (): SettingsRouteConfig[] => {
       data: [
         {
           label: 'Edit profile',
-          onClick: () => alert({ title: 'Oops!', message: 'This page is not yet available.' }),
+          onClick: () => router.push('/settings/profile'),
         },
         {
           label: 'Account settings',
