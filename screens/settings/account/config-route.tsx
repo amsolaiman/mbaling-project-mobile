@@ -61,8 +61,7 @@ export const SettingAccountConfig = (): SettingsAccountRouteConfig[] => {
               },
               {
                 label: 'Address',
-                onClick: () =>
-                  alert({ title: 'Oops!', message: 'This page is not yet available.' }),
+                onClick: () => router.push('/settings/account/address'),
               },
             ],
           }
@@ -77,8 +76,7 @@ export const SettingAccountConfig = (): SettingsAccountRouteConfig[] => {
               },
               {
                 label: 'Address',
-                onClick: () =>
-                  alert({ title: 'Oops!', message: 'This page is not yet available.' }),
+                onClick: () => router.push('/settings/account/address'),
               },
             ],
           },
