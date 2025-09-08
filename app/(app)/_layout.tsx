@@ -29,6 +29,7 @@ export default function MainLayout() {
       <Stack.Screen name="settings/account/mobile" options={{ headerShown: false }} />
       <Stack.Screen name="settings/account/address" options={{ headerShown: false }} />
       <Stack.Screen name="settings/account/housing" options={{ headerShown: false }} />
+      <Stack.Screen name="settings/account/campus" options={{ headerShown: false }} />
     </Stack>
   );
 }

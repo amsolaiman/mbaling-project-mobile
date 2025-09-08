@@ -2,8 +2,6 @@
 import { router } from 'expo-router';
 // auth
 import { useAuthContext } from '@/auth/hooks';
-// components
-import useCustomAlert from '@/components/custom-alert';
 
 // ----------------------------------------------------------------------
 
@@ -22,9 +20,6 @@ export type SettingsAccountRouteDataType = {
 
 export const SettingAccountConfig = (): SettingsAccountRouteConfig[] => {
   const { isLandlord } = useAuthContext();
-
-  const { alert } = useCustomAlert();
-
   return [
     {
       title: 'Account information',
@@ -70,8 +65,7 @@ export const SettingAccountConfig = (): SettingsAccountRouteConfig[] => {
             data: [
               {
                 label: 'Campus housing',
-                onClick: () =>
-                  alert({ title: 'Oops!', message: 'This page is not yet available.' }),
+                onClick: () => router.push('/settings/account/campus'),
               },
               {
                 label: 'Address',
