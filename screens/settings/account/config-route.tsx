@@ -56,8 +56,7 @@ export const SettingAccountConfig = (): SettingsAccountRouteConfig[] => {
             data: [
               {
                 label: 'Housing name',
-                onClick: () =>
-                  alert({ title: 'Oops!', message: 'This page is not yet available.' }),
+                onClick: () => router.push('/settings/account/housing'),
               },
               {
                 label: 'Address',
