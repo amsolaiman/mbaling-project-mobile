@@ -54,3 +54,8 @@ export type IUserStudentDetails = {
   housingId: string | null;
   applicationId: string | null;
 };
+
+export type IUserAddress = {
+  code: string;
+  name: string;
+};
