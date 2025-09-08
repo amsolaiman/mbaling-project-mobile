@@ -6,9 +6,9 @@ The mBALING project is a student housing management system for on-campus housing
 
 The mBALING app serves as the mobile counterpart of the project, where all user activities take place. Test the app demo with:
 
-> Use **demo_landlord** with password **@demo123** for landlord users (mobile app).
+> Use **demo_landlord** with password **@demo123** for landlord users.
 
-> Use **demo_student** with password **@demo123** for student users (mobile app).
+> Use **demo_student** with password **@demo123** for student users.
 
 ## Getting Started
 
@@ -35,6 +35,26 @@ In the output, you'll find options to open the app in a
 - [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
 
 You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+
+### Testing
+
+Use the following mock users for testing during development:
+
+> Use **kuhei.yamyam** with password **@test123** for student user with housing data.
+
+> Use **aiko_lihannan** with password **@test123** for student user without housing data.
+
+> Use **cozycorner_amina** with password **@test123** for landlord user with only list of tenants.
+
+> Use **castro.bedspace** with password **@test123** for landlord user with only list of applicants.
+
+> Use **macarambon_central** with password **@test123** for landlord user without lists of tenants & applicants.
+
+Demo users are also used for testing.
+
+> Use **demo_student** with password **@demo123** for student user with application data.
+
+> Use **demo_landlord** with password **@demo123** for landlord user with lists of tenants & applicants.
 
 ## Project Team
 
