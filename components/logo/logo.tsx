@@ -3,6 +3,8 @@ import { View } from 'react-native';
 import Svg, { G, Path } from 'react-native-svg';
 // @expo
 import { Link } from 'expo-router';
+// styles
+import Colors from '@/styles/constants/Colors';
 //
 import { LogoProps } from './types';
 
@@ -11,7 +13,9 @@ import { LogoProps } from './types';
 const Logo = forwardRef<View, LogoProps>(
   ({ size = 96, variant = 'base', color = 'primary', disabledLink = false }, ref) => {
     const FILL_COLOR =
-      (color === 'light' && '#ecedee') || (color === 'dark' && '#11181c') || '#be282d';
+      (color === 'light' && Colors.common.white.main) ||
+      (color === 'dark' && Colors.common.black.main) ||
+      Colors.primary;
 
     const baseLogo = (
       <Svg width={size} height={size} viewBox="0 0 512 512" fill="none">

@@ -55,7 +55,7 @@ export default function RootLayout() {
     ...NativePaperTheme,
     colors: {
       ...NativePaperTheme.colors,
-      primary: '#be282d',
+      primary: '#c3272b',
     },
     fonts: configureFonts({
       config: fontConfig,
