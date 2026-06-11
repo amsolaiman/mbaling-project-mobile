@@ -7,7 +7,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "check:type": "tsc --noEmit"
   },
   "dependencies": {
     "@expo/ui": "~56.0.17",
@@ -38,5 +39,6 @@
     "@types/react": "~19.2.2",
     "typescript": "~6.0.3"
   },
-  "private": true
+  "private": true,
+  "packageManager": "pnpm@10.4.1"
 }
