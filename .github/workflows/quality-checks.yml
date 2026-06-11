@@ -1,0 +1,40 @@
+name: Quality Checks
+
+on: [workflow_dispatch, pull_request]
+
+jobs:
+  checks:
+    name: Check code quality
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      # Install pnpm first before setting up Node.js
+      # Version is read automatically from `packageManager` in package.json
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      # Install Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24.0.0
+          cache: pnpm
+
+      # Install dependencies
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+        env:
+          NODE_ENV: test
+
+      # Run quality checks
+      - name: Run linter
+        run: pnpm lint
+        env:
+          NODE_ENV: test
+
+      - name: Run type check
+        run: pnpm check:type
+        env:
+          NODE_ENV: test
