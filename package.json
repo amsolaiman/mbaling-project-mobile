@@ -8,6 +8,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "lint": "expo lint",
+    "format": "prettier --write \"**/*.{js,ts,tsx,json,md,yml,yaml}\"",
     "check:type": "tsc --noEmit",
     "prepare": "husky"
   },
@@ -43,6 +44,7 @@
     "eslint": "^9.0.0",
     "eslint-config-expo": "~56.0.4",
     "husky": "^9.1.7",
+    "prettier": "^3.8.4",
     "typescript": "~6.0.3"
   },
   "private": true,
