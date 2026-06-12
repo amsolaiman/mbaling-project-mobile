@@ -13,6 +13,7 @@
     "lint:fix": "eslint --fix --ext .ts,.tsx .",
     "format": "prettier --write \"**/*.{js,ts,tsx,json,md,yml,yaml}\"",
     "check:type": "tsc --noEmit",
+    "check:circular-deps": "madge -c --extensions ts,tsx .",
     "prepare": "husky"
   },
   "dependencies": {
@@ -53,6 +54,7 @@
     "eslint-plugin-unused-imports": "^4.2.0",
     "husky": "^9.1.7",
     "lint-staged": "^17.0.7",
+    "madge": "^8.0.0",
     "prettier": "^3.8.4",
     "tsx": "^4.22.4",
     "typescript": "~6.0.3"
