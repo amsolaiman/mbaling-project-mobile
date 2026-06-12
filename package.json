@@ -3,6 +3,8 @@
   "main": "expo-router/entry",
   "version": "0.1.0",
   "scripts": {
+    "validate-env": "tsx scripts/validate-env.ts",
+    "prestart": "pnpm validate-env",
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
@@ -36,20 +38,23 @@
     "react-native-safe-area-context": "~5.7.0",
     "react-native-screens": "4.25.2",
     "react-native-web": "~0.21.0",
-    "react-native-worklets": "0.8.3"
+    "react-native-worklets": "0.8.3",
+    "yup": "^1.7.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^21.0.2",
     "@commitlint/config-conventional": "^21.0.2",
+    "@types/react": "~19.2.2",
     "@typescript-eslint/eslint-plugin": "^8.14.0",
     "@typescript-eslint/parser": "^8.14.0",
-    "@types/react": "~19.2.2",
+    "dotenv": "^17.4.2",
     "eslint": "^9.0.0",
     "eslint-config-expo": "~56.0.4",
     "eslint-plugin-unused-imports": "^4.2.0",
     "husky": "^9.1.7",
     "lint-staged": "^17.0.7",
     "prettier": "^3.8.4",
+    "tsx": "^4.22.4",
     "typescript": "~6.0.3"
   },
   "private": true,
