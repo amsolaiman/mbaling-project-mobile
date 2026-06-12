@@ -1,0 +1,125 @@
+name: 'Release Version'
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  determine-version:
+    name: Determine release type
+    runs-on: ubuntu-latest
+    outputs:
+      release_type: ${{ steps.release.outputs.release_type }}
+      should_release: ${{ steps.release.outputs.should_release }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GIT_ACCESS_TOKEN }}
+
+      - name: Determine release type from commits
+        id: release
+        run: |
+          echo "🔎 Checking commit messages..."
+
+          # Get commit messages from current push
+          COMMITS=$(git log ${{ github.event.before }}..${{ github.sha }} --pretty=format:%B)
+
+          echo "Commits to analyze:"
+          echo "$COMMITS"
+
+          RELEASE_TYPE="none"
+
+          # Major release detection
+          if echo "$COMMITS" | grep -Eq "BREAKING CHANGE:|^[a-zA-Z]+(\(.+\))?!:"; then
+            RELEASE_TYPE="major"
+          # Minor release detection
+          elif echo "$COMMITS" | grep -Eq "^feat(\(.+\))?:"; then
+            RELEASE_TYPE="minor"
+          # Patch release detection
+          elif echo "$COMMITS" | grep -Eq "^(fix|perf|revert)(\(.+\))?:"; then
+            RELEASE_TYPE="patch"
+          fi
+
+          echo "✅ Detected release type: $RELEASE_TYPE"
+          echo "release_type=$RELEASE_TYPE" >> $GITHUB_OUTPUT
+
+          if [ "$RELEASE_TYPE" != "none" ]; then
+            echo "should_release=true" >> $GITHUB_OUTPUT
+          else
+            echo "should_release=false" >> $GITHUB_OUTPUT
+          fi
+
+  release:
+    name: Create version release
+    runs-on: ubuntu-latest
+    needs: determine-version
+    if: needs.determine-version.outputs.should_release == 'true'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GIT_ACCESS_TOKEN }}
+
+      - name: Ensure release is on main
+        run: |
+          if [ "$GITHUB_REF" != "refs/heads/main" ]; then
+            echo "❌ Release workflow must be run on the main branch"
+            exit 1
+          fi
+
+      # Install pnpm first, so it's available for Node.js setup
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      # Install Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24.0.0
+          cache: pnpm
+
+      # Install dependencies
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # Run version release
+      - name: Configure Git user
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+
+      - name: Run release script
+        run: |
+          RELEASE_TYPE="${{ needs.determine-version.outputs.release_type }}"
+          echo "🚀 Running release: $RELEASE_TYPE"
+          pnpm release:$RELEASE_TYPE
+
+      - name: Push changes and tags to main
+        run: git push --follow-tags origin main
+
+      - name: Get version
+        id: get-version
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.get-version.outputs.version }}
+          name: Release v${{ steps.get-version.outputs.version }}
+          body_path: CHANGELOG.md
+          token: ${{ secrets.GIT_ACCESS_TOKEN }}
+
+      # Merge main into dev branch
+      - name: Sync version bumps back to dev
+        run: |
+          git fetch origin
+          git checkout dev
+          git merge origin/main --no-edit
+          git push origin dev
