@@ -1,9 +1,9 @@
 import { View, type ViewProps } from 'react-native';
 
-// constants
-import { ThemeColor } from '@/constants/theme';
 // hooks
 import { useTheme } from '@/hooks/use-theme';
+// constants
+import { ThemeColor } from '@/styles';
 
 // ----------------------------------------------------------------------
 

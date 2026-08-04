@@ -1,9 +1,9 @@
 import { Platform, StyleSheet, Text, type TextProps } from 'react-native';
 
-// constants
-import { Fonts, ThemeColor } from '@/constants/theme';
 // hooks
 import { useTheme } from '@/hooks/use-theme';
+// constants
+import { Fonts, ThemeColor } from '@/styles';
 
 // ----------------------------------------------------------------------
 

@@ -3,7 +3,8 @@ import { Dimensions, StyleSheet, useColorScheme } from 'react-native';
 
 // constants
 import { TAB_ROUTES } from '@/constants/routes';
-import { Colors, Spacing } from '@/constants/theme';
+// styles
+import { Colors, Spacing } from '@/styles';
 
 // ----------------------------------------------------------------------
 
