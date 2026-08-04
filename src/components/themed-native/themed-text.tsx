@@ -1,7 +1,11 @@
 import { Platform, StyleSheet, Text, type TextProps } from 'react-native';
 
+// constants
 import { Fonts, ThemeColor } from '@/constants/theme';
+// hooks
 import { useTheme } from '@/hooks/use-theme';
+
+// ----------------------------------------------------------------------
 
 export type ThemedTextProps = TextProps & {
   type?:
@@ -16,7 +20,7 @@ export type ThemedTextProps = TextProps & {
   themeColor?: ThemeColor;
 };
 
-export function ThemedText({
+export default function ThemedText({
   style,
   type = 'default',
   themeColor,

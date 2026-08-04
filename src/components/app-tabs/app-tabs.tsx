@@ -1,37 +1,14 @@
 import { Tabs } from 'expo-router';
 import { Dimensions, StyleSheet, useColorScheme } from 'react-native';
 
-// assets
-import {
-  TabIconAccount,
-  TabIconHome,
-  TabIconManage,
-  TabIconSearch,
-  TabIconSettings,
-} from '@/assets/icons/tab-icons';
 // constants
+import { TAB_ROUTES } from '@/constants/routes';
 import { Colors, Spacing } from '@/constants/theme';
 
 // ----------------------------------------------------------------------
 
-type TabRoute = {
-  name: string;
-  title: string;
-  Icon: typeof TabIconHome;
-  hideFor?: 'student' | 'landlord';
-};
-
-const TAB_ROUTES: TabRoute[] = [
-  { name: 'index', title: 'Home', Icon: TabIconHome },
-  { name: 'search', title: 'Search', Icon: TabIconSearch, hideFor: 'landlord' },
-  { name: 'manage', title: 'Manage', Icon: TabIconManage, hideFor: 'student' },
-  { name: 'account', title: 'Account', Icon: TabIconAccount },
-  { name: 'settings', title: 'Settings', Icon: TabIconSettings },
-];
-
-export default function TabLayout() {
+export default function AppTabs() {
   const scheme = useColorScheme();
-
   const colors = Colors[scheme === 'unspecified' ? 'light' : scheme];
 
   // TODO: replace with actual logic when authentication is implemented
