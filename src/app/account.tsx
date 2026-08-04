@@ -1,7 +1,9 @@
 import { StyleSheet } from 'react-native';
 
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
+// components
+import { ThemedText, ThemedView } from '@/components/themed-native';
+
+// ----------------------------------------------------------------------
 
 export default function AccountScreen() {
   return (
