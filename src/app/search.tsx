@@ -8,7 +8,7 @@ import { ThemedText, ThemedView } from '@/components/themed-native';
 export default function SearchScreen() {
   return (
     <ThemedView style={styles.container}>
-      <ThemedText type="title" style={styles.title}>
+      <ThemedText font={600} style={styles.title}>
         Search
       </ThemedText>
     </ThemedView>
@@ -22,6 +22,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
+    fontSize: 48,
+    lineHeight: 52,
     textAlign: 'center',
   },
 });

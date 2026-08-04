@@ -5,13 +5,13 @@
 
 // ----------------------------------------------------------------------
 
-const COLOR_PRIMARY = '#c3272b';
+export const COLOR_PRIMARY = '#c3272b';
 
-const COLOR_SECONDARY = '#ffffff';
+export const COLOR_SECONDARY = '#ffffff';
 
-const COLOR_ACCENT = '#f6b6bb';
+export const COLOR_ACCENT = '#f6b6bb';
 
-const COMMON_COLORS = {
+export const COMMON_COLORS = {
   white: {
     main: '#ffffff',
     10: 'rgba(255, 255, 255, 0.1)',
@@ -38,7 +38,7 @@ const COMMON_COLORS = {
   },
 };
 
-const GREY_COLORS = {
+export const GREY_COLORS = {
   50: '#f1f4f7',
   100: '#e0e6ed',
   200: '#c3d0dd',
