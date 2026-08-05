@@ -1,27 +1,17 @@
 import { StyleSheet } from 'react-native';
-import { Button } from 'react-native-paper';
 
 // components
-import { ThemedText, ThemedView } from '@/components/themed-native';
-// styles
-import { Fonts } from '@/styles';
+import Logo from '@/components/logo';
+import { ThemedView } from '@/components/themed-native';
 
 // ----------------------------------------------------------------------
 
 export default function HomeScreen() {
-  const fontWeights = Object.keys(Fonts) as unknown as (keyof typeof Fonts)[];
-
   return (
     <ThemedView style={styles.container}>
-      <Button mode="contained" onPress={() => console.log('Pressed')}>
-        Press me!
-      </Button>
-
-      {fontWeights.map((weight) => (
-        <ThemedText key={weight} font={weight} style={styles.title}>
-          {weight}
-        </ThemedText>
-      ))}
+      <Logo color="primary" variant="base" />
+      <Logo color="primary" variant="vertical" />
+      <Logo color="primary" variant="horizontal" />
     </ThemedView>
   );
 }
@@ -30,13 +20,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    gap: 8,
+    gap: 24,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  title: {
-    fontSize: 48,
-    lineHeight: 52,
-    textAlign: 'center',
   },
 });
