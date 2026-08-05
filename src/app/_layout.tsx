@@ -1,7 +1,7 @@
 import { useFonts } from 'expo-font';
 import {
-  DarkTheme,
-  DefaultTheme,
+  DarkTheme as NativeDarkTheme,
+  DefaultTheme as NativeDefaultTheme,
   SplashScreen,
   ThemeProvider,
 } from 'expo-router';
@@ -19,6 +19,7 @@ import AppTabs from '@/components/app-tabs';
 // constants
 import { COLOR_PRIMARY } from '@/constants/theme';
 // styles
+import { Colors } from '@/styles';
 import fontConfig from '@/styles/font-config';
 
 // ----------------------------------------------------------------------
@@ -48,6 +49,7 @@ export default function TabLayout() {
     // Async font loading only occurs in development.
     return null;
   }
+
   const NativePaperTheme =
     colorScheme === 'light' ? MD3LightTheme : MD3DarkTheme;
 
@@ -60,6 +62,22 @@ export default function TabLayout() {
     fonts: configureFonts({
       config: fontConfig,
     }),
+  };
+
+  const DefaultTheme = {
+    ...NativeDefaultTheme,
+    colors: {
+      ...NativeDefaultTheme.colors,
+      background: Colors.light.background,
+    },
+  };
+
+  const DarkTheme = {
+    ...NativeDarkTheme,
+    colors: {
+      ...NativeDarkTheme.colors,
+      background: Colors.dark.background,
+    },
   };
 
   return (
