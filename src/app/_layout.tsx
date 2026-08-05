@@ -7,9 +7,19 @@ import {
 } from 'expo-router';
 import { useEffect } from 'react';
 import { useColorScheme } from 'react-native';
+import {
+  MD3DarkTheme,
+  MD3LightTheme,
+  PaperProvider,
+  configureFonts,
+} from 'react-native-paper';
 
 // components
 import AppTabs from '@/components/app-tabs';
+// constants
+import { COLOR_PRIMARY } from '@/constants/theme';
+// styles
+import fontConfig from '@/styles/font-config';
 
 // ----------------------------------------------------------------------
 
@@ -38,10 +48,25 @@ export default function TabLayout() {
     // Async font loading only occurs in development.
     return null;
   }
+  const NativePaperTheme =
+    colorScheme === 'light' ? MD3LightTheme : MD3DarkTheme;
+
+  const paperTheme = {
+    ...NativePaperTheme,
+    colors: {
+      ...NativePaperTheme.colors,
+      primary: COLOR_PRIMARY,
+    },
+    fonts: configureFonts({
+      config: fontConfig,
+    }),
+  };
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <AppTabs />
+      <PaperProvider theme={paperTheme}>
+        <AppTabs />
+      </PaperProvider>
     </ThemeProvider>
   );
 }

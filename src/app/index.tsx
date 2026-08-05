@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { Button } from 'react-native-paper';
 
 // components
 import { ThemedText, ThemedView } from '@/components/themed-native';
@@ -12,6 +13,10 @@ export default function HomeScreen() {
 
   return (
     <ThemedView style={styles.container}>
+      <Button mode="contained" onPress={() => console.log('Pressed')}>
+        Press me!
+      </Button>
+
       {fontWeights.map((weight) => (
         <ThemedText key={weight} font={weight} style={styles.title}>
           {weight}
