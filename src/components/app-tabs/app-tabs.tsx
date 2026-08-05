@@ -32,7 +32,7 @@ export default function AppTabs() {
             {
               height: 60,
               paddingBottom: 0,
-              backgroundColor: colors.backgroundElement,
+              backgroundColor: colors.backgroundCard,
             },
           ],
           tabBarItemStyle: [
