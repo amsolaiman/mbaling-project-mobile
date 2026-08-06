@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 0,
   },
   tabShadow: {
-    shadowColor: '#000000',
+    shadowColor: Colors.light.common.black.main,
     shadowOffset: {
       width: 0,
       height: 4,

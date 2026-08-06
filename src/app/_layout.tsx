@@ -3,6 +3,7 @@ import {
   DarkTheme as NativeDarkTheme,
   DefaultTheme as NativeDefaultTheme,
   SplashScreen,
+  Stack,
   ThemeProvider,
 } from 'expo-router';
 import { useEffect } from 'react';
@@ -13,10 +14,10 @@ import {
   PaperProvider,
   configureFonts,
 } from 'react-native-paper';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
-// components
-import AppTabs from '@/components/app-tabs';
 // constants
+import { ROOT_ROUTES } from '@/constants/routes';
 import { COLOR_PRIMARY } from '@/constants/theme';
 // styles
 import { Colors } from '@/styles';
@@ -24,7 +25,7 @@ import fontConfig from '@/styles/font-config';
 
 // ----------------------------------------------------------------------
 
-export default function TabLayout() {
+export default function RootLayout() {
   const colorScheme = useColorScheme();
 
   const [loaded, error] = useFonts({
@@ -81,10 +82,24 @@ export default function TabLayout() {
   };
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <PaperProvider theme={paperTheme}>
-        <AppTabs />
-      </PaperProvider>
-    </ThemeProvider>
+    <SafeAreaProvider>
+      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+        <PaperProvider theme={paperTheme}>
+          <Routes />
+        </PaperProvider>
+      </ThemeProvider>
+    </SafeAreaProvider>
+  );
+}
+
+function Routes() {
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <Stack>
+        {ROOT_ROUTES.map(({ name, options }) => (
+          <Stack.Screen key={name} name={name} options={options} />
+        ))}
+      </Stack>
+    </SafeAreaView>
   );
 }
