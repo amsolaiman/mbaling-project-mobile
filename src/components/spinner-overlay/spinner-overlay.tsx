@@ -1,8 +1,10 @@
 import { StyleSheet, Text } from 'react-native';
 import { Modal, Portal } from 'react-native-paper';
 
+// constants
+import { COMMON_COLORS } from '@/constants/theme';
 // styles
-import { Colors } from '@/styles';
+import { Fonts } from '@/styles';
 
 //
 import Spinner from './spinner';
@@ -35,8 +37,9 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   caption: {
+    ...Fonts[400],
     textAlign: 'center',
     fontSize: 14,
-    color: Colors.dark.text,
+    color: COMMON_COLORS.white.main,
   },
 });

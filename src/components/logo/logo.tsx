@@ -4,9 +4,7 @@ import { View } from 'react-native';
 import Svg, { G, Path } from 'react-native-svg';
 
 // constants
-import { COLOR_PRIMARY } from '@/constants/theme';
-// styles
-import { Colors } from '@/styles';
+import { COLOR_PRIMARY, COMMON_COLORS } from '@/constants/theme';
 
 //
 import { LogoProps } from './types';
@@ -18,7 +16,12 @@ const Logo = forwardRef<View, LogoProps>(
     { size = 96, variant = 'base', color = 'primary', disabledLink = false },
     ref
   ) => {
-    const FILL_COLOR = color === 'primary' ? COLOR_PRIMARY : Colors[color].text;
+    const FILL_COLOR =
+      color === 'light'
+        ? COMMON_COLORS.white.main
+        : color === 'dark'
+          ? COMMON_COLORS.black.main
+          : COLOR_PRIMARY;
 
     const baseLogo = (
       <Svg width={size} height={size} viewBox="0 0 512 512" fill="none">
