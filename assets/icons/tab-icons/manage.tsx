@@ -2,15 +2,11 @@ import { memo } from 'react';
 import Svg, { Path } from 'react-native-svg';
 
 //
-import { TabIconProps } from '../types';
+import { IconProps } from '../types';
 
 // ----------------------------------------------------------------------
 
-const TabIconManage = ({
-  variant = 'solid',
-  size = 24,
-  color,
-}: TabIconProps) => {
+const TabIconManage = ({ variant = 'solid', size = 24, color }: IconProps) => {
   // solar:pen-bold
   const renderSolid = (
     <Path

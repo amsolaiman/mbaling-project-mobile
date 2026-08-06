@@ -1,12 +1,12 @@
 import { memo } from 'react';
 import Svg, { G, Path } from 'react-native-svg';
 
+//
+import { IconProps } from './types';
+
 // ----------------------------------------------------------------------
 
-type Props = {
-  size: number;
-  color: string;
-};
+type Props = Omit<IconProps, 'variant'>;
 
 const IconSpinner = ({ size = 24, color }: Props) => {
   return (
