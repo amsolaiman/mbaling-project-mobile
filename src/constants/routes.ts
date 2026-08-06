@@ -1,3 +1,5 @@
+import { type NativeStackNavigationOptions } from 'expo-router';
+
 // assets
 import {
   TabIconAccount,
@@ -8,6 +10,31 @@ import {
 } from '@/assets/icons/tab-icons';
 
 // ----------------------------------------------------------------------
+
+type RootRoutesType = {
+  name: string;
+  title: string;
+  options?: NativeStackNavigationOptions;
+};
+
+export const ROOT_ROUTES: RootRoutesType[] = [
+  {
+    name: 'login',
+    title: 'Login',
+    options: {
+      headerShown: false,
+      animation: 'fade',
+    },
+  },
+  {
+    name: '(tabs)',
+    title: 'Tab Pages',
+    options: {
+      headerShown: false,
+      animation: 'fade',
+    },
+  },
+];
 
 type TabRoutesType = {
   name: string;
