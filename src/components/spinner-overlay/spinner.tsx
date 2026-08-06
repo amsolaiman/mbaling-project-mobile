@@ -2,8 +2,8 @@ import { Animated, Easing } from 'react-native';
 
 // assets
 import { IconSpinner } from '@/assets/icons';
-// styles
-import { Colors } from '@/styles';
+// constants
+import { COLOR_PRIMARY, COMMON_COLORS } from '@/constants/theme';
 
 // ----------------------------------------------------------------------
 
@@ -34,16 +34,18 @@ export default function Spinner({
     outputRange: ['0deg', '360deg'],
   });
 
+  const FILL_COLOR =
+    color === 'light'
+      ? COMMON_COLORS.white.main
+      : color === 'dark'
+        ? COMMON_COLORS.black.main
+        : COLOR_PRIMARY;
+
   return (
     <Animated.View
       style={{ width: size, height: size, transform: [{ rotate: spin }] }}
     >
-      <IconSpinner
-        size={size}
-        color={
-          color === 'primary' ? Colors.light.primary : Colors[color].background
-        }
-      />
+      <IconSpinner size={size} color={FILL_COLOR} />
     </Animated.View>
   );
 }
