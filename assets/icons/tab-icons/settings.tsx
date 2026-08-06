@@ -2,7 +2,7 @@ import { memo } from 'react';
 import Svg, { G, Path } from 'react-native-svg';
 
 //
-import { TabIconProps } from '../types';
+import { IconProps } from '../types';
 
 // ----------------------------------------------------------------------
 
@@ -10,7 +10,7 @@ const TabIconSettings = ({
   variant = 'solid',
   size = 24,
   color,
-}: TabIconProps) => {
+}: IconProps) => {
   // solar:settings-minimalistic-bold
   const renderSolid = (
     <Path

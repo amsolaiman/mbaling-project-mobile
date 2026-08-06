@@ -1,15 +1,16 @@
 import { memo } from 'react';
 import Svg, { Path } from 'react-native-svg';
 
+//
+import { IconProps } from './types';
+
 // ----------------------------------------------------------------------
 
-type Props = {
-  size: number;
-  color: string;
-  variant?: 'solid' | 'outline' | 'duotone';
-};
-
-const IconQuestionMark = ({ variant = 'solid', size = 24, color }: Props) => {
+const IconQuestionMark = ({
+  variant = 'solid',
+  size = 24,
+  color,
+}: IconProps) => {
   // solar:question-circle-bold
   const renderSolid = (
     <Path
