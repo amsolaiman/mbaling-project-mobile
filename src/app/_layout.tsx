@@ -16,6 +16,8 @@ import {
 } from 'react-native-paper';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
+// auth
+import { AuthConsumer, AuthProvider } from '@/auth/context';
 // constants
 import { ROOT_ROUTES } from '@/constants/routes';
 import { COLOR_PRIMARY } from '@/constants/theme';
@@ -82,13 +84,19 @@ export default function RootLayout() {
   };
 
   return (
-    <SafeAreaProvider>
-      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <PaperProvider theme={paperTheme}>
-          <Routes />
-        </PaperProvider>
-      </ThemeProvider>
-    </SafeAreaProvider>
+    <AuthProvider>
+      <SafeAreaProvider>
+        <ThemeProvider
+          value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
+        >
+          <PaperProvider theme={paperTheme}>
+            <AuthConsumer>
+              <Routes />
+            </AuthConsumer>
+          </PaperProvider>
+        </ThemeProvider>
+      </SafeAreaProvider>
+    </AuthProvider>
   );
 }
 

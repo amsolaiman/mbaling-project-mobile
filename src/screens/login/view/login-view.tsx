@@ -11,6 +11,8 @@ import {
 import { Button } from 'react-native-paper';
 import * as Yup from 'yup';
 
+// auth
+import { useAuthContext } from '@/auth/hooks';
 // components
 import Logo from '@/components/logo';
 import {
@@ -32,6 +34,8 @@ type FormValuesProps = {
 };
 
 export default function LoginView() {
+  const { login } = useAuthContext();
+
   const LoginSchema = Yup.object().shape({
     username: Yup.string().required('Username is required'),
     password: Yup.string().required('Password is required'),
@@ -56,20 +60,19 @@ export default function LoginView() {
   const onSubmit = useCallback(
     async (data: FormValuesProps) => {
       try {
-        await new Promise((resolve) => setTimeout(resolve, 2000));
+        await login?.(data.username, data.password);
         reset();
         router.replace('/');
-        // eslint-disable-next-line no-console
-        console.info('DATA', data);
       } catch (error: Error | unknown) {
         const message =
           typeof error === 'string' ? error : (error as Error).message;
 
         alert(message);
-        throw new Error(message);
+        // eslint-disable-next-line no-console
+        console.error(message);
       }
     },
-    [reset]
+    [login, reset]
   );
 
   return (
