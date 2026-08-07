@@ -8,6 +8,8 @@ import {
   TabIconSearch,
   TabIconSettings,
 } from '@/assets/icons/tab-icons';
+// auth
+import { AuthUserRoles } from '@/auth/types';
 
 // ----------------------------------------------------------------------
 
@@ -34,13 +36,17 @@ export const ROOT_ROUTES: RootRoutesType[] = [
       animation: 'fade',
     },
   },
+  {
+    name: '+not-found',
+    title: 'Not Found',
+  },
 ];
 
 type TabRoutesType = {
   name: string;
   title: string;
   Icon: typeof TabIconHome;
-  hideFor?: 'student' | 'landlord';
+  hideFor?: AuthUserRoles;
 };
 
 export const TAB_ROUTES: TabRoutesType[] = [
@@ -53,13 +59,13 @@ export const TAB_ROUTES: TabRoutesType[] = [
     name: 'search',
     title: 'Search',
     Icon: TabIconSearch,
-    hideFor: 'landlord',
+    hideFor: AuthUserRoles.LANDLORD,
   },
   {
     name: 'manage',
     title: 'Manage',
     Icon: TabIconManage,
-    hideFor: 'student',
+    hideFor: AuthUserRoles.STUDENT,
   },
   {
     name: 'account',

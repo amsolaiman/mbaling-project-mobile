@@ -1,6 +1,8 @@
 import { Tabs } from 'expo-router';
 import { Dimensions, StyleSheet, useColorScheme } from 'react-native';
 
+// auth
+import { useAuthContext } from '@/auth/hooks';
 // constants
 import { TAB_ROUTES } from '@/constants/routes';
 // styles
@@ -12,14 +14,15 @@ export default function AppTabs() {
   const scheme = useColorScheme();
   const colors = Colors[scheme === 'unspecified' ? 'light' : scheme];
 
-  // TODO: replace with actual logic when authentication is implemented
-  const userRole: 'student' | 'landlord' = 'student';
+  const { user } = useAuthContext();
+  const currentRole = user?.role;
 
   return (
     <Tabs
       screenOptions={({ route }) => {
-        const isHidden =
-          TAB_ROUTES.find((r) => r.name === route.name)?.hideFor === userRole;
+        const isShown =
+          TAB_ROUTES.find((r) => r.name === route.name)?.hideFor ===
+          currentRole;
 
         return {
           headerShown: false,
@@ -37,7 +40,7 @@ export default function AppTabs() {
           ],
           tabBarItemStyle: [
             styles.tabItem,
-            { display: isHidden ? 'none' : 'flex' },
+            { display: isShown ? 'none' : 'flex' },
           ],
           tabBarHideOnKeyboard: true,
         };
