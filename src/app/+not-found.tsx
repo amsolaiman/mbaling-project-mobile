@@ -1,22 +1,24 @@
+import { Link, Stack } from 'expo-router';
 import { StyleSheet } from 'react-native';
 
-// auth
-import { RoleBasedGuard } from '@/auth/guard';
-import { AuthUserRoles } from '@/auth/types';
 // components
 import { ThemedText, ThemedView } from '@/components/themed-native';
 
 // ----------------------------------------------------------------------
 
-export default function SearchScreen() {
+export default function NotFoundScreen() {
   return (
-    <RoleBasedGuard roles={[AuthUserRoles.STUDENT]}>
+    <>
+      <Stack.Screen options={{ title: 'Oops!' }} />
+
       <ThemedView style={styles.container}>
-        <ThemedText font={600} style={styles.title}>
-          Search
-        </ThemedText>
+        <ThemedText>This screen does not exist.</ThemedText>
+
+        <Link href="/" style={styles.link}>
+          <ThemedText>Go to home screen!</ThemedText>
+        </Link>
       </ThemedView>
-    </RoleBasedGuard>
+    </>
   );
 }
 
@@ -25,10 +27,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    padding: 20,
   },
-  title: {
-    fontSize: 48,
-    lineHeight: 52,
-    textAlign: 'center',
+  link: {
+    marginTop: 15,
+    paddingVertical: 15,
   },
 });

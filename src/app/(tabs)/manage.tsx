@@ -1,5 +1,8 @@
 import { StyleSheet } from 'react-native';
 
+// auth
+import { RoleBasedGuard } from '@/auth/guard';
+import { AuthUserRoles } from '@/auth/types';
 // components
 import { ThemedText, ThemedView } from '@/components/themed-native';
 
@@ -7,11 +10,13 @@ import { ThemedText, ThemedView } from '@/components/themed-native';
 
 export default function ManageScreen() {
   return (
-    <ThemedView style={styles.container}>
-      <ThemedText font={600} style={styles.title}>
-        Manage
-      </ThemedText>
-    </ThemedView>
+    <RoleBasedGuard roles={[AuthUserRoles.LANDLORD]}>
+      <ThemedView style={styles.container}>
+        <ThemedText font={600} style={styles.title}>
+          Manage
+        </ThemedText>
+      </ThemedView>
+    </RoleBasedGuard>
   );
 }
 
