@@ -1,19 +1,34 @@
-import { Link } from 'expo-router';
-import { StyleSheet } from 'react-native';
+import { router } from 'expo-router';
+import { useCallback } from 'react';
+import { Pressable, StyleSheet } from 'react-native';
 
+// auth
+import { useAuthContext } from '@/auth/hooks';
 // components
 import { ThemedText, ThemedView } from '@/components/themed-native';
 
 // ----------------------------------------------------------------------
 
 export default function SettingsScreen() {
+  const { logout } = useAuthContext();
+
+  const handleLogout = useCallback(async () => {
+    try {
+      await logout();
+      router.replace('/login');
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error(error);
+    }
+  }, [logout]);
+
   return (
     <ThemedView style={styles.container}>
-      <Link href="/login">
+      <Pressable onPress={handleLogout}>
         <ThemedText font={600} style={styles.title}>
           Settings
         </ThemedText>
-      </Link>
+      </Pressable>
     </ThemedView>
   );
 }

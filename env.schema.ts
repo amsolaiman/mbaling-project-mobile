@@ -7,6 +7,10 @@ export const envSchema = Yup.object({
   SYSTEM_TYPE: Yup.string()
     .required('SYSTEM_TYPE is required')
     .oneOf(['app'], 'SYSTEM_TYPE must be set to "app"'),
+  // HOST
+  EXPO_PUBLIC_HOST_API: Yup.string().required(
+    'EXPO_PUBLIC_HOST_API is required'
+  ),
 });
 
 export type EnvSchemaType = Yup.InferType<typeof envSchema>;
