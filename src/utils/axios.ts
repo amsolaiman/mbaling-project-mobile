@@ -1,8 +1,9 @@
-import { create } from 'axios';
+import axios from 'axios';
 
 // ----------------------------------------------------------------------
 
-const axiosInstance = create({
+// eslint-disable-next-line import/no-named-as-default-member
+const axiosInstance = axios.create({
   baseURL: process.env.EXPO_PUBLIC_HOST_API,
 });
 
@@ -20,5 +21,8 @@ export const API_ENDPOINTS = {
   auth: {
     me: '/api/auth/me',
     login: '/api/auth/login',
+  },
+  post: {
+    list: '/api/post/list?createdBy=true',
   },
 };
