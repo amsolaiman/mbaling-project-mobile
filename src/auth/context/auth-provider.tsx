@@ -81,7 +81,7 @@ export function AuthProvider({ children }: Props) {
       const accessToken = await SecureStore.getItemAsync(STORAGE_KEY);
 
       if (accessToken && isValidToken(accessToken)) {
-        setSession(accessToken);
+        await setSession(accessToken);
 
         const response = await axios.get(API_ENDPOINTS.auth.me, {
           headers: {
@@ -133,7 +133,7 @@ export function AuthProvider({ children }: Props) {
 
     const { accessToken } = response.data;
 
-    setSession(accessToken);
+    await setSession(accessToken);
 
     const me = await axios.get(API_ENDPOINTS.auth.me, {
       headers: {
@@ -153,7 +153,7 @@ export function AuthProvider({ children }: Props) {
 
   // LOGOUT
   const logout = useCallback(async () => {
-    setSession(null);
+    await setSession(null);
     dispatch({
       type: Types.LOGOUT,
     });

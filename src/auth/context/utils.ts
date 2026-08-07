@@ -30,6 +30,10 @@ export const isValidToken = (accessToken: string) => {
 
   const decoded = jwtDecode(accessToken);
 
+  if (typeof decoded.exp !== 'number' || !Number.isFinite(decoded.exp)) {
+    return false;
+  }
+
   const currentTime = Date.now() / 1000;
 
   return decoded.exp > currentTime;
@@ -58,17 +62,35 @@ export const eventBus = {
 
 // ----------------------------------------------------------------------
 
+let expirationTimer: ReturnType<typeof setTimeout> | null = null;
+
+const clearTokenExpirationTimer = () => {
+  if (expirationTimer) {
+    clearTimeout(expirationTimer);
+    expirationTimer = null;
+  }
+};
+
+// ----------------------------------------------------------------------
+
 export const tokenExpired = (exp: number) => {
-  let expiredTimer;
+  clearTokenExpirationTimer();
 
-  // Test token expires after 10s
-  // const timeLeft = currentTime + 10000 - currentTime; // ~10s
-  const currentTime = Date.now();
-  const timeLeft = exp * 1000 - currentTime;
+  if (!Number.isFinite(exp)) {
+    return;
+  }
 
-  clearTimeout(expiredTimer);
+  const timeLeft = exp * 1000 - Date.now();
 
-  expiredTimer = setTimeout(async () => {
+  if (timeLeft <= 0) {
+    void SecureStore.deleteItemAsync('accessToken');
+    eventBus.emit('token-expired');
+    return;
+  }
+
+  expirationTimer = setTimeout(async () => {
+    expirationTimer = null;
+
     await SecureStore.deleteItemAsync('accessToken');
 
     eventBus.emit('token-expired');
@@ -81,17 +103,30 @@ export const tokenExpired = (exp: number) => {
 // ----------------------------------------------------------------------
 
 export const setSession = async (accessToken: string | null) => {
+  clearTokenExpirationTimer();
+
   if (accessToken) {
     await SecureStore.setItemAsync('accessToken', accessToken);
 
     axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
 
-    // This function below will handle when token is expired
-    const { exp } = jwtDecode(accessToken); // ~1 hour by mbaling server
-    tokenExpired(exp);
+    try {
+      const { exp } = jwtDecode(accessToken);
+
+      if (typeof exp === 'number' && Number.isFinite(exp)) {
+        tokenExpired(exp);
+      } else {
+        // eslint-disable-next-line no-console
+        console.warn(
+          'Access token has no valid exp claim; skipping auto-expiry timer.'
+        );
+      }
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('Failed to decode access token:', error);
+    }
   } else {
     await SecureStore.deleteItemAsync('accessToken');
-
     delete axios.defaults.headers.common.Authorization;
   }
 };
