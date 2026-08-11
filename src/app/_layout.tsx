@@ -18,6 +18,8 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 // auth
 import { AuthConsumer, AuthProvider } from '@/auth/context';
+// components
+import { CustomAlertProvider } from '@/components/custom-alert';
 // constants
 import { ROOT_ROUTES } from '@/constants/routes';
 import { COLOR_PRIMARY } from '@/constants/theme';
@@ -90,9 +92,11 @@ export default function RootLayout() {
           value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
         >
           <PaperProvider theme={paperTheme}>
-            <AuthConsumer>
-              <Routes />
-            </AuthConsumer>
+            <CustomAlertProvider>
+              <AuthConsumer>
+                <Routes />
+              </AuthConsumer>
+            </CustomAlertProvider>
           </PaperProvider>
         </ThemeProvider>
       </SafeAreaProvider>

@@ -7,6 +7,7 @@ import { TextInput } from 'react-native-paper';
 // assets
 import { TabIconSearch } from '@/assets/icons/tab-icons';
 // components
+import useCustomAlert from '@/components/custom-alert';
 import { RHFTextField } from '@/components/hook-form';
 import {
   ThemedKeyboardAvoidingView,
@@ -30,6 +31,8 @@ type FormValuesProps = {
 };
 
 export default function SearchView() {
+  const { alert } = useCustomAlert();
+
   const [data, setData] = useState<PostCardProps[]>();
 
   const defaultValues = {
@@ -46,29 +49,32 @@ export default function SearchView() {
     formState: { isSubmitting },
   } = methods;
 
-  const getData = useCallback(async (query: string) => {
-    try {
-      const response = await axios.get(API_ENDPOINTS.post.search(query));
+  const getData = useCallback(
+    async (query: string) => {
+      try {
+        const response = await axios.get(API_ENDPOINTS.post.search(query));
 
-      const posts: PostResponse[] = response.data.data;
+        const posts: PostResponse[] = response.data.data;
 
-      const _data = posts.map(({ id, title, uploads, createdBy }) => ({
-        id,
-        title,
-        imageUrl: uploads[0]?.imgUrl,
-        userId: createdBy?.id,
-        name: createdBy?.details?.housingName,
-        avatarUrl: createdBy?.avatarUrl,
-      }));
+        const _data = posts.map(({ id, title, uploads, createdBy }) => ({
+          id,
+          title,
+          imageUrl: uploads[0]?.imgUrl,
+          userId: createdBy?.id,
+          name: createdBy?.details?.housingName,
+          avatarUrl: createdBy?.avatarUrl,
+        }));
 
-      setData(_data);
-    } catch (error) {
-      const message =
-        typeof error === 'string' ? error : (error as Error).message;
+        setData(_data);
+      } catch (error) {
+        const message =
+          typeof error === 'string' ? error : (error as Error).message;
 
-      alert(message);
-    }
-  }, []);
+        alert({ title: 'Oops!', message });
+      }
+    },
+    [alert]
+  );
 
   const onSubmit = useCallback(
     async (data: FormValuesProps) => {

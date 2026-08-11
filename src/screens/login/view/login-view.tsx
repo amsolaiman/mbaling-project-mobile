@@ -14,6 +14,7 @@ import * as Yup from 'yup';
 // auth
 import { useAuthContext } from '@/auth/hooks';
 // components
+import useCustomAlert from '@/components/custom-alert';
 import Logo from '@/components/logo';
 import {
   ThemedKeyboardAvoidingView,
@@ -34,6 +35,8 @@ type FormValuesProps = {
 };
 
 export default function LoginView() {
+  const { alert } = useCustomAlert();
+
   const { login } = useAuthContext();
 
   const LoginSchema = Yup.object().shape({
@@ -67,12 +70,10 @@ export default function LoginView() {
         const message =
           typeof error === 'string' ? error : (error as Error).message;
 
-        alert(message);
-        // eslint-disable-next-line no-console
-        console.error(message);
+        alert({ title: 'Unable to login!', message: message });
       }
     },
-    [login, reset]
+    [alert, login, reset]
   );
 
   return (
