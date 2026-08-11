@@ -36,11 +36,12 @@ export type PostCardProps = {
 
 type Props = {
   item: PostCardProps;
+  hideProfile?: boolean;
 };
 
 // ----------------------------------------------------------------------
 
-export default function PostCard({ item }: Props) {
+export default function PostCard({ item, hideProfile = false }: Props) {
   const { id, title, imageUrl, userId, name, avatarUrl } = item;
 
   const scheme = useColorScheme();
@@ -64,17 +65,19 @@ export default function PostCard({ item }: Props) {
         </Text>
       </Pressable>
 
-      <View style={styles.infoWrapper}>
-        <TouchableOpacity onPress={handlePressProfile} style={styles.profile}>
-          <Avatar size={24} src={avatarUrl} />
+      {!hideProfile && (
+        <View style={styles.infoWrapper}>
+          <TouchableOpacity onPress={handlePressProfile} style={styles.profile}>
+            <Avatar size={24} src={avatarUrl} />
 
-          <ThemedText numberOfLines={1} style={styles.profileName}>
-            {name}
-          </ThemedText>
-        </TouchableOpacity>
+            <ThemedText numberOfLines={1} style={styles.profileName}>
+              {name}
+            </ThemedText>
+          </TouchableOpacity>
 
-        <IconMenuDots size={24} color={colors.text} />
-      </View>
+          <IconMenuDots size={24} color={colors.text} />
+        </View>
+      )}
     </View>
   );
 }

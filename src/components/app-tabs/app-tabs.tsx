@@ -6,7 +6,7 @@ import { useAuthContext } from '@/auth/hooks';
 // constants
 import { TAB_ROUTES } from '@/constants/routes';
 // styles
-import { Colors, Spacing } from '@/styles';
+import { Colors, Spacing, TAB_BAR_HEIGHT } from '@/styles';
 
 // ----------------------------------------------------------------------
 
@@ -33,7 +33,7 @@ export default function AppTabs() {
             styles.tabBar,
             styles.tabShadow,
             {
-              height: 60,
+              height: TAB_BAR_HEIGHT,
               paddingBottom: 0,
               backgroundColor: colors.backgroundCard,
             },

@@ -1,34 +1,15 @@
-import { StyleSheet } from 'react-native';
-
 // auth
 import { RoleBasedGuard } from '@/auth/guard';
 import { AuthUserRoles } from '@/auth/types';
-// components
-import { ThemedText, ThemedView } from '@/components/themed-native';
+// screens
+import { SearchView } from '@/screens/search/view';
 
 // ----------------------------------------------------------------------
 
 export default function SearchScreen() {
   return (
     <RoleBasedGuard roles={[AuthUserRoles.STUDENT]}>
-      <ThemedView style={styles.container}>
-        <ThemedText font={600} style={styles.title}>
-          Search
-        </ThemedText>
-      </ThemedView>
+      <SearchView />
     </RoleBasedGuard>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 48,
-    lineHeight: 52,
-    textAlign: 'center',
-  },
-});
