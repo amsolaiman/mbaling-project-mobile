@@ -5,12 +5,12 @@ import { FlatList, RefreshControl, StyleSheet, View } from 'react-native';
 
 // components
 import { Spinner } from '@/components/spinner-overlay';
-import { ThemedText } from '@/components/themed-native';
+import { ThemedText, ThemedView } from '@/components/themed-native';
 // hooks
 import { useBoolean } from '@/hooks/use-boolean';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 // styles
-import { Fonts } from '@/styles';
+import { BOTTOM_TAB_BAR_INSET, Fonts, Spacing } from '@/styles';
 // types
 import { PostResponse } from '@/types/posts';
 // utils
@@ -71,7 +71,7 @@ export default function HomeView() {
   }, [getData, refreshing]);
 
   return (
-    <View style={styles.container}>
+    <ThemedView style={styles.container}>
       <FlatList
         data={data}
         keyExtractor={(item) => item.id}
@@ -79,6 +79,9 @@ export default function HomeView() {
         //
         numColumns={2}
         columnWrapperStyle={styles.columnWrapper}
+        contentContainerStyle={{
+          paddingBottom: BOTTOM_TAB_BAR_INSET + Spacing.five,
+        }}
         //
         refreshControl={
           <RefreshControl refreshing={refreshing.value} onRefresh={onRefresh} />
@@ -88,7 +91,7 @@ export default function HomeView() {
         }
         ListHeaderComponentStyle={styles.header}
         ListFooterComponent={
-          <View style={{ marginTop: 32 }}>
+          <View style={{ marginTop: Spacing.five }}>
             <Spinner
               size={42}
               color={colorScheme === 'light' ? 'primary' : 'light'}
@@ -98,7 +101,7 @@ export default function HomeView() {
         ListFooterComponentStyle={styles.footer}
         ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
       />
-    </View>
+    </ThemedView>
   );
 }
 
@@ -108,19 +111,18 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   columnWrapper: {
-    paddingHorizontal: 16,
+    paddingHorizontal: Spacing.three,
     justifyContent: 'space-between',
   },
   header: {
-    padding: 16,
+    padding: Spacing.three,
   },
   headerTitle: {
     ...Fonts[700],
     fontSize: 18,
   },
   footer: {
-    paddingBottom: 32 + 76,
-    paddingHorizontal: 16,
+    paddingHorizontal: Spacing.three,
     alignItems: 'center',
   },
 });
