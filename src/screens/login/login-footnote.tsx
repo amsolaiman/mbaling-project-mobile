@@ -5,7 +5,7 @@ import { IconQuestionMark } from '@/assets/icons';
 // constants
 import { COMMON_COLORS } from '@/constants/theme';
 // styles
-import { Fonts } from '@/styles';
+import { Fonts, Spacing } from '@/styles';
 
 // ----------------------------------------------------------------------
 
@@ -34,7 +34,7 @@ export default function LoginFootnote() {
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    bottom: 24,
+    bottom: Spacing.four,
     left: 0,
     right: 0,
     alignItems: 'center',
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   button: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 4,
+    gap: Spacing.one,
   },
   text: {
     ...Fonts[400],

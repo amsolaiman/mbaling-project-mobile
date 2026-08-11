@@ -3,6 +3,8 @@ import { StyleSheet } from 'react-native';
 
 // components
 import { ThemedText, ThemedView } from '@/components/themed-native';
+// styles
+import { Spacing } from '@/styles';
 
 // ----------------------------------------------------------------------
 
@@ -27,10 +29,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 20,
+    padding: Spacing.four,
   },
   link: {
-    marginTop: 15,
-    paddingVertical: 15,
+    marginTop: Spacing.three,
+    paddingVertical: Spacing.three,
   },
 });

@@ -21,7 +21,7 @@ import { COLOR_ACCENT, COMMON_COLORS } from '@/constants/theme';
 // hooks
 import { useColorScheme } from '@/hooks/use-color-scheme';
 // styles
-import { Colors, Fonts } from '@/styles';
+import { Colors, Fonts, Spacing } from '@/styles';
 
 // ----------------------------------------------------------------------
 
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
   container: {
     width: (Dimensions.get('window').width - 40) / 2,
     flexDirection: 'column',
-    gap: 4,
+    gap: Spacing.one,
   },
   imageWrapper: {
     width: '100%',
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 4,
+    gap: Spacing.one,
   },
   profileName: {
     ...Fonts[600],
