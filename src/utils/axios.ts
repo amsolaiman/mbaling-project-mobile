@@ -24,5 +24,6 @@ export const API_ENDPOINTS = {
   },
   post: {
     list: '/api/post/list?createdBy=true',
+    search: (query: string) => `/api/post/search?query=${query}&createdBy=true`,
   },
 };
