@@ -1,3 +1,5 @@
+export * from './tab-icons';
+
 export { default as IconCheckCircle } from './check-circle';
 export { default as IconCloseCircle } from './close-circle';
 export { default as IconMenuDots } from './menu-dots';

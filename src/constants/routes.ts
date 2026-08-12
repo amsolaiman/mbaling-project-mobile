@@ -2,12 +2,12 @@ import { type NativeStackNavigationOptions } from 'expo-router';
 
 // assets
 import {
-  TabIconAccount,
-  TabIconHome,
-  TabIconManage,
-  TabIconSearch,
-  TabIconSettings,
-} from '@/assets/icons/tab-icons';
+  IconHome,
+  IconMagnifier,
+  IconPen,
+  IconSettings,
+  IconUser,
+} from '@/assets/icons';
 // auth
 import { AuthUserRoles } from '@/auth/types';
 
@@ -45,7 +45,7 @@ export const ROOT_ROUTES: RootRoutesType[] = [
 type TabRoutesType = {
   name: string;
   title: string;
-  Icon: typeof TabIconHome;
+  Icon: typeof IconHome;
   hideFor?: AuthUserRoles;
 };
 
@@ -53,28 +53,28 @@ export const TAB_ROUTES: TabRoutesType[] = [
   {
     name: 'index',
     title: 'Home',
-    Icon: TabIconHome,
+    Icon: IconHome,
   },
   {
     name: 'search',
     title: 'Search',
-    Icon: TabIconSearch,
+    Icon: IconMagnifier,
     hideFor: AuthUserRoles.LANDLORD,
   },
   {
     name: 'manage',
     title: 'Manage',
-    Icon: TabIconManage,
+    Icon: IconPen,
     hideFor: AuthUserRoles.STUDENT,
   },
   {
     name: 'account',
     title: 'Account',
-    Icon: TabIconAccount,
+    Icon: IconUser,
   },
   {
     name: 'settings',
     title: 'Settings',
-    Icon: TabIconSettings,
+    Icon: IconSettings,
   },
 ];

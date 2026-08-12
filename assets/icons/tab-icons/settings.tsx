@@ -6,11 +6,7 @@ import { IconProps } from '../types';
 
 // ----------------------------------------------------------------------
 
-const TabIconSettings = ({
-  variant = 'solid',
-  size = 24,
-  color,
-}: IconProps) => {
+const IconSettings = ({ variant = 'solid', size = 24, color }: IconProps) => {
   // solar:settings-minimalistic-bold
   const renderSolid = (
     <Path
@@ -57,4 +53,4 @@ const TabIconSettings = ({
   );
 };
 
-export default memo(TabIconSettings);
+export default memo(IconSettings);
