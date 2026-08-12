@@ -6,7 +6,7 @@ import { IconProps } from '../types';
 
 // ----------------------------------------------------------------------
 
-const TabIconSearch = ({ variant = 'solid', size = 24, color }: IconProps) => {
+const IconMagnifier = ({ variant = 'solid', size = 24, color }: IconProps) => {
   // solar:magnifer-bold
   const renderSolid = (
     <Path
@@ -53,4 +53,4 @@ const TabIconSearch = ({ variant = 'solid', size = 24, color }: IconProps) => {
   );
 };
 
-export default memo(TabIconSearch);
+export default memo(IconMagnifier);

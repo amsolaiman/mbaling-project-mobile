@@ -2,7 +2,7 @@ import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 import { Avatar as PaperAvatar } from 'react-native-paper';
 
 // assets
-import { TabIconAccount } from '@/assets/icons/tab-icons';
+import { IconUser } from '@/assets/icons';
 // constants
 import { COLOR_ACCENT, COMMON_COLORS } from '@/constants/theme';
 
@@ -27,7 +27,7 @@ export default function Avatar({ size, src, style }: Props) {
         <PaperAvatar.Icon
           size={size}
           icon={() => (
-            <TabIconAccount
+            <IconUser
               variant="duotone"
               size={size / 1.5}
               color={COMMON_COLORS.white.main}

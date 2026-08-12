@@ -6,7 +6,7 @@ import { IconProps } from '../types';
 
 // ----------------------------------------------------------------------
 
-const TabIconAccount = ({ variant = 'solid', size = 24, color }: IconProps) => {
+const IconUser = ({ variant = 'solid', size = 24, color }: IconProps) => {
   // solar:user-bold
   const renderSolid = (
     <>
@@ -51,4 +51,4 @@ const TabIconAccount = ({ variant = 'solid', size = 24, color }: IconProps) => {
   );
 };
 
-export default memo(TabIconAccount);
+export default memo(IconUser);

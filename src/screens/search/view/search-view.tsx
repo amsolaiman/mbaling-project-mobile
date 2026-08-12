@@ -5,7 +5,7 @@ import { Animated, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { TextInput } from 'react-native-paper';
 
 // assets
-import { TabIconSearch } from '@/assets/icons/tab-icons';
+import { IconMagnifier } from '@/assets/icons';
 // components
 import useCustomAlert from '@/components/custom-alert';
 import { RHFTextField } from '@/components/hook-form';
@@ -121,7 +121,7 @@ export default function SearchView() {
                 left={
                   <TextInput.Icon
                     icon={() => (
-                      <TabIconSearch
+                      <IconMagnifier
                         variant="outline"
                         size={20}
                         color={GREY_COLORS[600]}
