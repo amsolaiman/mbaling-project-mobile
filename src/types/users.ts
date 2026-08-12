@@ -4,6 +4,10 @@ export type UserLandlordResponse = IUserItem & {
   details: Omit<IUserLandlordDetails, 'userId'>;
 };
 
+export type UserStudentResponse = IUserItem & {
+  details: Omit<IUserStudentDetails, 'id' | 'userId'>;
+};
+
 // ----------------------------------------------------------------------
 
 export type IUserItem = {
@@ -38,4 +42,15 @@ export type IUserLandlordDetails = {
   housingName: string;
   chatLink: string | null;
   mapLink: string | null;
+};
+
+export type IUserStudentDetails = {
+  id: string;
+  userId: string;
+  studentId: string;
+  degree: string;
+  department: string;
+  college: string;
+  housingId: string | null;
+  applicationId: string | null;
 };
