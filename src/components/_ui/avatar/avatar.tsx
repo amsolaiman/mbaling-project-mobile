@@ -43,7 +43,7 @@ export default function Avatar({ size, src, style }: Props) {
 const styles = StyleSheet.create({
   container: {
     aspectRatio: 1 / 1,
-    borderRadius: 50,
+    borderRadius: '50%',
     backgroundColor: COLOR_ACCENT,
   },
   avatar: {

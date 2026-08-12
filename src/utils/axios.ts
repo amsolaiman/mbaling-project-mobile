@@ -22,6 +22,10 @@ export const API_ENDPOINTS = {
     me: '/api/auth/me',
     login: '/api/auth/login',
   },
+  student: {
+    housing: (id: string) => `/api/student/list/${id}/housing`,
+    application: (id: string) => `/api/student/list/${id}/application`,
+  },
   post: {
     list: '/api/post/list?createdBy=true',
     search: (query: string) => `/api/post/search?query=${query}&createdBy=true`,

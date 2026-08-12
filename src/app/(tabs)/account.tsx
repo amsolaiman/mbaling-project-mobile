@@ -1,29 +1,17 @@
-import { StyleSheet } from 'react-native';
-
-// components
-import { ThemedText, ThemedView } from '@/components/themed-native';
+// auth
+import { useAuthContext } from '@/auth/hooks';
+import { AuthUserRoles } from '@/auth/types';
+// screens
+import { AccountStudentView } from '@/screens/account/view';
 
 // ----------------------------------------------------------------------
 
 export default function AccountScreen() {
-  return (
-    <ThemedView style={styles.container}>
-      <ThemedText font={600} style={styles.title}>
-        Account
-      </ThemedText>
-    </ThemedView>
-  );
-}
+  const { user } = useAuthContext();
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 48,
-    lineHeight: 52,
-    textAlign: 'center',
-  },
-});
+  if (user?.role === AuthUserRoles.LANDLORD) {
+    return null;
+  }
+
+  return <AccountStudentView />;
+}
