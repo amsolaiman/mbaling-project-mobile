@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 
-import { useCallback } from 'react';
+import { useCallback, useRef } from 'react';
 import {
   Dimensions,
   Image,
@@ -15,6 +15,7 @@ import {
 import { IconMenuDots } from '@/assets/icons';
 // components
 import Avatar from '@/components/_ui/avatar';
+import ActionSheet, { ActionSheetRef } from '@/components/action-sheet';
 import { ThemedText } from '@/components/themed-native';
 // constant
 import { COLOR_ACCENT, COMMON_COLORS } from '@/constants/theme';
@@ -44,6 +45,8 @@ type Props = {
 export default function PostCard({ item, hideProfile = false }: Props) {
   const { id, title, imageUrl, userId, name, avatarUrl } = item;
 
+  const sheetRef = useRef<ActionSheetRef>(null);
+
   const scheme = useColorScheme();
   const colors = Colors[scheme === 'unspecified' ? 'light' : scheme];
 
@@ -55,30 +58,49 @@ export default function PostCard({ item, hideProfile = false }: Props) {
     console.log('User:', userId);
   }, [userId]);
 
+  const meta = {
+    title,
+    imageUrl,
+    link: `http://localhost:8081/post/${id}`,
+  };
+
   return (
-    <View style={styles.container}>
-      <Pressable onPress={handlePressPost} style={styles.imageWrapper}>
-        <Image source={{ uri: imageUrl }} style={styles.image} />
+    <>
+      <View style={styles.container}>
+        <Pressable onPress={handlePressPost} style={styles.imageWrapper}>
+          <Image source={{ uri: imageUrl }} style={styles.image} />
 
-        <Text numberOfLines={2} style={styles.title}>
-          {title}
-        </Text>
-      </Pressable>
+          <Text numberOfLines={2} style={styles.title}>
+            {title}
+          </Text>
+        </Pressable>
 
-      {!hideProfile && (
-        <View style={styles.infoWrapper}>
-          <TouchableOpacity onPress={handlePressProfile} style={styles.profile}>
-            <Avatar size={24} src={avatarUrl} />
+        {!hideProfile && (
+          <View style={styles.infoWrapper}>
+            <TouchableOpacity
+              onPress={handlePressProfile}
+              style={styles.profile}
+            >
+              <Avatar size={24} src={avatarUrl} />
 
-            <ThemedText numberOfLines={1} style={styles.profileName}>
-              {name}
-            </ThemedText>
-          </TouchableOpacity>
+              <ThemedText numberOfLines={1} style={styles.profileName}>
+                {name}
+              </ThemedText>
+            </TouchableOpacity>
 
-          <IconMenuDots size={24} color={colors.text} />
-        </View>
-      )}
-    </View>
+            <TouchableOpacity onPress={() => sheetRef.current?.show()}>
+              <IconMenuDots size={24} color={colors.text} />
+            </TouchableOpacity>
+          </View>
+        )}
+      </View>
+
+      <ActionSheet
+        ref={sheetRef}
+        meta={meta}
+        onClose={() => sheetRef.current?.hide()}
+      />
+    </>
   );
 }
 
