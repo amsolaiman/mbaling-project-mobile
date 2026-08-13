@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 import { yupResolver } from '@hookform/resolvers/yup';
 import { router } from 'expo-router';
 import { useCallback } from 'react';
@@ -66,6 +68,7 @@ export default function LoginView() {
         await login?.(data.username, data.password);
         reset();
         router.replace('/');
+        console.info('DATA', data);
       } catch (error: Error | unknown) {
         const message =
           typeof error === 'string' ? error : (error as Error).message;
