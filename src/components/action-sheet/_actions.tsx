@@ -1,23 +1,18 @@
 /* eslint-disable no-console */
 
-import * as Linking from 'expo-linking';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 //
-import useCustomAlert from '../custom-alert';
-
-import ActionButton, {
+import {
   ActionButtonCopy,
   ActionButtonEmail,
   ActionButtonMessage,
   ActionButtonReport,
   ActionButtonShare,
+  ActionButtonSocial,
 } from './action-button';
-import socialAppsChecking, {
-  socialsReaderIcon,
-  socialsReaderUrl,
-} from './action-socials';
-import { ActionMetaProps } from './types';
+import socialAppsChecking from './action-socials';
+import { ActionMetaProps, SocialAppNames } from './types';
 
 // ----------------------------------------------------------------------
 
@@ -25,65 +20,39 @@ function useAvailableSocialActions(
   meta: ActionMetaProps,
   onClose: VoidFunction
 ) {
-  const { alert } = useCustomAlert();
-
-  const [apps, setApps] = useState<string[]>([]);
+  const [apps, setApps] = useState<SocialAppNames[]>([]);
 
   useEffect(() => {
     let isMounted = true;
 
-    const fetchSocialApps = async () => {
-      try {
-        const result = await socialAppsChecking();
+    socialAppsChecking()
+      .then((result) => {
         if (isMounted) setApps(result);
-      } catch (error) {
+      })
+      .catch((error) => {
         console.error('Failed to check social apps:', error);
-      }
-    };
-
-    fetchSocialApps();
+      });
 
     return () => {
       isMounted = false;
     };
   }, []);
 
-  const handlePress = useCallback(
-    async (name: string) => {
-      const message = `mBALING | ${meta.title}\n\n${meta.link}`;
-
-      try {
-        const url = socialsReaderUrl(name, message);
-
-        await Linking.openURL(url).catch(() => {
-          alert({ message: 'Failed to open app.' });
-        });
-
-        onClose();
-      } catch (error) {
-        console.error(error);
-      }
-    },
-    [alert, meta.link, meta.title, onClose]
-  );
-
-  const socials = useMemo(
+  return useMemo(
     () =>
-      apps.map((appName) => ({
-        name: appName,
+      apps.map((name) => ({
+        name,
         component: (
-          <ActionButton
-            key={appName}
-            label={appName}
-            icon={socialsReaderIcon(appName)}
-            onPress={() => handlePress(appName)}
+          <ActionButtonSocial
+            key={name}
+            name={name}
+            meta={meta}
+            onClose={onClose}
           />
         ),
       })),
-    [apps, handlePress]
+    [apps, meta, onClose]
   );
-
-  return socials;
 }
 
 // ----------------------------------------------------------------------

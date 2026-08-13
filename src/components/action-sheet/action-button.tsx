@@ -20,12 +20,18 @@ import { ThemedText } from '@/components/themed-native';
 import { COMMON_COLORS, GREY_COLORS } from '@/constants/theme';
 // hooks
 import { useColorScheme } from '@/hooks/use-color-scheme';
-import { useTheme } from '@/hooks/use-theme';
 // styles
 import { Fonts, Spacing } from '@/styles';
 
 //
-import { ActionBasicProps, ActionButtonProps } from './types';
+import { socialsReaderIcon, socialsReaderUrl } from './action-socials';
+import {
+  ActionBasicProps,
+  ActionButtonLinkProps,
+  ActionButtonProps,
+  SocialAppNames,
+} from './types';
+import { actionIconStyles, buildShareMessage } from './utils';
 
 // ----------------------------------------------------------------------
 
@@ -85,15 +91,35 @@ const styles = StyleSheet.create({
 });
 
 // ----------------------------------------------------------------------
+// Shared button for anything that opens a URL built from the share message
+// (Message, Email, and each social app all use this).
 
-export const IconStyles = () => {
-  const color = useTheme();
+const ActionButtonLink: React.FC<ActionButtonLinkProps> = ({
+  label,
+  icon,
+  buildUrl,
+  meta,
+  onClose = () => {},
+}) => {
+  const { alert } = useCustomAlert();
 
-  return {
-    size: 30,
-    color: color.text,
-  };
+  const handlePress = useCallback(async () => {
+    try {
+      const url = buildUrl(buildShareMessage(meta));
+
+      await Linking.openURL(url).catch(() => {
+        alert({ message: 'Failed to open app.' });
+      });
+      onClose();
+    } catch (error) {
+      console.error(error);
+    }
+  }, [alert, buildUrl, meta, onClose]);
+
+  return <ActionButton label={label} onPress={handlePress} icon={icon} />;
 };
+
+// ----------------------------------------------------------------------
 
 export const ActionButtonCopy: React.FC<ActionBasicProps> = ({
   meta,
@@ -112,7 +138,7 @@ export const ActionButtonCopy: React.FC<ActionBasicProps> = ({
     <ActionButton
       label="Copy link"
       onPress={handlePress}
-      icon={<IconActionLink variant="outline" {...IconStyles()} />}
+      icon={<IconActionLink variant="outline" {...actionIconStyles()} />}
     />
   );
 };
@@ -122,79 +148,60 @@ export const ActionButtonShare: React.FC<ActionBasicProps> = ({
   onClose = () => {},
 }) => {
   const handlePress = useCallback(async () => {
-    const message = `mBALING | ${meta.title}\n\n${meta.link}`;
     try {
-      await Share.share({ message });
+      await Share.share({ message: buildShareMessage(meta) });
       onClose();
     } catch (error) {
       console.error(error);
     }
-  }, [meta.link, meta.title, onClose]);
+  }, [meta, onClose]);
 
   return (
     <ActionButton
       label="Share"
       onPress={handlePress}
-      icon={<IconActionShare variant="outline" {...IconStyles()} />}
+      icon={<IconActionShare variant="outline" {...actionIconStyles()} />}
     />
   );
 };
 
 export const ActionButtonMessage: React.FC<ActionBasicProps> = ({
   meta,
-  onClose = () => {},
-}) => {
-  const { alert } = useCustomAlert();
-
-  const handlePress = useCallback(async () => {
-    const message = `mBALING | ${meta.title}\n\n${meta.link}`;
-    try {
-      const url = `sms:?body=${encodeURIComponent(message)}`;
-      await Linking.openURL(url).catch(() => {
-        alert({ message: 'Failed to open messaging app.' });
-      });
-      onClose();
-    } catch (error) {
-      console.error(error);
-    }
-  }, [alert, meta.link, meta.title, onClose]);
-
-  return (
-    <ActionButton
-      label="Message"
-      onPress={handlePress}
-      icon={<IconActionChat variant="outline" {...IconStyles()} />}
-    />
-  );
-};
+  onClose,
+}) => (
+  <ActionButtonLink
+    label="Message"
+    icon={<IconActionChat variant="outline" {...actionIconStyles()} />}
+    buildUrl={(message) => `sms:?body=${encodeURIComponent(message)}`}
+    meta={meta}
+    onClose={onClose}
+  />
+);
 
 export const ActionButtonEmail: React.FC<ActionBasicProps> = ({
   meta,
-  onClose = () => {},
-}) => {
-  const { alert } = useCustomAlert();
+  onClose,
+}) => (
+  <ActionButtonLink
+    label="Email"
+    icon={<IconActionLetter variant="outline" {...actionIconStyles()} />}
+    buildUrl={(message) => `mailto:?body=${encodeURIComponent(message)}`}
+    meta={meta}
+    onClose={onClose}
+  />
+);
 
-  const handlePress = useCallback(async () => {
-    const message = `mBALING | ${meta.title}\n\n${meta.link}`;
-    try {
-      const url = `mailto:?body=${encodeURIComponent(message)}`;
-      await Linking.openURL(url).catch(() => {
-        alert({ message: 'Failed to open mailing app.' });
-      });
-      onClose();
-    } catch (error) {
-      console.error(error);
-    }
-  }, [alert, meta.link, meta.title, onClose]);
-
-  return (
-    <ActionButton
-      label="Email"
-      onPress={handlePress}
-      icon={<IconActionLetter variant="outline" {...IconStyles()} />}
-    />
-  );
-};
+export const ActionButtonSocial: React.FC<
+  ActionBasicProps & { name: SocialAppNames }
+> = ({ name, meta, onClose }) => (
+  <ActionButtonLink
+    label={name}
+    icon={socialsReaderIcon(name)}
+    buildUrl={(message) => socialsReaderUrl(name, message)}
+    meta={meta}
+    onClose={onClose}
+  />
+);
 
 export const ActionButtonReport: React.FC<ActionBasicProps> = ({
   onClose = () => {},
@@ -210,7 +217,7 @@ export const ActionButtonReport: React.FC<ActionBasicProps> = ({
     <ActionButton
       label="Report"
       onPress={handlePress}
-      icon={<IconActionFlag {...IconStyles()} />}
+      icon={<IconActionFlag {...actionIconStyles()} />}
     />
   );
 };

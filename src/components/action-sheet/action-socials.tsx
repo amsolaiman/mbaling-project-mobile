@@ -4,7 +4,6 @@ import { Platform } from 'react-native';
 
 // assets
 import {
-  IconCloseCircle,
   IconSocialDiscord,
   IconSocialMessenger,
   IconSocialTelegram,
@@ -13,23 +12,27 @@ import {
 } from '@/assets/icons';
 
 //
-import { IconStyles } from './action-button';
 import { SocialAppNames } from './types';
 
 // ----------------------------------------------------------------------
 
-const socialAppsChecking = async (): Promise<SocialAppNames[]> => {
-  const appsAvailability: Record<SocialAppNames, boolean> = {
-    [SocialAppNames.DISCORD]: await Linking.canOpenURL('discord://'),
-    [SocialAppNames.MESSENGER]: await Linking.canOpenURL('fb-messenger://'),
-    [SocialAppNames.TELEGRAM]: await Linking.canOpenURL('tg://'),
-    [SocialAppNames.VIBER]: await Linking.canOpenURL('viber://'),
-    [SocialAppNames.WHATSAPP]: await Linking.canOpenURL('whatsapp://'),
-  };
+const URL_SCHEMES: Record<SocialAppNames, string> = {
+  [SocialAppNames.DISCORD]: 'discord://',
+  [SocialAppNames.MESSENGER]: 'fb-messenger://',
+  [SocialAppNames.TELEGRAM]: 'tg://',
+  [SocialAppNames.VIBER]: 'viber://',
+  [SocialAppNames.WHATSAPP]: 'whatsapp://',
+};
 
-  return (Object.keys(appsAvailability) as SocialAppNames[]).filter(
-    (app) => appsAvailability[app]
+const socialAppsChecking = async (): Promise<SocialAppNames[]> => {
+  const entries = await Promise.all(
+    (Object.values(SocialAppNames) as SocialAppNames[]).map(async (app) => {
+      const canOpen = await Linking.canOpenURL(URL_SCHEMES[app]);
+      return [app, canOpen] as const;
+    })
   );
+
+  return entries.filter(([, canOpen]) => canOpen).map(([app]) => app);
 };
 
 export default socialAppsChecking;
@@ -49,7 +52,7 @@ export const socialsReaderIcon = (name: string): React.ReactNode => {
     case SocialAppNames.WHATSAPP:
       return <IconSocialWhatsapp size={30} />;
     default:
-      return <IconCloseCircle variant="outline" {...IconStyles()} />;
+      return null;
   }
 };
 

@@ -25,6 +25,12 @@ export type ActionBasicProps = ViewProps & {
   onClose?: VoidFunction;
 };
 
+export type ActionButtonLinkProps = ActionBasicProps & {
+  label: string;
+  icon: React.ReactNode;
+  buildUrl: (message: string) => string;
+};
+
 export enum SocialAppNames {
   DISCORD = 'Discord',
   MESSENGER = 'Messenger',
