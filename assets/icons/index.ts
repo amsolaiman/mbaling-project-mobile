@@ -1,3 +1,4 @@
+export * from './action-icons';
 export * from './tab-icons';
 
 export { default as IconCheckCircle } from './check-circle';
