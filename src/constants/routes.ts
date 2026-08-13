@@ -13,13 +13,13 @@ import { AuthUserRoles } from '@/auth/types';
 
 // ----------------------------------------------------------------------
 
-type RootRoutesType = {
+type StackRoutesType = {
   name: string;
   title: string;
   options?: NativeStackNavigationOptions;
 };
 
-export const ROOT_ROUTES: RootRoutesType[] = [
+export const ROOT_ROUTES: StackRoutesType[] = [
   {
     name: 'login',
     title: 'Login',
@@ -29,8 +29,8 @@ export const ROOT_ROUTES: RootRoutesType[] = [
     },
   },
   {
-    name: '(tabs)',
-    title: 'Tab Pages',
+    name: '(main)',
+    title: 'Main Pages',
     options: {
       headerShown: false,
       animation: 'fade',
@@ -42,14 +42,24 @@ export const ROOT_ROUTES: RootRoutesType[] = [
   },
 ];
 
-type TabRoutesType = {
+export const MAIN_ROUTES: StackRoutesType[] = [
+  {
+    name: '(tabs)',
+    title: 'Tab Pages',
+    options: {
+      headerShown: false,
+    },
+  },
+];
+
+type TabsRoutesType = {
   name: string;
   title: string;
   Icon: typeof IconHome;
   hideFor?: AuthUserRoles;
 };
 
-export const TAB_ROUTES: TabRoutesType[] = [
+export const TAB_ROUTES: TabsRoutesType[] = [
   {
     name: 'index',
     title: 'Home',
