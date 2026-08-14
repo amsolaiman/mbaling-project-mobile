@@ -1,3 +1,4 @@
+import { router } from 'expo-router';
 import { useCallback } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
@@ -29,8 +30,7 @@ export default function PostAvatar({
   const color = useTheme();
 
   const handlePress = useCallback(() => {
-    // eslint-disable-next-line no-console
-    console.log('User:', userId);
+    router.push(`/profile/${userId}`);
   }, [userId]);
 
   return (

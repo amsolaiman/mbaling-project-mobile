@@ -57,6 +57,13 @@ export const MAIN_ROUTES: StackRoutesType[] = [
       headerShown: false,
     },
   },
+  {
+    name: 'profile/[id]',
+    title: 'Landlord Profile',
+    options: {
+      headerShown: false,
+    },
+  },
 ];
 
 type TabsRoutesType = {
