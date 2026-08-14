@@ -3,9 +3,11 @@ import { Pressable, StyleSheet } from 'react-native';
 
 // assets
 import { IconArrow } from '@/assets/icons';
-// hooks
+// constants
 import { COMMON_COLORS } from '@/constants/theme';
+// hooks
 import { useColorScheme } from '@/hooks/use-color-scheme';
+// styles
 import { Colors } from '@/styles';
 
 // ----------------------------------------------------------------------
@@ -40,7 +42,7 @@ export default function BackButton({
         direction="left"
         variant="outline"
         size={24}
-        color={Colors[theme].text}
+        color={Colors[theme].textReverse}
       />
     </Pressable>
   );

@@ -9,12 +9,14 @@ export const Colors = {
   light: {
     ...BRAND_COLORS,
     text: '#11181c',
+    textReverse: '#ecedee',
     background: '#ffffff',
     backgroundCard: '#ffffff',
   },
   dark: {
     ...BRAND_COLORS,
     text: '#ecedee',
+    textReverse: '#11181c',
     background: '#151718',
     backgroundCard: '#1f1f1f',
   },

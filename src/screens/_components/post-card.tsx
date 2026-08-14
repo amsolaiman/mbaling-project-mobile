@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 
+import { router } from 'expo-router';
 import { useCallback, useRef } from 'react';
 import {
   Dimensions,
@@ -51,7 +52,7 @@ export default function PostCard({ item, hideProfile = false }: Props) {
   const colors = Colors[scheme === 'unspecified' ? 'light' : scheme];
 
   const handlePressPost = useCallback(() => {
-    console.log('Post:', id);
+    router.push(`/post/${id}`);
   }, [id]);
 
   const handlePressProfile = useCallback(() => {

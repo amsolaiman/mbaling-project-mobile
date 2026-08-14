@@ -3,6 +3,7 @@ export * from './social-icons';
 export * from './tab-icons';
 
 export { default as IconArrow } from './arrow';
+export { default as IconChatRound } from './chat-round';
 export { default as IconCheckCircle } from './check-circle';
 export { default as IconCloseCircle } from './close-circle';
 export { default as IconDocument } from './document';
