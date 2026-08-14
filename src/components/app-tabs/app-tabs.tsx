@@ -68,16 +68,16 @@ export default function AppTabs() {
 
 const styles = StyleSheet.create({
   tabItem: {
-    padding: 12,
+    padding: Spacing.three,
     alignItems: 'center',
     justifyContent: 'center',
   },
   tabBar: {
     paddingVertical: Spacing.one,
-    paddingHorizontal: Spacing.three,
+    paddingHorizontal: Spacing.four,
     marginHorizontal: Dimensions.get('window').width * 0.05,
     position: 'absolute',
-    marginBottom: Spacing.three,
+    marginBottom: Spacing.four,
     borderRadius: 50,
     borderTopWidth: 0,
   },
@@ -85,10 +85,10 @@ const styles = StyleSheet.create({
     shadowColor: Colors.light.common.black.main,
     shadowOffset: {
       width: 0,
-      height: 4,
+      height: Spacing.one,
     },
     shadowOpacity: 0.4,
-    shadowRadius: 6,
-    elevation: 4,
+    shadowRadius: Spacing.oneHalf,
+    elevation: Spacing.oneHalf,
   },
 });

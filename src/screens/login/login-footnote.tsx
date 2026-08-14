@@ -39,7 +39,7 @@ export default function LoginFootnote() {
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    bottom: Spacing.four,
+    bottom: Spacing.five,
     left: 0,
     right: 0,
     alignItems: 'center',

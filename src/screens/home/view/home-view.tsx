@@ -80,7 +80,7 @@ export default function HomeView() {
         numColumns={2}
         columnWrapperStyle={styles.columnWrapper}
         contentContainerStyle={{
-          paddingBottom: BOTTOM_TAB_BAR_INSET + Spacing.five,
+          paddingBottom: BOTTOM_TAB_BAR_INSET + Spacing.six,
         }}
         //
         refreshControl={
@@ -91,7 +91,7 @@ export default function HomeView() {
         }
         ListHeaderComponentStyle={styles.header}
         ListFooterComponent={
-          <View style={{ marginTop: Spacing.five }}>
+          <View style={{ marginTop: Spacing.six }}>
             <Spinner
               size={42}
               color={colorScheme === 'light' ? 'primary' : 'light'}
@@ -99,7 +99,9 @@ export default function HomeView() {
           </View>
         }
         ListFooterComponentStyle={styles.footer}
-        ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
+        ItemSeparatorComponent={() => (
+          <View style={{ height: Spacing.three }} />
+        )}
       />
     </ThemedView>
   );
@@ -111,18 +113,18 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   columnWrapper: {
-    paddingHorizontal: Spacing.three,
+    paddingHorizontal: Spacing.four,
     justifyContent: 'space-between',
   },
   header: {
-    padding: Spacing.three,
+    padding: Spacing.four,
   },
   headerTitle: {
     ...Fonts[700],
     fontSize: 18,
   },
   footer: {
-    paddingHorizontal: Spacing.three,
+    paddingHorizontal: Spacing.four,
     alignItems: 'center',
   },
 });

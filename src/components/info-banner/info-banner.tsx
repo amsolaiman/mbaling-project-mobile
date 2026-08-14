@@ -69,14 +69,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    gap: Spacing.three,
+    gap: Spacing.four,
   },
   textWrapper: {
     flex: 1,
   },
   title: {
     ...Fonts[600],
-    marginBottom: 6,
+    marginBottom: Spacing.oneHalf,
     fontSize: 16,
   },
   caption: {

@@ -35,11 +35,11 @@ export default function SearchResult({ data, onScroll }: Props) {
       numColumns={2}
       columnWrapperStyle={styles.columnWrapper}
       contentContainerStyle={{
-        paddingBottom: BOTTOM_TAB_BAR_INSET + Spacing.five,
+        paddingBottom: BOTTOM_TAB_BAR_INSET + Spacing.six,
       }}
       //
       ListFooterComponent={
-        <View style={{ marginTop: Spacing.five }}>
+        <View style={{ marginTop: Spacing.six }}>
           <Spinner
             size={42}
             color={colorScheme === 'light' ? 'primary' : 'light'}
@@ -47,7 +47,7 @@ export default function SearchResult({ data, onScroll }: Props) {
         </View>
       }
       ListFooterComponentStyle={styles.footer}
-      ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
+      ItemSeparatorComponent={() => <View style={{ height: Spacing.three }} />}
       //
       onScroll={onScroll}
       scrollEventThrottle={16}
@@ -57,11 +57,11 @@ export default function SearchResult({ data, onScroll }: Props) {
 
 const styles = StyleSheet.create({
   columnWrapper: {
-    paddingHorizontal: Spacing.three,
+    paddingHorizontal: Spacing.four,
     justifyContent: 'space-between',
   },
   footer: {
-    paddingHorizontal: Spacing.three,
+    paddingHorizontal: Spacing.four,
     alignItems: 'center',
   },
 });

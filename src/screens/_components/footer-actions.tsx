@@ -66,7 +66,7 @@ export default function FooterActions({
 
 const styles = StyleSheet.create({
   container: {
-    minHeight: Spacing.six,
+    minHeight: Spacing.nine,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -78,15 +78,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   actionLeft: {
-    padding: Spacing.three,
-    minWidth: Spacing.four,
+    padding: Spacing.four,
+    minWidth: Spacing.five,
     aspectRatio: 1 / 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
   actionRight: {
-    padding: Spacing.three,
-    minWidth: Spacing.four,
+    padding: Spacing.four,
+    minWidth: Spacing.five,
     aspectRatio: 1 / 1,
     alignItems: 'center',
     justifyContent: 'center',

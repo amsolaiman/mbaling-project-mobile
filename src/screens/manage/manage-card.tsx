@@ -10,7 +10,7 @@ import { ThemedText } from '@/components/themed-native';
 // constants
 import { COLOR_ACCENT, COLOR_PRIMARY, COMMON_COLORS } from '@/constants/theme';
 // styles
-import { Fonts } from '@/styles';
+import { Fonts, Spacing } from '@/styles';
 
 // ----------------------------------------------------------------------
 
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     height: 240,
     position: 'relative',
     backgroundColor: COLOR_ACCENT,
-    borderRadius: 12,
+    borderRadius: Spacing.three,
     overflow: 'hidden',
   },
   image: {
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   },
   title: {
     ...Fonts[500],
-    padding: 12,
+    padding: Spacing.three,
     position: 'absolute',
     bottom: 0,
     left: 0,
@@ -103,11 +103,11 @@ const styles = StyleSheet.create({
   },
   actionWrapper: {
     position: 'absolute',
-    top: 12,
-    right: 12,
+    top: Spacing.three,
+    right: Spacing.three,
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 12,
+    gap: Spacing.three,
   },
   button: {
     backgroundColor: COMMON_COLORS.white.main,

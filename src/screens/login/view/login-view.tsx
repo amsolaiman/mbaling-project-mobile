@@ -24,6 +24,8 @@ import {
 } from '@/components/themed-native';
 // constants
 import { COLOR_PRIMARY, COMMON_COLORS } from '@/constants/theme';
+// styles
+import { Spacing } from '@/styles';
 
 //
 import LoginFootnote from '../login-footnote';
@@ -123,17 +125,17 @@ const styles = StyleSheet.create({
     backgroundColor: COLOR_PRIMARY,
   },
   logo: {
-    marginBottom: 48,
+    marginBottom: Spacing.seven,
     alignSelf: 'center',
   },
   button: {
-    marginTop: 16,
+    marginTop: Spacing.four,
     width: 100,
     alignSelf: 'center',
     borderRadius: 50,
   },
   label: {
-    marginVertical: 6,
-    marginHorizontal: 12,
+    marginVertical: Spacing.oneHalf,
+    marginHorizontal: Spacing.three,
   },
 });

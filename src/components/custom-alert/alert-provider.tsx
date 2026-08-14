@@ -103,17 +103,17 @@ export default function CustomAlertProvider({
 
 const styles = StyleSheet.create({
   modal: {
-    margin: Spacing.four,
+    margin: Spacing.five,
     borderRadius: Spacing.one,
   },
   title: {
     ...Fonts[600],
-    padding: Spacing.three,
+    padding: Spacing.four,
     paddingBottom: 0,
     fontSize: 20,
   },
   message: {
-    padding: Spacing.three,
+    padding: Spacing.four,
     fontSize: 14,
     lineHeight: 14 * 1.5,
   },

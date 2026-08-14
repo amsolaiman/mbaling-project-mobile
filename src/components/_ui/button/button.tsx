@@ -3,6 +3,8 @@ import { ButtonProps, Button as PaperButton } from 'react-native-paper';
 
 // constants
 import { COLOR_PRIMARY, COMMON_COLORS } from '@/constants/theme';
+// styles
+import { Spacing } from '@/styles';
 
 // ----------------------------------------------------------------------
 
@@ -41,16 +43,16 @@ export default function Button({
 
 const styles = StyleSheet.create({
   button: {
-    minWidth: 72,
+    minWidth: Spacing.ten,
     borderWidth: 1,
     borderRadius: 50,
   },
   label: {
-    marginVertical: 12,
-    marginHorizontal: 16,
+    marginVertical: Spacing.three,
+    marginHorizontal: Spacing.four,
   },
   dense: {
-    marginVertical: 6,
+    marginVertical: Spacing.oneHalf,
   },
   white: {
     color: COMMON_COLORS.white.main,

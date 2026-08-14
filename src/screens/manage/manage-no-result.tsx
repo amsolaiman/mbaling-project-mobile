@@ -6,6 +6,8 @@ import { IconPin } from '@/assets/icons';
 import { ThemedText } from '@/components/themed-native';
 // constants
 import { GREY_COLORS } from '@/constants/theme';
+// styles
+import { Spacing } from '@/styles';
 
 // ----------------------------------------------------------------------
 
@@ -27,7 +29,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 18,
-    marginTop: 12,
+    marginTop: Spacing.three,
     color: GREY_COLORS[400],
   },
 });

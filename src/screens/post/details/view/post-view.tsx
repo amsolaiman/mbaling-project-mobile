@@ -103,17 +103,17 @@ const styles = StyleSheet.create({
   },
   heroContainer: {
     overflow: 'hidden',
-    borderRadius: Spacing.five,
+    borderRadius: Spacing.six,
     marginBottom: 1,
   },
   infoContainer: {
     flex: 1,
-    paddingVertical: Spacing.five,
-    paddingHorizontal: Spacing.three,
+    paddingVertical: Spacing.six,
+    paddingHorizontal: Spacing.four,
     flexDirection: 'column',
-    gap: Spacing.four,
-    borderTopLeftRadius: Spacing.five,
-    borderTopRightRadius: Spacing.five,
+    gap: Spacing.five,
+    borderTopLeftRadius: Spacing.six,
+    borderTopRightRadius: Spacing.six,
   },
   infoHeading: {
     flexDirection: 'column',
