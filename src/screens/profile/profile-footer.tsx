@@ -1,12 +1,12 @@
 import { useCallback } from 'react';
-import { Linking, Share, StyleSheet } from 'react-native';
+import { Linking, StyleSheet } from 'react-native';
 
 // assets
-import { IconActionShare, IconChatRound } from '@/assets/icons';
+import { IconChatRound, IconMapPoint } from '@/assets/icons';
 // auth
 import { useAuthContext } from '@/auth/hooks';
-// components
 import { AuthUserRoles } from '@/auth/types';
+// components
 import Button from '@/components/_ui/button';
 import useCustomAlert from '@/components/custom-alert';
 import SpinnerOverlay from '@/components/spinner-overlay';
@@ -15,20 +15,21 @@ import { useBoolean } from '@/hooks/use-boolean';
 import { useTheme } from '@/hooks/use-theme';
 // styles
 import { Fonts, Spacing } from '@/styles';
+// types
 import { UserStudentResponse } from '@/types/users';
 
 //
-import { FooterActions } from '../../_components';
+import { FooterActions } from '../_components';
 
 // ----------------------------------------------------------------------
 
 type Props = {
   id: string;
-  title: string;
+  mapLink?: string | null;
   chatLink?: string | null;
 };
 
-export default function PostFooter({ id, title, chatLink }: Props) {
+export default function ProfileFooter({ id, mapLink, chatLink }: Props) {
   const color = useTheme();
 
   const loading = useBoolean();
@@ -38,7 +39,7 @@ export default function PostFooter({ id, title, chatLink }: Props) {
 
   const { alert } = useCustomAlert();
 
-  const handleChat = useCallback(() => {
+  const handleViewChat = useCallback(() => {
     if (chatLink) {
       Linking.openURL(chatLink);
     } else {
@@ -46,17 +47,13 @@ export default function PostFooter({ id, title, chatLink }: Props) {
     }
   }, [chatLink, alert]);
 
-  const handleShare = useCallback(async () => {
-    const link = `http://localhost:8081/post/${id}`;
-    const message = `mBALING | ${title}\n\n${link}`;
-
-    try {
-      await Share.share({ message });
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error(error);
+  const handleViewMap = useCallback(() => {
+    if (mapLink) {
+      Linking.openURL(mapLink);
+    } else {
+      alert({ message: 'This account has not provided a Google Map link.' });
     }
-  }, [id, title]);
+  }, [mapLink, alert]);
 
   const handleApply = () => {
     alert({
@@ -89,12 +86,12 @@ export default function PostFooter({ id, title, chatLink }: Props) {
 
       <FooterActions
         leftAction={{
-          function: () => handleChat(),
+          function: () => handleViewChat(),
           icon: <IconChatRound size={24} color={color.text} />,
         }}
         rightAction={{
-          function: () => handleShare(),
-          icon: <IconActionShare size={24} color={color.text} />,
+          function: () => handleViewMap(),
+          icon: <IconMapPoint size={24} color={color.text} />,
         }}
       >
         {isStudent && (
@@ -115,6 +112,11 @@ export default function PostFooter({ id, title, chatLink }: Props) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    bottom: 0,
+    left: 0,
+    right: 0,
+  },
   buttonLabel: {
     marginVertical: Spacing.three,
     marginHorizontal: Spacing.four,

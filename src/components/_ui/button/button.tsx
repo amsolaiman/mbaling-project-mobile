@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
   button: {
     minWidth: 72,
     borderWidth: 1,
+    borderRadius: 50,
   },
   label: {
     marginVertical: 12,

@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 import { router } from 'expo-router';
 import { useCallback, useRef } from 'react';
 import {
@@ -14,6 +12,8 @@ import {
 
 // assets
 import { IconMenuDots } from '@/assets/icons';
+// auth
+import { useAuthContext } from '@/auth/hooks';
 // components
 import Avatar from '@/components/_ui/avatar';
 import ActionSheet, { ActionSheetRef } from '@/components/action-sheet';
@@ -44,6 +44,8 @@ type Props = {
 // ----------------------------------------------------------------------
 
 export default function PostCard({ item, hideProfile = false }: Props) {
+  const { user } = useAuthContext();
+
   const { id, title, imageUrl, userId, name, avatarUrl } = item;
 
   const sheetRef = useRef<ActionSheetRef>(null);
@@ -56,8 +58,12 @@ export default function PostCard({ item, hideProfile = false }: Props) {
   }, [id]);
 
   const handlePressProfile = useCallback(() => {
-    console.log('User:', userId);
-  }, [userId]);
+    if (user?.id === userId) {
+      router.push(`/account`);
+    } else {
+      router.push(`/profile/${userId}`);
+    }
+  }, [user?.id, userId]);
 
   const meta = {
     title,
