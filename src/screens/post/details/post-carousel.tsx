@@ -93,13 +93,13 @@ const styles = StyleSheet.create({
   },
   pagination: {
     position: 'absolute',
-    bottom: Spacing.three,
+    bottom: Spacing.four,
     left: 0,
     right: 0,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 12,
+    gap: Spacing.three,
     zIndex: 10,
   },
   dot: {

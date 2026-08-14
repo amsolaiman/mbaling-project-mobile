@@ -51,11 +51,11 @@ export default function UserHeroBanner({ info, hideUsername = false }: Props) {
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: Spacing.four,
+    paddingVertical: Spacing.five,
     flexDirection: 'column',
     alignItems: 'center',
-    gap: Spacing.four,
-    borderBottomWidth: 2,
+    gap: Spacing.five,
+    borderBottomWidth: Spacing.half,
     borderBottomColor: COLOR_PRIMARY,
   },
   username: {

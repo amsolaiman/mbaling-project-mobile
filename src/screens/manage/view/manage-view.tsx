@@ -88,7 +88,9 @@ export default function ManageView() {
         }
         ListHeaderComponentStyle={styles.header}
         ListEmptyComponent={<ManageNoResult />}
-        ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
+        ItemSeparatorComponent={() => (
+          <View style={{ height: Spacing.three }} />
+        )}
       />
     </ThemedView>
   );
@@ -100,14 +102,14 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     flex: 1,
-    paddingHorizontal: Spacing.three,
+    paddingHorizontal: Spacing.four,
   },
   content: {
     flexGrow: 1,
-    paddingBottom: BOTTOM_TAB_BAR_INSET + Spacing.five,
+    paddingBottom: BOTTOM_TAB_BAR_INSET + Spacing.six,
   },
   header: {
-    paddingVertical: Spacing.three,
+    paddingVertical: Spacing.four,
     width: '100%',
     alignItems: 'center',
   },

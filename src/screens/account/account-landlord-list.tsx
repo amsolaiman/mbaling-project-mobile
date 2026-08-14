@@ -134,10 +134,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    gap: Spacing.four,
+    gap: Spacing.five,
   },
   listWrapper: {
-    gap: 12,
+    gap: Spacing.three,
   },
   noResult: {
     fontSize: 18,

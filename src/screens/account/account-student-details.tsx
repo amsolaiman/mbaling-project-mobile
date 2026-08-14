@@ -154,12 +154,12 @@ export default function AccountStudentDetails() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: Spacing.four,
-    paddingBottom: BOTTOM_TAB_BAR_INSET + Spacing.four,
+    paddingTop: Spacing.five,
+    paddingBottom: BOTTOM_TAB_BAR_INSET + Spacing.five,
     flexDirection: 'column',
-    gap: Spacing.four,
+    gap: Spacing.five,
   },
   wrapper: {
-    gap: 12,
+    gap: Spacing.three,
   },
 });

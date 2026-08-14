@@ -37,7 +37,7 @@ export default function AccountLandlordSetup() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    gap: Spacing.four,
+    gap: Spacing.five,
   },
 });
 

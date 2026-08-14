@@ -8,6 +8,8 @@ import { ThemedText } from '@/components/themed-native';
 import { COMMON_COLORS } from '@/constants/theme';
 // hooks
 import { useBoolean } from '@/hooks/use-boolean';
+// styles
+import { Spacing } from '@/styles';
 
 // ----------------------------------------------------------------------
 
@@ -63,7 +65,7 @@ const styles = StyleSheet.create({
   },
   input: {
     width: '60%',
-    height: 48,
+    height: Spacing.seven,
     alignSelf: 'center',
     textAlign: 'center',
     backgroundColor: 'transparent',

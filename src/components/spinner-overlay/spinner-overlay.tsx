@@ -4,7 +4,7 @@ import { Modal, Portal } from 'react-native-paper';
 // constants
 import { COMMON_COLORS } from '@/constants/theme';
 // styles
-import { Fonts } from '@/styles';
+import { Fonts, Spacing } from '@/styles';
 
 //
 import Spinner from './spinner';
@@ -34,7 +34,7 @@ export default function SpinnerOverlay({
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    gap: 12,
+    gap: Spacing.three,
   },
   caption: {
     ...Fonts[400],

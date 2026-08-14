@@ -41,6 +41,6 @@ export default function AccountLandlordView() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: Spacing.three,
+    paddingHorizontal: Spacing.four,
   },
 });

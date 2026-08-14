@@ -133,7 +133,9 @@ export default function ProfileView() {
             ListHeaderComponentStyle={styles.header}
             ListFooterComponent={<View />}
             ListFooterComponentStyle={styles.footer}
-            ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
+            ItemSeparatorComponent={() => (
+              <View style={{ height: Spacing.three }} />
+            )}
           />
         )}
       </View>
@@ -152,14 +154,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   columnWrapper: {
-    paddingHorizontal: Spacing.three,
+    paddingHorizontal: Spacing.four,
     justifyContent: 'space-between',
   },
   header: {
-    marginBottom: Spacing.four,
-    paddingHorizontal: Spacing.three,
+    marginBottom: Spacing.five,
+    paddingHorizontal: Spacing.four,
   },
   footer: {
-    paddingBottom: Spacing.four,
+    paddingBottom: Spacing.five,
   },
 });

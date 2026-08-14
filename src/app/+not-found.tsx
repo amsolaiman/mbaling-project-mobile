@@ -29,10 +29,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    padding: Spacing.four,
+    padding: Spacing.five,
   },
   link: {
-    marginTop: Spacing.three,
-    paddingVertical: Spacing.three,
+    marginTop: Spacing.four,
+    paddingVertical: Spacing.four,
   },
 });

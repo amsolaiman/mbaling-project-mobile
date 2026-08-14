@@ -70,21 +70,21 @@ export default ActionSheet;
 
 const styles = StyleSheet.create({
   listContainer: {
-    padding: Spacing.three,
-    paddingBottom: Spacing.four,
+    padding: Spacing.four,
+    paddingBottom: Spacing.five,
   },
   listSeparator: {
-    width: 12,
+    width: Spacing.three,
   },
   title: {
     ...Fonts[600],
-    padding: 8,
+    padding: Spacing.two,
     textAlign: 'center',
     color: COLOR_PRIMARY,
   },
   metaContainer: {
-    padding: Spacing.three,
-    paddingBottom: Spacing.four,
+    padding: Spacing.four,
+    paddingBottom: Spacing.five,
     flexDirection: 'row',
     alignItems: 'flex-start',
     borderBottomWidth: 1,
@@ -95,12 +95,12 @@ const styles = StyleSheet.create({
     minHeight: 80,
     height: '100%',
     resizeMode: 'cover',
-    borderRadius: 12,
+    borderRadius: Spacing.three,
     backgroundColor: COLOR_SECONDARY,
   },
   metaInfo: {
     flex: 1,
-    marginLeft: 12,
+    marginLeft: Spacing.three,
     width: '100%',
   },
   infoTitle: {
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   infoLink: {
-    marginTop: 6,
+    marginTop: Spacing.oneHalf,
     fontSize: 12,
     lineHeight: 12 * 1.2,
   },

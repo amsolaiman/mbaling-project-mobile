@@ -8,7 +8,7 @@ import { COMMON_COLORS } from '@/constants/theme';
 // hooks
 import { useColorScheme } from '@/hooks/use-color-scheme';
 // styles
-import { Colors } from '@/styles';
+import { Colors, Spacing } from '@/styles';
 
 // ----------------------------------------------------------------------
 
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     width: 42,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 50,
+    borderRadius: '50%',
     zIndex: 999,
   },
 });
@@ -64,26 +64,26 @@ const getPosition = (position: string) => {
   switch (position) {
     case 'top-right':
       return {
-        top: 16,
-        right: 16,
+        top: Spacing.four,
+        right: Spacing.four,
       };
 
     case 'bottom-left':
       return {
-        bottom: 16,
-        left: 16,
+        bottom: Spacing.four,
+        left: Spacing.four,
       };
 
     case 'bottom-right':
       return {
-        bottom: 16,
-        right: 16,
+        bottom: Spacing.four,
+        right: Spacing.four,
       };
 
     default:
       return {
-        top: 16,
-        left: 16,
+        top: Spacing.four,
+        left: Spacing.four,
       };
   }
 };

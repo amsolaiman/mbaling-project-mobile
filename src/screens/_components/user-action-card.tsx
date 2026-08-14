@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    gap: 12,
+    gap: Spacing.three,
     borderRadius: Spacing.two,
   },
   profileWrapper: {
@@ -95,16 +95,16 @@ const styles = StyleSheet.create({
   actions: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 6,
+    gap: Spacing.oneHalf,
   },
   shadow: {
     shadowColor: COMMON_COLORS.black.main,
     shadowOffset: {
       width: 0,
-      height: 4,
+      height: Spacing.one,
     },
     shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
+    shadowRadius: Spacing.one,
+    elevation: Spacing.one,
   },
 });

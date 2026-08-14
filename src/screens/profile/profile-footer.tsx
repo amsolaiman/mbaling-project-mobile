@@ -118,8 +118,8 @@ const styles = StyleSheet.create({
     right: 0,
   },
   buttonLabel: {
-    marginVertical: Spacing.three,
-    marginHorizontal: Spacing.four,
+    marginVertical: Spacing.four,
+    marginHorizontal: Spacing.five,
     fontSize: 14,
     ...Fonts[500],
   },

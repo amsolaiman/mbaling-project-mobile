@@ -70,14 +70,14 @@ export default ActionButton;
 
 const styles = StyleSheet.create({
   container: {
-    width: 60,
+    width: Spacing.nine,
     flexDirection: 'column',
     alignItems: 'center',
     gap: Spacing.two,
   },
   button: {
-    width: 56,
-    height: 56,
+    width: Spacing.eight,
+    height: Spacing.eight,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: '50%',

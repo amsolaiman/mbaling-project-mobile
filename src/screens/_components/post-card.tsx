@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     height: 240,
     position: 'relative',
     backgroundColor: COLOR_ACCENT,
-    borderRadius: 12,
+    borderRadius: Spacing.three,
     overflow: 'hidden',
   },
   image: {
@@ -132,14 +132,14 @@ const styles = StyleSheet.create({
   },
   title: {
     ...Fonts[500],
-    padding: 12,
+    padding: Spacing.three,
     position: 'absolute',
     bottom: 0,
     left: 0,
     right: 0,
     fontSize: 16,
-    color: COMMON_COLORS.white.main,
     lineHeight: 16 * 1.2,
+    color: COMMON_COLORS.white.main,
     backgroundColor: COMMON_COLORS.black[60],
   },
   infoWrapper: {
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    gap: 6,
+    gap: Spacing.oneHalf,
   },
   profile: {
     flex: 1,

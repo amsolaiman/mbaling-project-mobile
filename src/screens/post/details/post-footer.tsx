@@ -116,8 +116,8 @@ export default function PostFooter({ id, title, chatLink }: Props) {
 
 const styles = StyleSheet.create({
   buttonLabel: {
-    marginVertical: Spacing.three,
-    marginHorizontal: Spacing.four,
+    marginVertical: Spacing.four,
+    marginHorizontal: Spacing.five,
     fontSize: 14,
     ...Fonts[500],
   },

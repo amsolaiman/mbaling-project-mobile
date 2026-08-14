@@ -62,12 +62,12 @@ export default function PostAvatar({
 
 const styles = StyleSheet.create({
   container: {
-    padding: Spacing.three,
-    paddingTop: 12,
-    paddingBottom: Spacing.four,
+    padding: Spacing.four,
+    paddingTop: Spacing.three,
+    paddingBottom: Spacing.five,
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 12,
+    gap: Spacing.three,
   },
   profileWrapper: {
     flex: 1,

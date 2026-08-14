@@ -155,21 +155,21 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   tabContainer: {
-    marginTop: 12,
+    marginTop: Spacing.three,
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    gap: 12,
+    gap: Spacing.three,
   },
   tabPage: {
     flex: 1,
-    paddingTop: Spacing.four,
-    paddingBottom: BOTTOM_TAB_BAR_INSET + Spacing.four,
+    paddingTop: Spacing.five,
+    paddingBottom: BOTTOM_TAB_BAR_INSET + Spacing.five,
   },
   badge: {
     ...Fonts[500],
     position: 'absolute',
-    top: -6,
-    right: -6,
+    top: -Spacing.oneHalf,
+    right: -Spacing.oneHalf,
     fontSize: 12,
   },
 });
