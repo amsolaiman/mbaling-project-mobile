@@ -1,3 +1,4 @@
+import { router } from 'expo-router';
 import { useCallback } from 'react';
 import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 
@@ -32,8 +33,7 @@ export default function ManageCard({ item }: Props) {
   const { id, title, imageUrl } = item;
 
   const handleEdit = useCallback(() => {
-    // eslint-disable-next-line no-console
-    console.log('Post:', id);
+    router.push(`/post/${id}/edit`);
   }, [id]);
 
   const handleDelete = () => {
