@@ -34,3 +34,9 @@ export type IPostUploads = {
   postId: string;
   imgUrl: string;
 };
+
+export type UploadFormValue = {
+  uri: string;
+  name: string;
+  type: string;
+};

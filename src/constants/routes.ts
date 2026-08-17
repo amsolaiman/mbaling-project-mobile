@@ -51,6 +51,13 @@ export const MAIN_ROUTES: StackRoutesType[] = [
     },
   },
   {
+    name: 'post/new',
+    title: 'Create Post',
+    options: {
+      headerShown: false,
+    },
+  },
+  {
     name: 'post/[id]',
     title: 'Post Details',
     options: {
