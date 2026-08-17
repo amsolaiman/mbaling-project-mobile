@@ -3,6 +3,9 @@
 import { useCallback, useEffect, useState } from 'react';
 import { FlatList, RefreshControl, StyleSheet, View } from 'react-native';
 
+// auth
+import { useAuthContext } from '@/auth/hooks';
+import { AuthUserRoles } from '@/auth/types';
 // components
 import { Spinner } from '@/components/spinner-overlay';
 import { ThemedText, ThemedView } from '@/components/themed-native';
@@ -18,10 +21,14 @@ import axios, { API_ENDPOINTS } from '@/utils/axios';
 
 //
 import PostCard, { PostCardProps } from '../../_components/post-card';
+import HomePostButton from '../home-post-button';
 
 // ----------------------------------------------------------------------
 
 export default function HomeView() {
+  const { user } = useAuthContext();
+  const isLandlord = user?.role === AuthUserRoles.LANDLORD;
+
   const colorScheme = useColorScheme() ?? 'light';
 
   const refreshing = useBoolean();
@@ -72,6 +79,8 @@ export default function HomeView() {
 
   return (
     <ThemedView style={styles.container}>
+      {isLandlord && <HomePostButton />}
+
       <FlatList
         data={data}
         keyExtractor={(item) => item.id}
