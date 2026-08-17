@@ -2,7 +2,7 @@
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import { router } from 'expo-router';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { ScrollView, StyleSheet } from 'react-native';
 import * as Yup from 'yup';
@@ -36,7 +36,11 @@ export type FormValuesProps = {
   uploads: UploadFormValue[];
 };
 
-export default function PostCreateView() {
+type Props = {
+  currentItem?: FormValuesProps;
+};
+
+export default function PostCreateView({ currentItem }: Props) {
   const { alert } = useCustomAlert();
 
   const PostSchema = Yup.object().shape({
@@ -61,12 +65,16 @@ export default function PostCreateView() {
       .required(),
   });
 
-  const defaultValues = {
-    title: '',
-    price: 0,
-    description: '',
-    uploads: [],
-  };
+  const defaultValues = useMemo(
+    () => ({
+      title: currentItem?.title || '',
+      price: currentItem?.price || 0,
+      description: currentItem?.description || '',
+      uploads: currentItem?.uploads || [],
+    }),
+
+    [currentItem]
+  );
 
   const methods = useForm<FormValuesProps>({
     resolver: yupResolver(PostSchema),
@@ -106,7 +114,7 @@ export default function PostCreateView() {
       <ThemedKeyboardAvoidingView>
         <ThemedView
           loadingState={isSubmitting}
-          loadingCaption="Creating post..."
+          loadingCaption={currentItem ? 'Updating post...' : 'Creating post...'}
           style={styles.container}
         >
           <BackButton customFunc={handleReturn} />

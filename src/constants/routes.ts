@@ -65,6 +65,13 @@ export const MAIN_ROUTES: StackRoutesType[] = [
     },
   },
   {
+    name: 'post/[id]/edit',
+    title: 'Edit Post',
+    options: {
+      headerShown: false,
+    },
+  },
+  {
     name: 'profile/[id]',
     title: 'Landlord Profile',
     options: {

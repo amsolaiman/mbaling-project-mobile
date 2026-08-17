@@ -17,6 +17,7 @@ export default function PostFormFields() {
         label="Title"
         //
         mode="flat"
+        multiline
       />
 
       <RHFTextField
