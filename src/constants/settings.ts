@@ -17,7 +17,7 @@ export const SETTINGS_CONFIG: SettingsConfigType[] = [
     data: [
       {
         label: 'Edit profile',
-        href: '/',
+        href: '/settings/profile',
       },
       {
         label: 'Account settings',

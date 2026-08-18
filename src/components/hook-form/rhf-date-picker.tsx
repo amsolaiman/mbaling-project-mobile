@@ -1,5 +1,5 @@
 import DateTimePicker, {
-  DateTimePickerEvent,
+  DateTimePickerChangeEvent,
 } from '@react-native-community/datetimepicker';
 import React, { useCallback, useRef } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
@@ -58,14 +58,14 @@ const RHFDatePicker: React.FC<Props> = ({
       control={control}
       render={({ field, fieldState: { error } }) => {
         const onDateChange = (
-          _event: DateTimePickerEvent,
-          selectedDate?: Date | undefined
+          _event: DateTimePickerChangeEvent,
+          date?: Date | undefined
         ) => {
           // Close picker on Android or keep open on iOS
           open.setValue(Platform.OS === 'ios');
 
-          if (selectedDate) {
-            field.onChange(selectedDate);
+          if (date) {
+            field.onChange(date);
             onClose();
           }
         };
@@ -103,7 +103,7 @@ const RHFDatePicker: React.FC<Props> = ({
                 value={field.value || new Date()}
                 mode="date"
                 display="default"
-                onChange={onDateChange}
+                onValueChange={onDateChange}
               />
             )}
 
