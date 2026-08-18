@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   },
   actionLeft: {
     flex: 1,
-    paddingLeft: Spacing.eight,
+    paddingLeft: Spacing.four,
     paddingVertical: Spacing.one,
     minHeight: Spacing.five,
     alignItems: 'flex-start',
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
   },
   actionRight: {
     flex: 1,
-    paddingLeft: Spacing.eight,
+    paddingRight: Spacing.four,
     paddingVertical: Spacing.one,
     minHeight: Spacing.five,
     alignItems: 'flex-end',

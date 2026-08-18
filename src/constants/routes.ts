@@ -78,6 +78,13 @@ export const MAIN_ROUTES: StackRoutesType[] = [
       headerShown: false,
     },
   },
+  {
+    name: 'settings/profile',
+    title: 'Edit Profile',
+    options: {
+      headerShown: false,
+    },
+  },
 ];
 
 type TabsRoutesType = {
