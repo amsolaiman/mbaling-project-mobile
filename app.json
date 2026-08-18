@@ -54,7 +54,8 @@
           "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera.",
           "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone."
         }
-      ]
+      ],
+      "expo-image"
     ],
     "experiments": {
       "typedRoutes": true,
