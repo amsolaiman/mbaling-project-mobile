@@ -92,6 +92,20 @@ export const MAIN_ROUTES: StackRoutesType[] = [
       headerShown: false,
     },
   },
+  {
+    name: 'settings/account/username',
+    title: 'Edit Username',
+    options: {
+      headerShown: false,
+    },
+  },
+  {
+    name: 'settings/account/password',
+    title: 'Edit Password',
+    options: {
+      headerShown: false,
+    },
+  },
 ];
 
 type TabsRoutesType = {

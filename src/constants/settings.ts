@@ -67,11 +67,11 @@ export const ACCOUNT_SETTINGS_CONFIG: AccountSettingsConfigType[] = [
     data: [
       {
         label: 'Username',
-        href: '/',
+        href: '/settings/account/username',
       },
       {
         label: 'Password',
-        href: '/',
+        href: '/settings/account/password',
       },
       {
         label: 'E-mail',
