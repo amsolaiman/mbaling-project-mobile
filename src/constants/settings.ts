@@ -75,11 +75,11 @@ export const ACCOUNT_SETTINGS_CONFIG: AccountSettingsConfigType[] = [
       },
       {
         label: 'E-mail',
-        href: '/',
+        href: '/settings/account/email',
       },
       {
         label: 'Mobile number',
-        href: '/',
+        href: '/settings/account/mobile',
       },
     ],
   },
