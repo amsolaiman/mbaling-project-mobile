@@ -106,6 +106,20 @@ export const MAIN_ROUTES: StackRoutesType[] = [
       headerShown: false,
     },
   },
+  {
+    name: 'settings/account/email',
+    title: 'Edit E-mail',
+    options: {
+      headerShown: false,
+    },
+  },
+  {
+    name: 'settings/account/mobile',
+    title: 'Edit Mobile Number',
+    options: {
+      headerShown: false,
+    },
+  },
 ];
 
 type TabsRoutesType = {
