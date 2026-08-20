@@ -127,6 +127,13 @@ export const MAIN_ROUTES: StackRoutesType[] = [
       headerShown: false,
     },
   },
+  {
+    name: 'settings/account/housing',
+    title: 'Edit Housing Name',
+    options: {
+      headerShown: false,
+    },
+  },
 ];
 
 type TabsRoutesType = {
