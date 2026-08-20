@@ -103,7 +103,7 @@ export const ACCOUNT_SETTINGS_CONFIG: AccountSettingsConfigType[] = [
     data: [
       {
         label: 'Campus housing',
-        href: '/',
+        href: '/settings/account/campus',
       },
       {
         label: 'Address',
