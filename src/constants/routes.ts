@@ -134,6 +134,13 @@ export const MAIN_ROUTES: StackRoutesType[] = [
       headerShown: false,
     },
   },
+  {
+    name: 'settings/account/campus',
+    title: 'Edit Campus Housing',
+    options: {
+      headerShown: false,
+    },
+  },
 ];
 
 type TabsRoutesType = {

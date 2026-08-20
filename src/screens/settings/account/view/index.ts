@@ -1,4 +1,5 @@
 export { default as SettingsAccountAddressView } from './account-address-view';
+export { default as SettingsAccountCampusView } from './account-campus-view';
 export { default as SettingsAccountEmailView } from './account-email-view';
 export { default as SettingsAccountHousingView } from './account-housing-view';
 export { default as SettingsAccountMobileView } from './account-mobile-view';
