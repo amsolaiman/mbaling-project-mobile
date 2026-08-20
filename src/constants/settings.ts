@@ -93,7 +93,7 @@ export const ACCOUNT_SETTINGS_CONFIG: AccountSettingsConfigType[] = [
       },
       {
         label: 'Address',
-        href: '/',
+        href: '/settings/account/address',
       },
     ],
   },
@@ -107,7 +107,7 @@ export const ACCOUNT_SETTINGS_CONFIG: AccountSettingsConfigType[] = [
       },
       {
         label: 'Address',
-        href: '/',
+        href: '/settings/account/address',
       },
     ],
   },
