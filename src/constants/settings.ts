@@ -89,7 +89,7 @@ export const ACCOUNT_SETTINGS_CONFIG: AccountSettingsConfigType[] = [
     data: [
       {
         label: 'Housing name',
-        href: '/',
+        href: '/settings/account/housing',
       },
       {
         label: 'Address',
