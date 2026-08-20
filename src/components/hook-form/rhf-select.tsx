@@ -72,8 +72,8 @@ const RHFSelect: React.FC<Props> = ({
         const value: typeof field.value =
           options.find((option) => option.value === field.value)?.label ?? '';
 
-        const handleSelect = (value: string | number) => {
-          field.onChange(value);
+        const handleSelect = (select: string | number) => {
+          field.onChange(select);
           onClose();
         };
 

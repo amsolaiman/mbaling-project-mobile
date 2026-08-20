@@ -1,13 +1,7 @@
 /* eslint-disable no-console */
 
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
-import { Controller, useFormContext } from 'react-hook-form';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { Controller, useFormContext, useWatch } from 'react-hook-form';
 import {
   TextInput as DefaultTextInput,
   LayoutChangeEvent,
@@ -38,29 +32,35 @@ import psgc, { PSGC_ENDPOINTS } from '@/utils/psgc';
 
 // ----------------------------------------------------------------------
 
+const sortList = (list: IUserAddress[]) =>
+  [...list].sort((a, b) => a.name.localeCompare(b.name));
+
+// ----------------------------------------------------------------------
+
 type Props = {
   isEdit: boolean;
 };
 
 export default function SettingsAccountAddressFields({ isEdit }: Props) {
-  const { watch } = useFormContext();
+  const { control } = useFormContext();
 
-  const addressLine3 = watch('addressLine3');
+  const addressLine4 = useWatch({ control, name: 'addressLine4' });
+  const addressLine3 = useWatch({ control, name: 'addressLine3' });
 
-  const addressLine4 = watch('addressLine4');
+  const [provinces, setProvinces] = useState<IUserAddress[]>([]);
 
-  const [province, setProvince] = useState<IUserAddress[]>([]);
+  const [citiesMunicipalities, setCitiesMunicipalities] = useState<
+    IUserAddress[]
+  >([]);
 
-  const [municipality, setMunicipality] = useState<IUserAddress[]>([]);
-
-  const [barangay, setBarangay] = useState<IUserAddress[]>([]);
+  const [barangays, setBarangays] = useState<IUserAddress[]>([]);
 
   //#region FETCH PROVINCES
   useEffect(() => {
     psgc
       .get(PSGC_ENDPOINTS.province.list)
       .then((response) => {
-        setProvince(response.data);
+        setProvinces(sortList(response.data));
       })
       .catch((error) => {
         const message =
@@ -72,20 +72,20 @@ export default function SettingsAccountAddressFields({ isEdit }: Props) {
 
   //#region FETCH CITIES/MUNICIPALITIES
   const fetchMunicipality = useCallback(() => {
-    const select = province.find((_) => _.name === addressLine4)?.code;
+    const selected = provinces.find((f) => f.name === addressLine4)?.code;
 
-    if (select)
+    if (selected)
       psgc
-        .get(PSGC_ENDPOINTS.province.getSub(select))
+        .get(PSGC_ENDPOINTS.province.getSub(selected))
         .then((response) => {
-          setMunicipality(response.data);
+          setCitiesMunicipalities(sortList(response.data));
         })
         .catch((error) => {
           const message =
             typeof error === 'string' ? error : (error as Error).message;
           console.error(message);
         });
-  }, [province, addressLine4]);
+  }, [provinces, addressLine4]);
 
   useEffect(() => {
     fetchMunicipality();
@@ -94,38 +94,26 @@ export default function SettingsAccountAddressFields({ isEdit }: Props) {
 
   //#region FETCH BARANGAYS
   const fetchBarangay = useCallback(() => {
-    const select = municipality.find((_) => _.name === addressLine3)?.code;
+    const selected = citiesMunicipalities.find(
+      (f) => f.name === addressLine3
+    )?.code;
 
-    if (select)
+    if (selected)
       psgc
-        .get(PSGC_ENDPOINTS.cityMunicipality.getSub(select))
+        .get(PSGC_ENDPOINTS.cityMunicipality.getSub(selected))
         .then((response) => {
-          setBarangay(response.data);
+          setBarangays(response.data);
         })
         .catch((error) => {
           const message =
             typeof error === 'string' ? error : (error as Error).message;
           console.error(message);
         });
-  }, [municipality, addressLine3]);
+  }, [citiesMunicipalities, addressLine3]);
 
   useEffect(() => {
     fetchBarangay();
   }, [fetchBarangay]);
-  //#endregion
-
-  //#region SORTING ARRAYS
-  const sortedProvince = useMemo(() => {
-    return province.sort((a, b) => a.name.localeCompare(b.name));
-  }, [province]);
-
-  const sortedMunicipality = useMemo(() => {
-    return municipality.sort((a, b) => a.name.localeCompare(b.name));
-  }, [municipality]);
-
-  const sortedBarangay = useMemo(() => {
-    return barangay.sort((a, b) => a.name.localeCompare(b.name));
-  }, [barangay]);
   //#endregion
 
   return (
@@ -133,7 +121,7 @@ export default function SettingsAccountAddressFields({ isEdit }: Props) {
       <SelectField
         name="addressLine4"
         label="Province"
-        options={sortedProvince}
+        options={provinces}
         //
         mode="flat"
         disabled={!isEdit}
@@ -142,7 +130,7 @@ export default function SettingsAccountAddressFields({ isEdit }: Props) {
       <SelectField
         name="addressLine3"
         label="City / municipality"
-        options={sortedMunicipality}
+        options={citiesMunicipalities}
         //
         mode="flat"
         disabled={!isEdit || !addressLine4}
@@ -151,7 +139,7 @@ export default function SettingsAccountAddressFields({ isEdit }: Props) {
       <SelectField
         name="addressLine2"
         label="Barangay"
-        options={sortedBarangay}
+        options={barangays}
         //
         mode="flat"
         disabled={!isEdit || !addressLine3}
@@ -194,15 +182,14 @@ const SelectField: React.FC<SelectFieldProps> = ({
   options,
   ...rest
 }) => {
-  const { watch, control, setValue } = useFormContext();
+  const { control, setValue } = useFormContext();
+
+  const addressLine4 = useWatch({ control, name: 'addressLine4' });
+  const addressLine3 = useWatch({ control, name: 'addressLine3' });
 
   const ref = useRef<DefaultTextInput>(null);
 
   const color = useTheme();
-
-  const addressLine3 = watch('addressLine3');
-
-  const addressLine4 = watch('addressLine4');
 
   const open = useBoolean();
 
@@ -223,19 +210,17 @@ const SelectField: React.FC<SelectFieldProps> = ({
       name={name}
       control={control}
       render={({ field, fieldState: { error } }) => {
-        const handleSelect = (value: string) => {
-          field.onChange(value);
-
-          if (name === 'addressLine4' && value !== addressLine4) {
+        const handleSelect = (select: string) => {
+          field.onChange(select);
+          onClose();
+          if (name === 'addressLine4' && select !== addressLine4) {
             setValue('addressLine3', null);
             setValue('addressLine2', null);
           }
 
-          if (name === 'addressLine3' && value !== addressLine3) {
+          if (name === 'addressLine3' && select !== addressLine3) {
             setValue('addressLine2', null);
           }
-
-          onClose();
         };
 
         return (

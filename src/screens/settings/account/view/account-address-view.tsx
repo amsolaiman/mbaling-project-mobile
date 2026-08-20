@@ -58,7 +58,7 @@ export default function SettingsAccountAddressView() {
   const userDetails = user as IUserItem;
 
   const AccountSettingsSchema = Yup.object().shape({
-    addressLine1: Yup.string().required('Address is required'),
+    addressLine1: Yup.string().required('Address line is required'),
     addressLine2: Yup.string().required('Barangay is required'),
     addressLine3: Yup.string().required('City or municipality is required'),
     addressLine4: Yup.string().required('Province is required'),
