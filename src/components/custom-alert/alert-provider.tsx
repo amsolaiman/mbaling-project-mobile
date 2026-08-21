@@ -73,9 +73,15 @@ export default function CustomAlertProvider({
               <ThemedText style={styles.title}>{alertConfig.title}</ThemedText>
             )}
 
-            <ThemedText style={styles.message}>
-              {alertConfig.message}
-            </ThemedText>
+            {typeof alertConfig.message === 'string' ? (
+              <ThemedText style={styles.message}>
+                {alertConfig.message}
+              </ThemedText>
+            ) : (
+              <View style={{ padding: Spacing.four }}>
+                {alertConfig.message}
+              </View>
+            )}
 
             <View style={styles.buttonContainer}>
               {alertConfig.buttons.map((btn, index) => (

@@ -1,3 +1,4 @@
+export { default as DemoPopop } from './demo-popup';
 export { default as FooterActions } from './footer-actions';
 export { default as PostCard } from './post-card';
 export { default as SettingsHeader } from './settings-header';

@@ -1,7 +1,9 @@
+import React from 'react';
+
 // ----------------------------------------------------------------------
 
 export type AlertConfig = {
-  message: string;
+  message: string | React.ReactNode;
   title: string | null;
   buttons: AlertButtonType[];
   resolve: (value: string) => void;
@@ -14,7 +16,7 @@ export type AlertButtonType = {
 };
 
 export type AlertParamsType = {
-  message: string;
+  message: string | React.ReactNode;
   title?: string;
   buttons?: AlertButtonType[];
 };
