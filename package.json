@@ -8,7 +8,6 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web",
     "lint": "eslint --ext .ts,.tsx .",
     "lint:fix": "eslint --fix --ext .ts,.tsx .",
     "format": "prettier --write \"**/*.{js,ts,tsx,json,md,yml,yaml}\"",
@@ -42,7 +41,6 @@
     "expo-system-ui": "~56.0.5",
     "expo-web-browser": "~56.0.6",
     "react": "19.2.3",
-    "react-dom": "19.2.3",
     "react-hook-form": "^7.84.0",
     "react-native": "0.85.3",
     "react-native-actions-sheet": "^10.1.2",
@@ -52,7 +50,6 @@
     "react-native-safe-area-context": "~5.7.0",
     "react-native-screens": "4.26.2",
     "react-native-svg": "^15.15.4",
-    "react-native-web": "~0.21.0",
     "react-native-worklets": "0.8.3",
     "yup": "^1.7.1"
   },

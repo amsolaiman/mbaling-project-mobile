@@ -3,7 +3,13 @@
 A role-based mobile housing application for students and landlords. mBALING lets users discover and manage housing listings, view landlord profiles, submit housing applications, and maintain their account and profile details from an Expo-powered mobile app.
 
 ```
-The mBALING project is a student housing management system for on-campus housing establishments at Mindanao State University. It is designed to assist the university's Housing Management Division in maintaining records of non-dormitory students' residential information while also bringing the campus's current housing marketing and search processes online.
+The mBALING project is a student housing management system for
+on-campus housing establishments at Mindanao State University.
+
+Designed to assist the university's Housing Management Division
+in maintaining records of non-dormitory students' residential
+information while also bringing the campus's current housing
+marketing and search processes online.
 ```
 
 ## Overview
