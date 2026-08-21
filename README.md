@@ -1,56 +1,115 @@
-# Welcome to your Expo app 👋
+# mBALING Mobile App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A role-based mobile housing application for students and landlords. mBALING lets users discover and manage housing listings, view landlord profiles, submit housing applications, and maintain their account and profile details from an Expo-powered mobile app.
 
-## Get started
-
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+The mBALING project is a student housing management system for on-campus housing establishments at Mindanao State University. It is designed to assist the university's Housing Management Division in maintaining records of non-dormitory students' residential information while also bringing the campus's current housing marketing and search processes online.
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Overview
 
-### Other setup steps
+- **App framework:** Expo SDK 56 with Expo Router
+- **Language:** Typescript
+- **UI:** React Native, React Native Paper
+- **Authentication:** JWT, Context-based authentication
+- **Forms and validation:** React Hook Form, Yup
+- **Networking:** Axios
+- **Package manager:** pnpm 10
+- **Supported targets:** Android, iOS
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+## Getting Started
 
-## Learn more
+### Prerequisites
 
-To learn more about developing your project with Expo, look at the following resources:
+- Node.js
+- pnpm
+- Expo-compatible development tooling, such as Expo Go, an Android emulator, or an iOS simulator
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+Install dependencies:
 
-## Join the community
+```bash
+pnpm install
+```
 
-Join our community of developers creating universal apps.
+### Environment Variables
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Create a local environment file from the provided template:
+
+```bash
+copy .env.sample .env
+```
+
+Configure these values in `.env`:
+
+- `SYSTEM_TYPE` - must be set to `app`
+- `EXPO_PUBLIC_HOST_API` - URL of the mBALING backend API
+- `EXPO_PUBLIC_PSGC_API` - URL of the PSGC geographic data API
+
+The `prestart` script validates these variables before the Expo server starts.
+
+### Start the App
+
+Start the development server:
+
+```bash
+pnpm start
+```
+
+Open the app with one of the available targets:
+
+```bash
+pnpm android
+pnpm ios
+```
+
+You can also use the interactive options printed by `pnpm start` to launch the app in Expo Go or a development build.
+
+## Demo / Testing
+
+Use the following demo users for testing the app:
+
+> Use **demo_student** with password **@demo123** for student user.
+
+> Use **demo_landlord** with password **@demo123** for landlord user.
+
+## Directory Structure
+
+```
+src/
+├── app/                  # Expo Router (screens, layouts, etc.)
+│
+├── auth/                 # Authentication context and tools
+│
+├── components/           # Shared UI/feature components
+│
+├── constants/            # Application constants
+│
+├── hooks/                # Shared custom utility hooks
+│
+├── screens/              # Feature-level screen views and supporting components
+│
+├── styles/               # Theme configuration (colors, fonts, etc.)
+│
+├── types/                # TypeScript type definitions
+│
+└── utils/                # Shared utility functions
+
+assets/                   # Project assets (app icons, custom fonts, etc.)
+
+scripts/                  # Development scripts
+```
+
+## API Integration
+
+The Axios client uses `EXPO_PUBLIC_HOST_API` as its base URL. It provides access to authentication, landlord, student, post listing, post search, and profile-related endpoints.
+
+The app uses `EXPO_PUBLIC_PSGC_API` for Philippine geographic data used by address and campus-related forms. See the [PSGC API documentation](https://psgc.gitlab.io/) for more information.
+
+## Learn More
+
+- [Expo](https://docs.expo.dev/)
+- [Expo Router](https://docs.expo.dev/router/introduction/)
+- [React Native Paper](https://callstack.github.io/react-native-paper/)
+- [React Hook Form](https://react-hook-form.com/)
+- [Yup](https://github.com/jquense/yup)
+- [Conventional Commits](https://www.conventionalcommits.org/en)
