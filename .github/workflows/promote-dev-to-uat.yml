@@ -1,0 +1,27 @@
+name: Promote DEV to UAT
+
+on:
+  workflow_dispatch:
+
+jobs:
+  promote-to-main:
+    name: Promote dev to uat branch
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          ref: dev
+          token: ${{ secrets.GIT_ACCESS_TOKEN }}
+
+      # Merge dev into uat branch
+      - name: Merge fast-forward
+        uses: MaximeHeckel/github-action-merge-fast-forward@v1.1.0
+        with:
+          branchtomerge: dev
+          branch: uat
+        env:
+          GITHUB_TOKEN: ${{ secrets.GIT_ACCESS_TOKEN }}
