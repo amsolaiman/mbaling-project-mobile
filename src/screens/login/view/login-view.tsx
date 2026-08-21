@@ -28,6 +28,7 @@ import { COLOR_PRIMARY, COMMON_COLORS } from '@/constants/theme';
 import { Spacing } from '@/styles';
 
 //
+import { DemoPopop } from '../../_components';
 import LoginFootnote from '../login-footnote';
 import LoginInputField from '../login-input-field';
 
@@ -90,6 +91,8 @@ export default function LoginView() {
             loadingState={isSubmitting}
             loadingCaption="Logging in..."
           >
+            {process.env.EXPO_PUBLIC_ENV === 'uat' && <DemoPopop />}
+
             <View style={styles.logo}>
               <Logo disabledLink variant="vertical" color="light" />
             </View>

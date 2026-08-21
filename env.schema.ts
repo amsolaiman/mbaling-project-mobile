@@ -7,6 +7,9 @@ export const envSchema = Yup.object({
   SYSTEM_TYPE: Yup.string()
     .required('SYSTEM_TYPE is required')
     .oneOf(['app'], 'SYSTEM_TYPE must be set to "app"'),
+  EXPO_PUBLIC_ENV: Yup.string()
+    .required('EXPO_PUBLIC_ENV is required')
+    .oneOf(['dev', 'uat', 'prod']),
   // HOST
   EXPO_PUBLIC_HOST_API: Yup.string()
     .url()

@@ -1,7 +1,7 @@
 // ----------------------------------------------------------------------
 
 export type IconProps = {
-  size: number;
+  size?: number;
   color: string;
   variant?: 'solid' | 'outline' | 'duotone';
 };
