@@ -1,25 +1,19 @@
 /* eslint-disable no-console */
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import { router } from 'expo-router';
 import { useCallback, useMemo } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import {
   Keyboard,
-  Pressable,
   StyleSheet,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
 import * as Yup from 'yup';
 
-// assets
-import { IconArrowAlt } from '@/assets/icons';
 // auth
 import { useAuthContext } from '@/auth/hooks';
 // components
-import Button from '@/components/_ui/button';
-import useCustomAlert from '@/components/custom-alert';
 import { RHFTextField } from '@/components/hook-form';
 import {
   ThemedKeyboardAvoidingView,
@@ -27,14 +21,13 @@ import {
 } from '@/components/themed-native';
 // hooks
 import { useBoolean } from '@/hooks/use-boolean';
-import { useTheme } from '@/hooks/use-theme';
 // styles
 import { Spacing } from '@/styles';
 // types
 import { UserLandlordResponse } from '@/types/users';
 
 //
-import { SettingsHeader } from '../../../_components';
+import SettingsActionHeader from '../../settings-action-header';
 
 // ----------------------------------------------------------------------
 
@@ -43,11 +36,7 @@ type FormValuesProps = {
 };
 
 export default function SettingsAccountHousingView() {
-  const color = useTheme();
-
   const edit = useBoolean();
-
-  const { alert } = useCustomAlert();
 
   const { user } = useAuthContext();
   const userDetails = user as UserLandlordResponse;
@@ -75,8 +64,7 @@ export default function SettingsAccountHousingView() {
 
   const onSubmit = useCallback(async (data: FormValuesProps) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      router.replace('/settings/account');
+      await new Promise((resolve) => setTimeout(resolve, 2000));
       console.info('DATA', data);
     } catch (error) {
       const message =
@@ -84,30 +72,6 @@ export default function SettingsAccountHousingView() {
       console.error(message);
     }
   }, []);
-
-  const handlePress = useCallback(async () => {
-    if (!edit.value) {
-      edit.onTrue();
-      return;
-    }
-
-    handleSubmit(onSubmit)();
-  }, [edit, handleSubmit, onSubmit]);
-
-  const handleReturn = useCallback(() => {
-    if (edit.value) {
-      alert({
-        message:
-          'Are you sure you want to leave this screen? Any unsaved changes will be lost.',
-        buttons: [
-          { text: 'CANCEL' },
-          { text: 'YES', onPress: router.back, variant: 'contained' },
-        ],
-      });
-    } else {
-      router.back();
-    }
-  }, [edit, alert]);
 
   return (
     <FormProvider {...methods}>
@@ -118,26 +82,11 @@ export default function SettingsAccountHousingView() {
             loadingCaption="Saving update..."
             style={styles.container}
           >
-            <SettingsHeader
+            <SettingsActionHeader
               title="Housing name"
-              actionLeft={
-                <Pressable onPress={handleReturn}>
-                  <IconArrowAlt
-                    direction="left"
-                    variant="outline"
-                    size={24}
-                    color={color.text}
-                  />
-                </Pressable>
-              }
-              actionRight={
-                <Button
-                  onPress={handlePress}
-                  mode={edit.value ? 'contained' : 'outlined'}
-                >
-                  {edit.value ? 'Save' : 'Edit'}
-                </Button>
-              }
+              isEdit={edit.value}
+              onEdit={edit.onTrue}
+              onSubmit={handleSubmit(onSubmit)}
             />
 
             <View style={styles.formContainer}>

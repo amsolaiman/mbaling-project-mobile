@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import { router } from 'expo-router';
 import { useCallback } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import {
@@ -15,10 +14,8 @@ import { TextInput } from 'react-native-paper';
 import * as Yup from 'yup';
 
 // assets
-import { IconArrowAlt, IconEye } from '@/assets/icons';
+import { IconEye } from '@/assets/icons';
 // components
-import Button from '@/components/_ui/button';
-import useCustomAlert from '@/components/custom-alert';
 import { RHFTextField } from '@/components/hook-form';
 import {
   ThemedKeyboardAvoidingView,
@@ -28,11 +25,11 @@ import {
 import { GREY_COLORS } from '@/constants/theme';
 // hooks
 import { useBoolean } from '@/hooks/use-boolean';
-import { useTheme } from '@/hooks/use-theme';
 // styles
 import { Spacing } from '@/styles';
 
-import { SettingsHeader } from '../../../_components';
+//
+import SettingsActionHeader from '../../settings-action-header';
 
 // ----------------------------------------------------------------------
 
@@ -43,13 +40,9 @@ type FormValuesProps = {
 };
 
 export default function SettingsAccountPasswordView() {
-  const color = useTheme();
-
   const edit = useBoolean();
 
   const show = useBoolean();
-
-  const { alert } = useCustomAlert();
 
   const AccountSettingsSchema = Yup.object().shape({
     oldPassword: Yup.string().required('Old password is required'),
@@ -84,8 +77,7 @@ export default function SettingsAccountPasswordView() {
 
   const onSubmit = useCallback(async (data: FormValuesProps) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      router.replace('/settings/account');
+      await new Promise((resolve) => setTimeout(resolve, 2000));
       console.info('DATA', data);
     } catch (error) {
       const message =
@@ -93,30 +85,6 @@ export default function SettingsAccountPasswordView() {
       console.error(message);
     }
   }, []);
-
-  const handlePress = useCallback(async () => {
-    if (!edit.value) {
-      edit.onTrue();
-      return;
-    }
-
-    handleSubmit(onSubmit)();
-  }, [edit, handleSubmit, onSubmit]);
-
-  const handleReturn = useCallback(() => {
-    if (edit.value) {
-      alert({
-        message:
-          'Are you sure you want to leave this screen? Any unsaved changes will be lost.',
-        buttons: [
-          { text: 'CANCEL' },
-          { text: 'YES', onPress: router.back, variant: 'contained' },
-        ],
-      });
-    } else {
-      router.back();
-    }
-  }, [edit, alert]);
 
   const renderEye = (
     <TextInput.Icon
@@ -147,26 +115,11 @@ export default function SettingsAccountPasswordView() {
             loadingCaption="Saving update..."
             style={styles.container}
           >
-            <SettingsHeader
+            <SettingsActionHeader
               title="Password"
-              actionLeft={
-                <Pressable onPress={handleReturn}>
-                  <IconArrowAlt
-                    direction="left"
-                    variant="outline"
-                    size={24}
-                    color={color.text}
-                  />
-                </Pressable>
-              }
-              actionRight={
-                <Button
-                  onPress={handlePress}
-                  mode={edit.value ? 'contained' : 'outlined'}
-                >
-                  {edit.value ? 'Save' : 'Edit'}
-                </Button>
-              }
+              isEdit={edit.value}
+              onEdit={edit.onTrue}
+              onSubmit={handleSubmit(onSubmit)}
             />
 
             <View style={styles.formContainer}>
