@@ -4,30 +4,25 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { router } from 'expo-router';
 import { useCallback, useMemo } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { Pressable, ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 import * as Yup from 'yup';
 
-// assets
-import { IconArrowAlt } from '@/assets/icons';
 // auth
 import { useAuthContext } from '@/auth/hooks';
 import { AuthUserRoles } from '@/auth/types';
 // components
-import Button from '@/components/_ui/button';
-import useCustomAlert from '@/components/custom-alert';
 import {
   ThemedKeyboardAvoidingView,
   ThemedView,
 } from '@/components/themed-native';
 // hooks
 import { useBoolean } from '@/hooks/use-boolean';
-import { useTheme } from '@/hooks/use-theme';
 // types
 import { UploadFormValue } from '@/types/posts';
 import { IUserItem } from '@/types/users';
 
 //
-import { SettingsHeader } from '../../../_components';
+import SettingsActionHeader from '../../settings-action-header';
 import SettingsProfileFields from '../profile-fields';
 import SettingsProfileFooter from '../profile-footer';
 
@@ -44,11 +39,7 @@ type FormValuesProps = {
 };
 
 export default function SettingsProfileView() {
-  const color = useTheme();
-
   const edit = useBoolean();
-
-  const { alert } = useCustomAlert();
 
   const { user } = useAuthContext();
   const userDetails = user as IUserItem;
@@ -97,7 +88,7 @@ export default function SettingsProfileView() {
 
   const onSubmit = useCallback(async (data: FormValuesProps) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      await new Promise((resolve) => setTimeout(resolve, 2000));
       router.back();
       console.info('DATA', data);
     } catch (error) {
@@ -107,30 +98,6 @@ export default function SettingsProfileView() {
     }
   }, []);
 
-  const handlePress = useCallback(async () => {
-    if (!edit.value) {
-      edit.onTrue();
-      return;
-    }
-
-    handleSubmit(onSubmit)();
-  }, [edit, handleSubmit, onSubmit]);
-
-  const handleReturn = useCallback(() => {
-    if (edit.value) {
-      alert({
-        message:
-          'Are you sure you want to leave this screen? Any unsaved changes will be lost.',
-        buttons: [
-          { text: 'CANCEL' },
-          { text: 'YES', onPress: router.back, variant: 'contained' },
-        ],
-      });
-    } else {
-      router.back();
-    }
-  }, [edit, alert]);
-
   return (
     <FormProvider {...methods}>
       <ThemedKeyboardAvoidingView>
@@ -139,26 +106,11 @@ export default function SettingsProfileView() {
           loadingCaption="Saving update..."
           style={styles.container}
         >
-          <SettingsHeader
+          <SettingsActionHeader
             title="Edit profile"
-            actionLeft={
-              <Pressable onPress={handleReturn}>
-                <IconArrowAlt
-                  direction="left"
-                  variant="outline"
-                  size={24}
-                  color={color.text}
-                />
-              </Pressable>
-            }
-            actionRight={
-              <Button
-                onPress={handlePress}
-                mode={edit.value ? 'contained' : 'outlined'}
-              >
-                {edit.value ? 'Save' : 'Edit'}
-              </Button>
-            }
+            isEdit={edit.value}
+            onEdit={edit.onTrue}
+            onSubmit={handleSubmit(onSubmit)}
           />
 
           <ScrollView
