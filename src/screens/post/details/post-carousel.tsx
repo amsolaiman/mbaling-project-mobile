@@ -3,13 +3,18 @@ import {
   Dimensions,
   FlatList,
   Image,
+  Pressable,
   StyleSheet,
   View,
   ViewToken,
 } from 'react-native';
 
+// components
+import ImageModal from '@/components/image-modal';
 // constants
 import { COLOR_ACCENT, COLOR_PRIMARY, GREY_COLORS } from '@/constants/theme';
+// hooks
+import { useBoolean } from '@/hooks/use-boolean';
 // styles
 import { Spacing } from '@/styles';
 // types
@@ -22,7 +27,11 @@ type Props = {
 };
 
 export default function PostCarousel({ data }: Props) {
+  const open = useBoolean();
+
   const [pageIndex, setPageIndex] = useState<number>(0);
+
+  const [modalImg, setModalImg] = useState<string | null>(null);
 
   const viewabilityConfig = {
     itemVisiblePercentThreshold: 50,
@@ -43,39 +52,61 @@ export default function PostCarousel({ data }: Props) {
 
   const [config] = useState([{ viewabilityConfig, onViewableItemsChanged }]);
 
+  const handleOpenModal = (imgUrl: string) => {
+    setModalImg(imgUrl);
+    open.onTrue();
+  };
+
+  const handleCloseModal = () => {
+    setModalImg(null);
+    open.onFalse();
+  };
+
   const renderItem = ({ item }: { item: Omit<IPostUploads, 'postId'> }) => (
-    <Image source={{ uri: item.imgUrl }} style={styles.image} />
+    <Pressable onPress={() => handleOpenModal(item.imgUrl)}>
+      <Image source={{ uri: item.imgUrl }} style={styles.image} />
+    </Pressable>
   );
 
   return (
-    <View style={styles.container}>
-      <FlatList
-        data={data}
-        keyExtractor={(item) => item.id}
-        renderItem={renderItem}
-        //
-        horizontal
-        pagingEnabled
-        showsHorizontalScrollIndicator={false}
-        //
-        viewabilityConfigCallbackPairs={config}
-      />
+    <>
+      <View style={styles.container}>
+        <FlatList
+          data={data}
+          keyExtractor={(item) => item.id}
+          renderItem={renderItem}
+          //
+          horizontal
+          pagingEnabled
+          showsHorizontalScrollIndicator={false}
+          //
+          viewabilityConfigCallbackPairs={config}
+        />
 
-      <View style={styles.pagination}>
-        {data.map((_, index) => (
-          <View
-            key={index}
-            style={[
-              styles.dot,
-              {
-                backgroundColor:
-                  pageIndex === index ? COLOR_PRIMARY : GREY_COLORS[50],
-              },
-            ]}
-          />
-        ))}
+        <View style={styles.pagination}>
+          {data.map((_, index) => (
+            <View
+              key={index}
+              style={[
+                styles.dot,
+                {
+                  backgroundColor:
+                    pageIndex === index ? COLOR_PRIMARY : GREY_COLORS[50],
+                },
+              ]}
+            />
+          ))}
+        </View>
       </View>
-    </View>
+
+      {open.value && modalImg && (
+        <ImageModal
+          src={modalImg}
+          open={open.value}
+          onClose={handleCloseModal}
+        />
+      )}
+    </>
   );
 }
 
