@@ -31,6 +31,9 @@
       "permissions": ["android.permission.RECORD_AUDIO"],
       "package": "com.amsolaiman.mbalingapp"
     },
+    "runtimeVersion": {
+      "policy": "fingerprint"
+    },
     "plugins": [
       "expo-router",
       [
