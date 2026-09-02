@@ -1,0 +1,166 @@
+name: Publish to Preview
+
+on:
+  workflow_dispatch:
+
+jobs:
+  guard:
+    name: Verify branch
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - name: Cancel run if not on uat branch
+        if: github.ref != 'refs/heads/uat'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "❌ Publish workflow must be run on the uat branch"
+          gh run cancel ${{ github.run_id }} --repo ${{ github.repository }}
+          # Give GitHub a moment to process the cancellation before this job exits
+          sleep 30
+
+  check-fingerprint:
+    name: Check native fingerprint
+    needs: guard
+    if: github.ref == 'refs/heads/uat'
+    runs-on: ubuntu-latest
+    outputs:
+      needs-build: ${{ steps.compare.outputs.needs-build }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GIT_ACCESS_TOKEN }}
+
+      # Install pnpm first before setting up Node.js
+      # Version is read automatically from `packageManager` in package.json
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      # Install Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24.0.0
+          cache: pnpm
+
+      # Install Expo and EAS
+      - name: Setup Expo and EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_ACCESS_TOKEN }}
+
+      # Install dependencies
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # Compute the fingerprint of the current native code/config on this commit
+      # Requires `runtimeVersion.policy: "fingerprint"` in app.json/app.config.*
+      - name: Generate current fingerprint
+        id: current
+        run: |
+          npx expo-updates fingerprint:generate --platform android > fingerprint.json
+          HASH=$(jq -r '.hash' fingerprint.json)
+          echo "hash=$HASH" >> "$GITHUB_OUTPUT"
+          echo "🔎 Current fingerprint: $HASH"
+
+      # Look up whether a finished preview build already exists that matches the current fingerprint
+      - name: Check for a compatible existing build
+        id: compare
+        run: |
+          eas build:list \
+            --platform android \
+            --profile preview \
+            --status finished \
+            --fingerprint-hash "${{ steps.current.outputs.hash }}" \
+            --limit 1 \
+            --non-interactive \
+            --json > matching-builds.json
+
+          COUNT=$(jq 'length' matching-builds.json)
+          echo "🔎 Matching builds found: $COUNT"
+
+          if [ "$COUNT" -gt 0 ]; then
+            echo "✅ Compatible build found — running EAS Update"
+            echo "needs-build=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "❎ No compatible build found — running new EAS Build"
+            echo "needs-build=true" >> "$GITHUB_OUTPUT"
+          fi
+
+  build:
+    name: EAS build preview
+    needs: check-fingerprint
+    if: needs.check-fingerprint.outputs.needs-build == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GIT_ACCESS_TOKEN }}
+
+      # Install pnpm, tools and dependencies
+      # Version is read automatically from `packageManager` in package.json
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24.0.0
+          cache: pnpm
+
+      - name: Setup Expo and EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_ACCESS_TOKEN }}
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # Run build
+      - name: Run EAS build
+        run: eas build --platform android --profile preview --non-interactive
+
+  update:
+    name: EAS update preview
+    needs: check-fingerprint
+    if: needs.check-fingerprint.outputs.needs-build == 'false'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GIT_ACCESS_TOKEN }}
+
+      # Install pnpm, tools and dependencies
+      # Version is read automatically from `packageManager` in package.json
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24.0.0
+          cache: pnpm
+
+      - name: Setup Expo and EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_ACCESS_TOKEN }}
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # Run update
+      - name: Run EAS update
+        run: |
+          MESSAGE=$(git log -1 --pretty=%s)
+          eas update --channel preview --platform android --message "$MESSAGE" --non-interactive
