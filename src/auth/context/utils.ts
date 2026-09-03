@@ -94,7 +94,6 @@ export const tokenExpired = (exp: number) => {
     await SecureStore.deleteItemAsync('accessToken');
 
     eventBus.emit('token-expired');
-    alert('Your session has timed out. Please login again to continue.');
 
     router.replace('/login');
   }, timeLeft);

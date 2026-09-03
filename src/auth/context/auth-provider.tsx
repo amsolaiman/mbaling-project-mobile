@@ -1,6 +1,8 @@
 import * as SecureStore from 'expo-secure-store';
 import React, { useCallback, useEffect, useMemo, useReducer } from 'react';
 
+// components
+import useCustomAlert from '@/components/custom-alert';
 // utils
 import axios, { API_ENDPOINTS } from '@/utils/axios';
 
@@ -74,6 +76,8 @@ type Props = {
 };
 
 export function AuthProvider({ children }: Props) {
+  const { alert } = useCustomAlert();
+
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const initialize = useCallback(async () => {
@@ -160,12 +164,20 @@ export function AuthProvider({ children }: Props) {
   }, []);
 
   useEffect(() => {
-    eventBus.on('token-expired', logout);
+    const handleTokenExpired = async () => {
+      await alert({
+        title: 'Session expired!',
+        message: 'Your session has timed out. Please login again to continue.',
+      });
+      logout();
+    };
+
+    eventBus.on('token-expired', handleTokenExpired);
 
     return () => {
-      eventBus.off('token-expired', logout);
+      eventBus.off('token-expired', handleTokenExpired);
     };
-  }, [logout]);
+  }, [logout, alert]);
 
   // ----------------------------------------------------------------------
 
