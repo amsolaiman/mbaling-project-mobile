@@ -28,7 +28,16 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "permissions": ["android.permission.RECORD_AUDIO"],
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.READ_MEDIA_VISUAL_USER_SELECTED",
+        "android.permission.ACCESS_MEDIA_LOCATION",
+        "android.permission.READ_MEDIA_IMAGES",
+        "android.permission.READ_MEDIA_VIDEO",
+        "android.permission.READ_MEDIA_AUDIO"
+      ],
       "package": "com.amsolaiman.mbalingapp"
     },
     "runtimeVersion": {
@@ -78,6 +87,9 @@
         "projectId": "d95df2f7-d6e4-4d84-880a-feede6b3794d"
       }
     },
-    "owner": "amsolaiman"
+    "owner": "amsolaiman",
+    "updates": {
+      "url": "https://u.expo.dev/d95df2f7-d6e4-4d84-880a-feede6b3794d"
+    }
   }
 }
