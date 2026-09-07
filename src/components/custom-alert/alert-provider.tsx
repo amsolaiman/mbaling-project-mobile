@@ -30,7 +30,7 @@ export default function CustomAlertProvider({
         setAlertConfig({
           message,
           title: title || null,
-          buttons: buttons ?? [{ text: 'OK' }],
+          buttons: buttons ?? [{ label: 'Ok' }],
           resolve,
         });
       });
@@ -39,7 +39,7 @@ export default function CustomAlertProvider({
   );
 
   const handlePress = (button: AlertButtonType) => {
-    alertConfig?.resolve(button.text);
+    alertConfig?.resolve(button.label);
     setAlertConfig(null);
     button.onPress?.();
   };
@@ -91,12 +91,13 @@ export default function CustomAlertProvider({
                   mode={btn.variant ?? 'text'}
                   style={styles.button}
                   labelStyle={{
+                    textTransform: 'uppercase',
                     ...(btn.variant === 'contained' && {
                       color: COMMON_COLORS.white.main,
                     }),
                   }}
                 >
-                  {btn.text}
+                  {btn.label}
                 </Button>
               ))}
             </View>

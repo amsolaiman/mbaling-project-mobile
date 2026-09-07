@@ -10,7 +10,7 @@ export type AlertConfig = {
 };
 
 export type AlertButtonType = {
-  text: string;
+  label: string;
   onPress?: () => void;
   variant?: 'contained' | 'outlined';
 };

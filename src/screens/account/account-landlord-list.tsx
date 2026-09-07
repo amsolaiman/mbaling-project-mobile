@@ -40,7 +40,7 @@ export default function AccountLandlordList({
     alert({
       message:
         'Approving this request will list the student as tenant. Do you want to continue?',
-      buttons: [{ text: 'CANCEL' }, { text: 'YES', variant: 'contained' }],
+      buttons: [{ label: 'Cancel' }, { label: 'Yes', variant: 'contained' }],
     });
   };
 
@@ -48,7 +48,7 @@ export default function AccountLandlordList({
     console.log('User: ', id);
     alert({
       message: 'Are you sure you want to reject this request?',
-      buttons: [{ text: 'CANCEL' }, { text: 'YES', variant: 'contained' }],
+      buttons: [{ label: 'Cancel' }, { label: 'Yes', variant: 'contained' }],
     });
   };
 
@@ -56,7 +56,7 @@ export default function AccountLandlordList({
     console.log('User: ', id);
     alert({
       message: 'Are you sure you want to delete this tenant?',
-      buttons: [{ text: 'CANCEL' }, { text: 'YES', variant: 'contained' }],
+      buttons: [{ label: 'Cancel' }, { label: 'Yes', variant: 'contained' }],
     });
   };
 

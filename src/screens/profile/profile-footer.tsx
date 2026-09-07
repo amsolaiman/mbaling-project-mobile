@@ -60,8 +60,8 @@ export default function ProfileFooter({ id, mapLink, chatLink }: Props) {
       message:
         'An application request will be sent to the landlord. Do you want to continue?',
       buttons: [
-        { text: 'CANCEL' },
-        { text: 'YES', onPress: onSubmit, variant: 'contained' },
+        { label: 'Cancel' },
+        { label: 'Yes', onPress: onSubmit, variant: 'contained' },
       ],
     });
   };
