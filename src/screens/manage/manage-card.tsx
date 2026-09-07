@@ -39,7 +39,7 @@ export default function ManageCard({ item }: Props) {
   const handleDelete = () => {
     alert({
       message: 'Are you sure you want to delete this post?',
-      buttons: [{ text: 'CANCEL' }, { text: 'YES', variant: 'contained' }],
+      buttons: [{ label: 'Cancel' }, { label: 'Yes', variant: 'contained' }],
     });
   };
 

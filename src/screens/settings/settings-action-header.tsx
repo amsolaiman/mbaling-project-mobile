@@ -48,8 +48,8 @@ export default function SettingsActionHeader({
         message:
           'Are you sure you want to leave this screen? Any unsaved changes will be lost.',
         buttons: [
-          { text: 'CANCEL' },
-          { text: 'YES', onPress: router.back, variant: 'contained' },
+          { label: 'Cancel' },
+          { label: 'Yes', onPress: router.back, variant: 'contained' },
         ],
       });
     } else {

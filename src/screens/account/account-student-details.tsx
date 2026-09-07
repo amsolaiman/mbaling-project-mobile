@@ -75,14 +75,14 @@ export default function AccountStudentDetails() {
   const handleDelete = () => {
     alert({
       message: 'Are you sure you want to delete this request?',
-      buttons: [{ text: 'CANCEL' }, { text: 'YES', variant: 'contained' }],
+      buttons: [{ label: 'Cancel' }, { label: 'Yes', variant: 'contained' }],
     });
   };
 
   const handleRemove = () => {
     alert({
       message: 'Are you sure you want to remove this housing address?',
-      buttons: [{ text: 'CANCEL' }, { text: 'YES', variant: 'contained' }],
+      buttons: [{ label: 'Cancel' }, { label: 'Yes', variant: 'contained' }],
     });
   };
 
