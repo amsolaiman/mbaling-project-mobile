@@ -86,32 +86,30 @@ export default function RootLayout() {
   };
 
   return (
-    <AuthProvider>
-      <SafeAreaProvider>
-        <ThemeProvider
-          value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
-        >
-          <PaperProvider theme={paperTheme}>
-            <CustomAlertProvider>
-              <AuthConsumer>
-                <Routes />
-              </AuthConsumer>
-            </CustomAlertProvider>
-          </PaperProvider>
-        </ThemeProvider>
-      </SafeAreaProvider>
-    </AuthProvider>
+    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      <PaperProvider theme={paperTheme}>
+        <CustomAlertProvider>
+          <SafeAreaProvider>
+            <AuthProvider>
+              <Routes />
+            </AuthProvider>
+          </SafeAreaProvider>
+        </CustomAlertProvider>
+      </PaperProvider>
+    </ThemeProvider>
   );
 }
 
 function Routes() {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <Stack>
-        {ROOT_ROUTES.map(({ name, options }) => (
-          <Stack.Screen key={name} name={name} options={options} />
-        ))}
-      </Stack>
-    </SafeAreaView>
+    <AuthConsumer>
+      <SafeAreaView style={{ flex: 1 }}>
+        <Stack>
+          {ROOT_ROUTES.map(({ name, options }) => (
+            <Stack.Screen key={name} name={name} options={options} />
+          ))}
+        </Stack>
+      </SafeAreaView>
+    </AuthConsumer>
   );
 }
