@@ -9,7 +9,7 @@ import { COLOR_PRIMARY, COMMON_COLORS } from '@/constants/theme';
 // hooks
 import { useTheme } from '@/hooks/use-theme';
 // styles
-import { Fonts, Spacing } from '@/styles';
+import { Spacing } from '@/styles';
 
 //
 import { CustomAlertContext } from './alert-context';
@@ -70,7 +70,9 @@ export default function CustomAlertProvider({
             ]}
           >
             {alertConfig.title && (
-              <ThemedText style={styles.title}>{alertConfig.title}</ThemedText>
+              <ThemedText font={600} style={styles.title}>
+                {alertConfig.title}
+              </ThemedText>
             )}
 
             {typeof alertConfig.message === 'string' ? (
@@ -114,7 +116,6 @@ const styles = StyleSheet.create({
     borderRadius: Spacing.one,
   },
   title: {
-    ...Fonts[600],
     padding: Spacing.four,
     paddingBottom: 0,
     fontSize: 20,

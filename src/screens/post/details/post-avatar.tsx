@@ -10,7 +10,7 @@ import { ThemedText, ThemedView } from '@/components/themed-native';
 // hooks
 import { useTheme } from '@/hooks/use-theme';
 // styles
-import { Fonts, Spacing } from '@/styles';
+import { Spacing } from '@/styles';
 
 // ----------------------------------------------------------------------
 
@@ -39,7 +39,7 @@ export default function PostAvatar({
         <Avatar size={48} src={avatarUrl} />
 
         <View style={{ flex: 1 }}>
-          <ThemedText numberOfLines={1} style={{ ...Fonts[600], fontSize: 16 }}>
+          <ThemedText font={600} numberOfLines={1} style={{ fontSize: 16 }}>
             {name}
           </ThemedText>
           <ThemedText numberOfLines={1} style={{ fontSize: 14 }}>

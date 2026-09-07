@@ -13,7 +13,7 @@ import { ThemedText, ThemedView } from '@/components/themed-native';
 import { useBoolean } from '@/hooks/use-boolean';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 // styles
-import { BOTTOM_TAB_BAR_INSET, Fonts, Spacing } from '@/styles';
+import { BOTTOM_TAB_BAR_INSET, Spacing } from '@/styles';
 // types
 import { PostResponse } from '@/types/posts';
 // utils
@@ -96,7 +96,9 @@ export default function HomeView() {
           <RefreshControl refreshing={refreshing.value} onRefresh={onRefresh} />
         }
         ListHeaderComponent={
-          <ThemedText style={styles.headerTitle}>FOR YOU</ThemedText>
+          <ThemedText font={700} style={styles.headerTitle}>
+            FOR YOU
+          </ThemedText>
         }
         ListHeaderComponentStyle={styles.header}
         ListFooterComponent={
@@ -129,7 +131,6 @@ const styles = StyleSheet.create({
     padding: Spacing.four,
   },
   headerTitle: {
-    ...Fonts[700],
     fontSize: 18,
   },
   footer: {

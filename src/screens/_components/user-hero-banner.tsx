@@ -6,7 +6,7 @@ import { ThemedText } from '@/components/themed-native';
 // constants
 import { COLOR_PRIMARY } from '@/constants/theme';
 // styles
-import { Fonts, Spacing } from '@/styles/';
+import { Spacing } from '@/styles/';
 
 // ----------------------------------------------------------------------
 
@@ -31,7 +31,7 @@ export default function UserHeroBanner({ info, hideUsername = false }: Props) {
   return (
     <View style={styles.container}>
       {!hideUsername && (
-        <ThemedText numberOfLines={1} style={styles.username}>
+        <ThemedText font={600} numberOfLines={1} style={styles.username}>
           {'@' + username}
         </ThemedText>
       )}
@@ -39,7 +39,9 @@ export default function UserHeroBanner({ info, hideUsername = false }: Props) {
       <Avatar size={150} src={avatarUrl} style={styles.avatar} />
 
       <View style={{ paddingHorizontal: Spacing.one }}>
-        <ThemedText style={styles.name}>{displayName}</ThemedText>
+        <ThemedText font={700} style={styles.name}>
+          {displayName}
+        </ThemedText>
 
         <ThemedText style={styles.detail}>
           {detailLine1 + '\n' + detailLine2}
@@ -59,7 +61,6 @@ const styles = StyleSheet.create({
     borderBottomColor: COLOR_PRIMARY,
   },
   username: {
-    ...Fonts[600],
     textAlign: 'center',
     fontSize: 16,
     color: COLOR_PRIMARY,
@@ -70,7 +71,6 @@ const styles = StyleSheet.create({
     outlineColor: COLOR_PRIMARY,
   },
   name: {
-    ...Fonts[700],
     marginBottom: Spacing.two,
     textAlign: 'center',
     fontSize: 18,

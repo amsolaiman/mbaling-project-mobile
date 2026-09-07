@@ -10,7 +10,7 @@ import { ThemedText } from '@/components/themed-native';
 // constants
 import { GREY_COLORS } from '@/constants/theme';
 // styles
-import { BOTTOM_TAB_BAR_INSET, Fonts, Spacing } from '@/styles';
+import { BOTTOM_TAB_BAR_INSET, Spacing } from '@/styles';
 
 // ----------------------------------------------------------------------
 
@@ -41,7 +41,7 @@ export default function SettingsLogout() {
       <ThemedText style={styles.header}>Actions</ThemedText>
 
       <TouchableOpacity onPress={handleLogout} style={styles.item}>
-        <ThemedText numberOfLines={1} style={styles.title}>
+        <ThemedText font={600} numberOfLines={1} style={styles.title}>
           Log out
         </ThemedText>
       </TouchableOpacity>
@@ -64,7 +64,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    ...Fonts[600],
     flex: 1,
     fontSize: 18,
   },

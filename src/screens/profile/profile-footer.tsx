@@ -118,9 +118,9 @@ const styles = StyleSheet.create({
     right: 0,
   },
   buttonLabel: {
+    ...Fonts[500],
+    fontSize: 14,
     marginVertical: Spacing.four,
     marginHorizontal: Spacing.five,
-    fontSize: 14,
-    ...Fonts[500],
   },
 });

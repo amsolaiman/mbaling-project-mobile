@@ -12,7 +12,7 @@ import { COMMON_COLORS, GREY_COLORS } from '@/constants/theme';
 // hooks
 import { useColorScheme } from '@/hooks/use-color-scheme';
 // styles
-import { BOTTOM_TAB_BAR_INSET, Fonts, Spacing } from '@/styles';
+import { BOTTOM_TAB_BAR_INSET, Spacing } from '@/styles';
 // types
 import {
   StudentApplicationResponse,
@@ -91,8 +91,8 @@ export default function AccountStudentDetails() {
       {current && (
         <View style={styles.wrapper}>
           <ThemedText
+            font={600}
             style={{
-              ...Fonts[600],
               fontSize: 16,
               color:
                 colorScheme === 'light'
@@ -125,8 +125,8 @@ export default function AccountStudentDetails() {
       {pending && (
         <View style={styles.wrapper}>
           <ThemedText
+            font={600}
             style={{
-              ...Fonts[600],
               fontSize: 16,
               color:
                 colorScheme === 'light'

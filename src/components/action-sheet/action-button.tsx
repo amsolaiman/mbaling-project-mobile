@@ -21,7 +21,7 @@ import { COMMON_COLORS, GREY_COLORS } from '@/constants/theme';
 // hooks
 import { useColorScheme } from '@/hooks/use-color-scheme';
 // styles
-import { Fonts, Spacing } from '@/styles';
+import { Spacing } from '@/styles';
 
 //
 import { socialsReaderIcon, socialsReaderUrl } from './action-socials';
@@ -59,7 +59,7 @@ const ActionButton: React.FC<ActionButtonProps> = ({
         {icon}
       </Pressable>
 
-      <ThemedText numberOfLines={1} style={styles.label}>
+      <ThemedText font={300} numberOfLines={1} style={styles.label}>
         {label}
       </ThemedText>
     </View>
@@ -83,7 +83,6 @@ const styles = StyleSheet.create({
     borderRadius: '50%',
   },
   label: {
-    ...Fonts[300],
     width: '100%',
     textAlign: 'center',
     fontSize: 12,
