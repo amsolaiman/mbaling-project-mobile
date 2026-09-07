@@ -4,7 +4,7 @@ import { StyleSheet, View } from 'react-native';
 // components
 import { ThemedText, ThemedView } from '@/components/themed-native';
 // styles
-import { Fonts, Spacing } from '@/styles';
+import { Spacing } from '@/styles';
 
 // ----------------------------------------------------------------------
 
@@ -26,7 +26,7 @@ export default function SettingsHeader({
       <View style={styles.actionLeft}>{actionLeft}</View>
 
       <View style={styles.label}>
-        <ThemedText numberOfLines={1} style={styles.title}>
+        <ThemedText font={500} numberOfLines={1} style={styles.title}>
           {title}
         </ThemedText>
       </View>
@@ -54,7 +54,6 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   title: {
-    ...Fonts[500],
     fontSize: 18,
     maxWidth: '50%',
   },

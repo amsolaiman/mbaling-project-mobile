@@ -17,7 +17,7 @@ import { ThemedText } from '@/components/themed-native';
 import { ACCOUNT_SETTINGS_CONFIG } from '@/constants/settings';
 import { COLOR_PRIMARY, GREY_COLORS } from '@/constants/theme';
 // styles
-import { Fonts, Spacing } from '@/styles';
+import { Spacing } from '@/styles';
 // types
 import { IUserItem } from '@/types/users';
 // utils
@@ -51,7 +51,7 @@ export default function SettingsAccountList() {
 
         const renderContent = (
           <View style={[styles.item, isLast && { marginBottom: Spacing.six }]}>
-            <ThemedText numberOfLines={1} style={styles.title}>
+            <ThemedText font={600} numberOfLines={1} style={styles.title}>
               {item.label}
             </ThemedText>
 
@@ -113,7 +113,7 @@ export default function SettingsAccountList() {
             style={styles.avatar}
           />
 
-          <ThemedText style={{ ...Fonts[600], fontSize: 18 }}>
+          <ThemedText font={600} style={{ fontSize: 18 }}>
             {'@' + userDetails?.username}
           </ThemedText>
         </>
@@ -150,7 +150,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    ...Fonts[600],
     flex: 1,
     fontSize: 18,
   },

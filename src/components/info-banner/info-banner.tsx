@@ -9,7 +9,7 @@ import { COMMON_COLORS, GREY_COLORS } from '@/constants/theme';
 // hooks
 import { useColorScheme } from '@/hooks/use-color-scheme';
 // constants
-import { Fonts, Spacing } from '@/styles';
+import { Spacing } from '@/styles';
 
 // ----------------------------------------------------------------------
 
@@ -32,6 +32,7 @@ export default function InfoBanner({
     <View style={styles.container}>
       <View style={styles.textWrapper}>
         <ThemedText
+          font={600}
           style={[
             styles.title,
             {
@@ -75,7 +76,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    ...Fonts[600],
     marginBottom: Spacing.oneHalf,
     fontSize: 16,
   },

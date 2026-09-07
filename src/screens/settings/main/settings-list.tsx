@@ -16,7 +16,7 @@ import { GREY_COLORS } from '@/constants/theme';
 // hooks
 import { useTheme } from '@/hooks/use-theme';
 // styles
-import { Fonts, Spacing } from '@/styles';
+import { Spacing } from '@/styles';
 // utils
 import { isExternalUrl } from '@/utils/url';
 
@@ -42,7 +42,7 @@ export default function SettingsList() {
 
         const renderContent = (
           <View style={[styles.item, isLast && { marginBottom: Spacing.six }]}>
-            <ThemedText numberOfLines={1} style={styles.title}>
+            <ThemedText font={600} numberOfLines={1} style={styles.title}>
               {item.label}
             </ThemedText>
 
@@ -116,7 +116,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    ...Fonts[600],
     flex: 1,
     fontSize: 18,
   },

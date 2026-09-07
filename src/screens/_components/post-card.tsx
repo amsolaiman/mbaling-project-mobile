@@ -90,7 +90,11 @@ export default function PostCard({ item, hideProfile = false }: Props) {
             >
               <Avatar size={24} src={avatarUrl} />
 
-              <ThemedText numberOfLines={1} style={styles.profileName}>
+              <ThemedText
+                font={600}
+                numberOfLines={1}
+                style={styles.profileName}
+              >
                 {name}
               </ThemedText>
             </TouchableOpacity>
@@ -156,7 +160,6 @@ const styles = StyleSheet.create({
     gap: Spacing.one,
   },
   profileName: {
-    ...Fonts[600],
     flex: 1,
     fontSize: 12,
   },

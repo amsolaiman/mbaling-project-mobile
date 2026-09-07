@@ -11,7 +11,7 @@ import { ThemedText, ThemedView } from '@/components/themed-native';
 // constants
 import { COMMON_COLORS } from '@/constants/theme';
 // styles
-import { Fonts, Spacing } from '@/styles';
+import { Spacing } from '@/styles';
 // types
 import { PostResponse } from '@/types/posts';
 // utils
@@ -77,7 +77,9 @@ export default function PostView() {
 
         <ThemedView style={styles.infoContainer}>
           <View style={styles.infoHeading}>
-            <ThemedText style={styles.heading}>{data?.title}</ThemedText>
+            <ThemedText font={600} style={styles.heading}>
+              {data?.title}
+            </ThemedText>
             <ThemedText
               style={styles.heading}
             >{`PHP ${data?.price || 0}/mon`}</ThemedText>
@@ -120,7 +122,6 @@ const styles = StyleSheet.create({
     gap: Spacing.two,
   },
   heading: {
-    ...Fonts[600],
     fontSize: 20,
     textAlign: 'center',
   },

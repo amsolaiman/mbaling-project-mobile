@@ -10,7 +10,7 @@ import { COMMON_COLORS, GREY_COLORS } from '@/constants/theme';
 // hooks
 import { useColorScheme } from '@/hooks/use-color-scheme';
 // styles
-import { Fonts, Spacing } from '@/styles';
+import { Spacing } from '@/styles';
 // types
 import {
   HousingApplicantResponse,
@@ -90,8 +90,8 @@ export default function AccountLandlordList({
       {!!pendingList?.length && (
         <View style={styles.listWrapper}>
           <ThemedText
+            font={600}
             style={{
-              ...Fonts[600],
               fontSize: 16,
               color:
                 colorScheme === 'light'
@@ -108,8 +108,8 @@ export default function AccountLandlordList({
 
       <View style={styles.listWrapper}>
         <ThemedText
+          font={600}
           style={{
-            ...Fonts[600],
             fontSize: 16,
             color:
               colorScheme === 'light'

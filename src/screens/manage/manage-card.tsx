@@ -11,7 +11,7 @@ import { ThemedText } from '@/components/themed-native';
 // constants
 import { COLOR_ACCENT, COLOR_PRIMARY, COMMON_COLORS } from '@/constants/theme';
 // styles
-import { Fonts, Spacing } from '@/styles';
+import { Spacing } from '@/styles';
 
 // ----------------------------------------------------------------------
 
@@ -48,7 +48,7 @@ export default function ManageCard({ item }: Props) {
       <View style={styles.imageWrapper}>
         <Image source={{ uri: imageUrl }} style={styles.image} />
 
-        <ThemedText numberOfLines={2} style={styles.title}>
+        <ThemedText font={500} numberOfLines={2} style={styles.title}>
           {title}
         </ThemedText>
       </View>
@@ -90,7 +90,6 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   title: {
-    ...Fonts[500],
     padding: Spacing.three,
     position: 'absolute',
     bottom: 0,

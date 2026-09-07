@@ -12,7 +12,7 @@ import { COLOR_PRIMARY, COLOR_SECONDARY, GREY_COLORS } from '@/constants/theme';
 // hooks
 import { useTheme } from '@/hooks/use-theme';
 // styles
-import { Fonts, Spacing } from '@/styles';
+import { Spacing } from '@/styles';
 
 //
 import useActionSheetActions from './_actions';
@@ -39,13 +39,17 @@ const ActionSheet = forwardRef<ActionSheetRef, DefaultActionSheetProps>(
           backgroundColor: color.backgroundCard,
         }}
       >
-        <ThemedText style={styles.title}>SHARE TO</ThemedText>
+        <ThemedText font={600} style={styles.title}>
+          SHARE TO
+        </ThemedText>
 
         <View style={styles.metaContainer}>
           <Image source={{ uri: imageUrl }} style={styles.metaImage} />
 
           <View style={styles.metaInfo}>
-            <ThemedText style={styles.infoTitle}>{title}</ThemedText>
+            <ThemedText font={500} style={styles.infoTitle}>
+              {title}
+            </ThemedText>
             <ThemedText style={styles.infoLink}>{link}</ThemedText>
           </View>
         </View>
@@ -77,7 +81,6 @@ const styles = StyleSheet.create({
     width: Spacing.three,
   },
   title: {
-    ...Fonts[600],
     padding: Spacing.two,
     textAlign: 'center',
     color: COLOR_PRIMARY,
@@ -104,7 +107,6 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   infoTitle: {
-    ...Fonts[500],
     fontSize: 16,
   },
   infoLink: {

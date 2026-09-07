@@ -10,7 +10,7 @@ import { COMMON_COLORS } from '@/constants/theme';
 // hooks
 import { useColorScheme } from '@/hooks/use-color-scheme';
 // styles
-import { Colors, Fonts, Spacing } from '@/styles';
+import { Colors, Spacing } from '@/styles';
 
 // ----------------------------------------------------------------------
 
@@ -46,7 +46,7 @@ export default function UserActionCard({ data, onApprove, onReject }: Props) {
         <Avatar size={48} src={avatarUrl} />
 
         <View style={{ flex: 1 }}>
-          <ThemedText numberOfLines={1} style={{ ...Fonts[600], fontSize: 16 }}>
+          <ThemedText font={600} numberOfLines={1} style={{ fontSize: 16 }}>
             {name}
           </ThemedText>
           <ThemedText numberOfLines={1} style={{ fontSize: 14 }}>

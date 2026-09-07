@@ -10,7 +10,7 @@ import { ThemedText, ThemedView } from '@/components/themed-native';
 // hooks
 import { useBoolean } from '@/hooks/use-boolean';
 // styles
-import { BOTTOM_TAB_BAR_INSET, Fonts, Spacing } from '@/styles';
+import { BOTTOM_TAB_BAR_INSET, Spacing } from '@/styles';
 // types
 import { PostResponse } from '@/types/posts';
 import { UserLandlordResponse } from '@/types/users';
@@ -84,7 +84,9 @@ export default function ManageView() {
           <RefreshControl refreshing={refreshing.value} onRefresh={onRefresh} />
         }
         ListHeaderComponent={
-          <ThemedText style={styles.headerTitle}>YOUR POSTS</ThemedText>
+          <ThemedText font={700} style={styles.headerTitle}>
+            YOUR POSTS
+          </ThemedText>
         }
         ListHeaderComponentStyle={styles.header}
         ListEmptyComponent={<ManageNoResult />}
@@ -114,7 +116,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   headerTitle: {
-    ...Fonts[700],
     fontSize: 18,
   },
 });
