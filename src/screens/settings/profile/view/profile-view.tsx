@@ -50,7 +50,7 @@ export default function SettingsProfileView() {
     middleName: Yup.string().required('Middle name is required'),
     gender: Yup.string().required('Gender is required'),
     dateOfBirth: Yup.mixed<Date | string>()
-      .test('is-valid-date', 'Date of birth is required', (value) => !!value)
+      .test('is-valid-date', 'Must be a valid date', (value) => !!value)
       .required('Date of birth is required'),
   });
 

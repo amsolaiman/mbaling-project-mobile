@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 import { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
@@ -27,28 +29,45 @@ import { UserActionCard } from '../_components';
 
 // ----------------------------------------------------------------------
 
-export default function AccountStudentDetails() {
+function SectionTitle({ children }: { children: string }) {
   const colorScheme = useColorScheme() ?? 'light';
 
+  return (
+    <ThemedText
+      font={600}
+      style={{
+        fontSize: 16,
+        color:
+          colorScheme === 'light' ? GREY_COLORS[700] : COMMON_COLORS.white.main,
+      }}
+    >
+      {children}
+    </ThemedText>
+  );
+}
+
+// ----------------------------------------------------------------------
+
+export default function AccountStudentDetails() {
   const { user } = useAuthContext();
   const userDetails = user as UserStudentResponse;
 
   const { alert } = useCustomAlert();
 
   const [current, setCurrent] = useState<StudentHousingResponse>();
-
   const [pending, setPending] = useState<StudentApplicationResponse>();
 
   const getData = useCallback(async () => {
     const currentHousing = userDetails?.details?.housingId;
     const pendingHousing = userDetails?.details?.applicationId;
 
+    if (!currentHousing && !pendingHousing) return;
+
     try {
       if (currentHousing) {
         const response = await axios.get(
           API_ENDPOINTS.student.housing(userDetails?.id)
         );
-
         setCurrent(response.data);
       }
 
@@ -56,15 +75,12 @@ export default function AccountStudentDetails() {
         const response = await axios.get(
           API_ENDPOINTS.student.application(userDetails?.id)
         );
-
         setPending(response.data);
       }
-
-      if (!currentHousing && !pendingHousing) return;
     } catch (error) {
       const message =
         typeof error === 'string' ? error : (error as Error).message;
-      throw new Error(message);
+      console.error(message);
     }
   }, [userDetails]);
 
@@ -90,18 +106,7 @@ export default function AccountStudentDetails() {
     <View style={styles.container}>
       {current && (
         <View style={styles.wrapper}>
-          <ThemedText
-            font={600}
-            style={{
-              fontSize: 16,
-              color:
-                colorScheme === 'light'
-                  ? GREY_COLORS[700]
-                  : COMMON_COLORS.white.main,
-            }}
-          >
-            Campus housing
-          </ThemedText>
+          <SectionTitle>Campus housing</SectionTitle>
 
           <UserActionCard
             data={{
@@ -124,18 +129,7 @@ export default function AccountStudentDetails() {
 
       {pending && (
         <View style={styles.wrapper}>
-          <ThemedText
-            font={600}
-            style={{
-              fontSize: 16,
-              color:
-                colorScheme === 'light'
-                  ? GREY_COLORS[700]
-                  : COMMON_COLORS.white.main,
-            }}
-          >
-            Pending
-          </ThemedText>
+          <SectionTitle>Pending</SectionTitle>
 
           <UserActionCard
             data={{
