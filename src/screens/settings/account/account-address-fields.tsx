@@ -147,7 +147,7 @@ export default function SettingsAccountAddressFields({ isEdit }: Props) {
 
       <RHFTextField
         name="addressLine1"
-        label="Address line"
+        label="Address details"
         //
         mode="flat"
         disabled={!isEdit}
@@ -213,11 +213,11 @@ const SelectField: React.FC<SelectFieldProps> = ({
         const handleSelect = (select: string) => {
           field.onChange(select);
           onClose();
+
           if (name === 'addressLine4' && select !== addressLine4) {
             setValue('addressLine3', null);
             setValue('addressLine2', null);
           }
-
           if (name === 'addressLine3' && select !== addressLine3) {
             setValue('addressLine2', null);
           }

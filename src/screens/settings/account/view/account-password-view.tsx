@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import {
   Keyboard,
@@ -42,21 +42,25 @@ type FormValuesProps = {
 export default function SettingsAccountPasswordView() {
   const edit = useBoolean();
 
-  const show = useBoolean();
+  const [show, setShow] = useState({
+    oldPassword: false,
+    newPassword: false,
+    confirmPassword: false,
+  });
 
   const AccountSettingsSchema = Yup.object().shape({
     oldPassword: Yup.string().required('Old password is required'),
     newPassword: Yup.string()
       .required('New password is required')
-      .min(8, 'Password must be at least 8 characters')
+      .min(8, 'Must be at least 8 characters')
       .test(
         'no-match',
-        'New password must be different than old password',
+        'Must be different than old password',
         (value, { parent }) => value !== parent.oldPassword
       ),
     confirmPassword: Yup.string()
       .required('Confirm password is required')
-      .oneOf([Yup.ref('newPassword')], 'Passwords must match'),
+      .oneOf([Yup.ref('newPassword')], 'Must match new password'),
   });
 
   const defaultValues = {
@@ -86,11 +90,32 @@ export default function SettingsAccountPasswordView() {
     }
   }, []);
 
-  const renderEye = (
+  const handleFormSubmit = useCallback(
+    (): Promise<boolean> =>
+      new Promise((resolve) => {
+        handleSubmit(
+          async (data) => {
+            await onSubmit(data);
+            resolve(true);
+          },
+          () => resolve(false)
+        )();
+      }),
+    [handleSubmit, onSubmit]
+  );
+
+  const toggleVisibility = useCallback((field: keyof typeof show) => {
+    setShow((prev) => ({ ...prev, [field]: !prev[field] }));
+  }, []);
+
+  const renderEye = (field: keyof typeof show) => (
     <TextInput.Icon
       icon={() => (
-        <Pressable onPress={show.onToggle} disabled={!edit.value}>
-          {show.value ? (
+        <Pressable
+          onPress={() => toggleVisibility(field)}
+          disabled={!edit.value}
+        >
+          {show[field] ? (
             <IconEye variant="solid" size={24} color={GREY_COLORS[300]} />
           ) : (
             <IconEye variant="outline" size={24} color={GREY_COLORS[300]} />
@@ -99,12 +124,6 @@ export default function SettingsAccountPasswordView() {
       )}
     />
   );
-
-  const RHFProps = {
-    disabled: !edit.value,
-    secureTextEntry: !show.value,
-    right: renderEye,
-  };
 
   return (
     <FormProvider {...methods}>
@@ -119,7 +138,7 @@ export default function SettingsAccountPasswordView() {
               title="Password"
               isEdit={edit.value}
               onEdit={edit.onTrue}
-              onSubmit={handleSubmit(onSubmit)}
+              onSubmit={handleFormSubmit}
             />
 
             <View style={styles.formContainer}>
@@ -127,21 +146,27 @@ export default function SettingsAccountPasswordView() {
                 name="oldPassword"
                 label="Enter old password"
                 mode="flat"
-                {...RHFProps}
+                disabled={!edit.value}
+                secureTextEntry={!show.oldPassword}
+                right={renderEye('oldPassword')}
               />
 
               <RHFTextField
                 name="newPassword"
                 label="Enter new password"
                 mode="flat"
-                {...RHFProps}
+                disabled={!edit.value}
+                secureTextEntry={!show.newPassword}
+                right={renderEye('newPassword')}
               />
 
               <RHFTextField
                 name="confirmPassword"
                 label="Confirm new password"
                 mode="flat"
-                {...RHFProps}
+                disabled={!edit.value}
+                secureTextEntry={!show.confirmPassword}
+                right={renderEye('confirmPassword')}
               />
             </View>
           </ThemedView>

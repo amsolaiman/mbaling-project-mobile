@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import { router } from 'expo-router';
 import { useCallback, useMemo } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { ScrollView, StyleSheet } from 'react-native';
@@ -89,7 +88,6 @@ export default function SettingsProfileView() {
   const onSubmit = useCallback(async (data: FormValuesProps) => {
     try {
       await new Promise((resolve) => setTimeout(resolve, 2000));
-      router.back();
       console.info('DATA', data);
     } catch (error) {
       const message =
@@ -97,6 +95,20 @@ export default function SettingsProfileView() {
       console.error(message);
     }
   }, []);
+
+  const handleFormSubmit = useCallback(
+    (): Promise<boolean> =>
+      new Promise((resolve) => {
+        handleSubmit(
+          async (data) => {
+            await onSubmit(data);
+            resolve(true);
+          },
+          () => resolve(false)
+        )();
+      }),
+    [handleSubmit, onSubmit]
+  );
 
   return (
     <FormProvider {...methods}>
@@ -110,7 +122,7 @@ export default function SettingsProfileView() {
             title="Edit profile"
             isEdit={edit.value}
             onEdit={edit.onTrue}
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={handleFormSubmit}
           />
 
           <ScrollView

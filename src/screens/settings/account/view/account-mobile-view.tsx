@@ -46,7 +46,8 @@ export default function SettingsAccountMobileView() {
     phoneNumber: Yup.string()
       .required('Mobile number is required')
       .matches(/^\d+$/, 'Must be a valid mobile number')
-      .min(10, 'Must be a valid mobile number'),
+      .min(10, 'Must be a valid mobile number')
+      .max(10, 'Must be a valid mobile number'),
   });
 
   const defaultValues = useMemo(
@@ -77,6 +78,20 @@ export default function SettingsAccountMobileView() {
     }
   }, []);
 
+  const handleFormSubmit = useCallback(
+    (): Promise<boolean> =>
+      new Promise((resolve) => {
+        handleSubmit(
+          async (data) => {
+            await onSubmit(data);
+            resolve(true);
+          },
+          () => resolve(false)
+        )();
+      }),
+    [handleSubmit, onSubmit]
+  );
+
   return (
     <FormProvider {...methods}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -90,7 +105,7 @@ export default function SettingsAccountMobileView() {
               title="Mobile number"
               isEdit={edit.value}
               onEdit={edit.onTrue}
-              onSubmit={handleSubmit(onSubmit)}
+              onSubmit={handleFormSubmit}
             />
 
             <View style={styles.formContainer}>

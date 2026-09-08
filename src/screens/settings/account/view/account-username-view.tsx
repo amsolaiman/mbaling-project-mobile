@@ -44,7 +44,7 @@ export default function SettingsAccountUsernameView() {
   const AccountSettingsSchema = Yup.object().shape({
     username: Yup.string()
       .required('Username is required')
-      .min(8, 'Username must be at least 8 characters'),
+      .min(8, 'Must be at least 8 characters'),
   });
 
   const defaultValues = useMemo(
@@ -75,6 +75,20 @@ export default function SettingsAccountUsernameView() {
     }
   }, []);
 
+  const handleFormSubmit = useCallback(
+    (): Promise<boolean> =>
+      new Promise((resolve) => {
+        handleSubmit(
+          async (data) => {
+            await onSubmit(data);
+            resolve(true);
+          },
+          () => resolve(false)
+        )();
+      }),
+    [handleSubmit, onSubmit]
+  );
+
   return (
     <FormProvider {...methods}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -88,7 +102,7 @@ export default function SettingsAccountUsernameView() {
               title="Username"
               isEdit={edit.value}
               onEdit={edit.onTrue}
-              onSubmit={handleSubmit(onSubmit)}
+              onSubmit={handleFormSubmit}
             />
 
             <View style={styles.formContainer}>

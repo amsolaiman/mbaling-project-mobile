@@ -75,6 +75,20 @@ export default function SettingsAccountEmailView() {
     }
   }, []);
 
+  const handleFormSubmit = useCallback(
+    (): Promise<boolean> =>
+      new Promise((resolve) => {
+        handleSubmit(
+          async (data) => {
+            await onSubmit(data);
+            resolve(true);
+          },
+          () => resolve(false)
+        )();
+      }),
+    [handleSubmit, onSubmit]
+  );
+
   return (
     <FormProvider {...methods}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -88,7 +102,7 @@ export default function SettingsAccountEmailView() {
               title="E-mail"
               isEdit={edit.value}
               onEdit={edit.onTrue}
-              onSubmit={handleSubmit(onSubmit)}
+              onSubmit={handleFormSubmit}
             />
 
             <View style={styles.formContainer}>

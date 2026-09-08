@@ -42,7 +42,7 @@ export default function SettingsAccountHousingView() {
   const userDetails = user as UserLandlordResponse;
 
   const AccountSettingsSchema = Yup.object().shape({
-    housingName: Yup.string().required('Name is required'),
+    housingName: Yup.string().required('Housing name is required'),
   });
 
   const defaultValues = useMemo(
@@ -73,6 +73,20 @@ export default function SettingsAccountHousingView() {
     }
   }, []);
 
+  const handleFormSubmit = useCallback(
+    (): Promise<boolean> =>
+      new Promise((resolve) => {
+        handleSubmit(
+          async (data) => {
+            await onSubmit(data);
+            resolve(true);
+          },
+          () => resolve(false)
+        )();
+      }),
+    [handleSubmit, onSubmit]
+  );
+
   return (
     <FormProvider {...methods}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -86,7 +100,7 @@ export default function SettingsAccountHousingView() {
               title="Housing name"
               isEdit={edit.value}
               onEdit={edit.onTrue}
-              onSubmit={handleSubmit(onSubmit)}
+              onSubmit={handleFormSubmit}
             />
 
             <View style={styles.formContainer}>
