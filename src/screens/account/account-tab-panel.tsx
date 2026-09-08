@@ -29,7 +29,7 @@ type TabProps = {
   title: string;
   isActive: boolean;
   onPress: VoidFunction;
-  badgeCount: number | null;
+  badgeCount?: number;
 };
 
 const Tab: React.FC<TabProps> = ({ title, isActive, onPress, badgeCount }) => {
@@ -115,13 +115,10 @@ export default function AccountTabPanel() {
   }, [getPendingData, getCurrentData]);
 
   const TABS = [
-    {
-      name: 'setup',
-      badgeCount: null,
-    },
+    { name: 'setup' },
     {
       name: 'list',
-      badgeCount: pending?.length ?? null,
+      badgeCount: pending?.length,
     },
   ];
 

@@ -21,28 +21,6 @@ import { UserLandlordResponse } from '@/types/users';
 
 // ----------------------------------------------------------------------
 
-export default function AccountLandlordSetup() {
-  const { user } = useAuthContext();
-  const userDetails = user as UserLandlordResponse;
-
-  return (
-    <View style={styles.container}>
-      <LinkForm type="chat" link={userDetails?.details?.chatLink} />
-
-      <LinkForm type="map" link={userDetails?.details?.mapLink} />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    gap: Spacing.five,
-  },
-});
-
-// ----------------------------------------------------------------------
-
 type FormValuesProps = {
   input: string | null | undefined;
 };
@@ -159,5 +137,27 @@ const formStyles = StyleSheet.create({
   button: {
     minWidth: 90,
     alignSelf: 'flex-end',
+  },
+});
+
+// ----------------------------------------------------------------------
+
+export default function AccountLandlordSetup() {
+  const { user } = useAuthContext();
+  const userDetails = user as UserLandlordResponse;
+
+  return (
+    <View style={styles.container}>
+      <LinkForm type="chat" link={userDetails?.details?.chatLink} />
+
+      <LinkForm type="map" link={userDetails?.details?.mapLink} />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    gap: Spacing.five,
   },
 });
