@@ -19,7 +19,7 @@ type Props = {
   title: string;
   isEdit: boolean;
   onEdit: VoidFunction;
-  onSubmit: VoidFunction;
+  onSubmit: () => Promise<boolean>;
 };
 
 export default function SettingsActionHeader({
@@ -38,8 +38,10 @@ export default function SettingsActionHeader({
       return;
     }
 
-    await onSubmit();
-    router.back();
+    const success = await onSubmit();
+    if (success) {
+      router.back();
+    }
   }, [isEdit, onEdit, onSubmit]);
 
   const handleReturn = useCallback(() => {
