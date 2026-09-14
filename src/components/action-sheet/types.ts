@@ -32,7 +32,6 @@ export type ActionButtonLinkProps = ActionBasicProps & {
 };
 
 export enum SocialAppNames {
-  DISCORD = 'Discord',
   MESSENGER = 'Messenger',
   TELEGRAM = 'Telegram',
   VIBER = 'Viber',

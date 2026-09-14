@@ -4,7 +4,6 @@ import { Platform } from 'react-native';
 
 // assets
 import {
-  IconSocialDiscord,
   IconSocialMessenger,
   IconSocialTelegram,
   IconSocialViber,
@@ -17,7 +16,6 @@ import { SocialAppNames } from './types';
 // ----------------------------------------------------------------------
 
 const URL_SCHEMES: Record<SocialAppNames, string> = {
-  [SocialAppNames.DISCORD]: 'discord://',
   [SocialAppNames.MESSENGER]: 'fb-messenger://',
   [SocialAppNames.TELEGRAM]: 'tg://',
   [SocialAppNames.VIBER]: 'viber://',
@@ -41,8 +39,6 @@ export default socialAppsChecking;
 
 export const socialsReaderIcon = (name: string): React.ReactNode => {
   switch (name) {
-    case SocialAppNames.DISCORD:
-      return <IconSocialDiscord size={30} />;
     case SocialAppNames.MESSENGER:
       return <IconSocialMessenger size={30} />;
     case SocialAppNames.TELEGRAM:
@@ -60,13 +56,6 @@ export const socialsReaderUrl = (name: string, message: string): string => {
   const encoded = encodeURIComponent(message);
 
   switch (name) {
-    case SocialAppNames.DISCORD:
-      return (
-        Platform.select({
-          ios: `discord://`,
-          android: `discord://invite?text=${encoded}`,
-        }) ?? ''
-      );
     case SocialAppNames.MESSENGER:
       return (
         Platform.select({

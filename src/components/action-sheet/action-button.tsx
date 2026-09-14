@@ -45,6 +45,8 @@ const ActionButton: React.FC<ActionButtonProps> = ({
   return (
     <View style={styles.container}>
       <Pressable
+        accessibilityRole="button"
+        accessibilityLabel={label}
         onPress={onPress}
         style={[
           styles.button,
@@ -105,13 +107,18 @@ const ActionButtonLink: React.FC<ActionButtonLinkProps> = ({
   const handlePress = useCallback(async () => {
     try {
       const url = buildUrl(buildShareMessage(meta));
+      const canOpen = await Linking.canOpenURL(url).catch(() => false);
 
-      await Linking.openURL(url).catch(() => {
+      if (!canOpen) {
         alert({ message: 'Failed to open app.' });
-      });
+        return;
+      }
+
+      await Linking.openURL(url);
       onClose();
     } catch (error) {
       console.error(error);
+      alert({ message: 'Failed to open app.' });
     }
   }, [alert, buildUrl, meta, onClose]);
 
@@ -124,14 +131,17 @@ export const ActionButtonCopy: React.FC<ActionBasicProps> = ({
   meta,
   onClose = () => {},
 }) => {
+  const { alert } = useCustomAlert();
+
   const handlePress = useCallback(async () => {
     try {
       await Clipboard.setStringAsync(meta.link);
       onClose();
     } catch (error) {
       console.error(error);
+      alert({ message: 'Failed to copy link.' });
     }
-  }, [meta.link, onClose]);
+  }, [alert, meta.link, onClose]);
 
   return (
     <ActionButton
@@ -146,14 +156,17 @@ export const ActionButtonShare: React.FC<ActionBasicProps> = ({
   meta,
   onClose = () => {},
 }) => {
+  const { alert } = useCustomAlert();
+
   const handlePress = useCallback(async () => {
     try {
       await Share.share({ message: buildShareMessage(meta) });
       onClose();
     } catch (error) {
       console.error(error);
+      alert({ message: 'Failed to share post.' });
     }
-  }, [meta, onClose]);
+  }, [alert, meta, onClose]);
 
   return (
     <ActionButton

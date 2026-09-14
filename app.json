@@ -12,7 +12,6 @@
       "icon": "./assets/expo.icon",
       "infoPlist": {
         "LSApplicationQueriesSchemes": [
-          "discord",
           "fb-messenger",
           "tg",
           "viber",
