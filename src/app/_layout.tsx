@@ -1,4 +1,5 @@
 import { useFonts } from 'expo-font';
+import { NavigationBar } from 'expo-navigation-bar';
 import {
   DarkTheme as NativeDarkTheme,
   DefaultTheme as NativeDefaultTheme,
@@ -6,6 +7,7 @@ import {
   Stack,
   ThemeProvider,
 } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import { useColorScheme } from 'react-native';
 import {
@@ -31,6 +33,7 @@ import fontConfig from '@/styles/font-config';
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
+  const isDarkMode = colorScheme === 'dark';
 
   const [loaded, error] = useFonts({
     'Metropolis-Thin': require('../../assets/fonts/Metropolis-100.ttf'),
@@ -86,12 +89,14 @@ export default function RootLayout() {
   };
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <ThemeProvider value={isDarkMode ? DarkTheme : DefaultTheme}>
       <PaperProvider theme={paperTheme}>
         <CustomAlertProvider>
           <SafeAreaProvider>
             <AuthProvider>
+              <StatusBar style={isDarkMode ? 'light' : 'dark'} />
               <Routes />
+              <NavigationBar style={isDarkMode ? 'light' : 'dark'} />
             </AuthProvider>
           </SafeAreaProvider>
         </CustomAlertProvider>
