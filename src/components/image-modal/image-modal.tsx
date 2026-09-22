@@ -79,7 +79,11 @@ export default function ImageModal({ src, open, onClose }: Props) {
     <Portal>
       <Modal visible={open} contentContainerStyle={styles.container}>
         <View style={styles.buttons}>
-          <TouchableOpacity onPress={handleDownload}>
+          <TouchableOpacity
+            accessibilityRole="button"
+            accessibilityLabel="Download image"
+            onPress={handleDownload}
+          >
             <IconDownload
               variant="outline"
               size={32}
@@ -87,7 +91,11 @@ export default function ImageModal({ src, open, onClose }: Props) {
             />
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={handleShare}>
+          <TouchableOpacity
+            accessibilityRole="button"
+            accessibilityLabel="Share image"
+            onPress={handleShare}
+          >
             <IconActionShare
               variant="outline"
               size={32}
@@ -95,7 +103,11 @@ export default function ImageModal({ src, open, onClose }: Props) {
             />
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={onClose}>
+          <TouchableOpacity
+            accessibilityRole="button"
+            accessibilityLabel="Close image modal"
+            onPress={onClose}
+          >
             <IconCloseCircle
               variant="outline"
               size={32}

@@ -102,6 +102,8 @@ export default function LoginView() {
             <LoginInputField name="password" label="password" secureTextEntry />
 
             <Button
+              accessibilityRole="button"
+              accessibilityLabel="Log in"
               onPress={handleSubmit(onSubmit)}
               style={styles.button}
               //

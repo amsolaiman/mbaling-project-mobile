@@ -19,6 +19,8 @@ export default function HomePostButton() {
   return (
     <View style={[styles.container, styles.shadow]}>
       <Pressable
+        accessibilityRole="button"
+        accessibilityLabel="Create new post"
         onPress={handlePress}
         android_ripple={{
           color: COMMON_COLORS.black[20],

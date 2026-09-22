@@ -12,6 +12,7 @@ import { IconArrow } from '@/assets/icons';
 import { useAuthContext } from '@/auth/hooks';
 // components
 import Avatar from '@/components/_ui/avatar';
+import useCustomAlert from '@/components/custom-alert';
 import { ThemedText } from '@/components/themed-native';
 // constants
 import { ACCOUNT_SETTINGS_CONFIG } from '@/constants/settings';
@@ -31,6 +32,8 @@ import SettingsAccountFooter from './account-footer';
 export default function SettingsAccountList() {
   const { user } = useAuthContext();
   const userDetails = user as IUserItem;
+
+  const { alert } = useCustomAlert();
 
   const sections = useMemo(
     () =>
@@ -67,6 +70,8 @@ export default function SettingsAccountList() {
         if (item.isNotLive) {
           return (
             <TouchableOpacity
+              accessibilityRole="button"
+              accessibilityLabel={`${item.label} option`}
               onPress={() =>
                 alert({
                   title: 'Oops!',
@@ -95,7 +100,12 @@ export default function SettingsAccountList() {
                 : undefined
             }
           >
-            <TouchableOpacity>{renderContent}</TouchableOpacity>
+            <TouchableOpacity
+              accessibilityRole="button"
+              accessibilityLabel={`${item.label} option`}
+            >
+              {renderContent}
+            </TouchableOpacity>
           </Link>
         );
       }}

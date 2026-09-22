@@ -63,7 +63,11 @@ export default function SettingsActionHeader({
     <SettingsHeader
       title={title}
       actionLeft={
-        <Pressable onPress={handleReturn}>
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel="Go back"
+          onPress={handleReturn}
+        >
           <IconArrowAlt
             direction="left"
             variant="outline"
@@ -73,7 +77,12 @@ export default function SettingsActionHeader({
         </Pressable>
       }
       actionRight={
-        <Button onPress={handlePress} mode={isEdit ? 'contained' : 'outlined'}>
+        <Button
+          accessibilityRole="button"
+          accessibilityLabel={isEdit ? 'Save changes' : 'Edit details'}
+          onPress={handlePress}
+          mode={isEdit ? 'contained' : 'outlined'}
+        >
           {isEdit ? 'Save' : 'Edit'}
         </Button>
       }

@@ -145,6 +145,8 @@ export default function PostFormUpload() {
                       {file ? (
                         <>
                           <TouchableOpacity
+                            accessibilityRole="button"
+                            accessibilityLabel={`Select image ${index + 1}`}
                             onPress={() => setSelectedIndex(index)}
                           >
                             <Image
@@ -154,6 +156,8 @@ export default function PostFormUpload() {
                           </TouchableOpacity>
 
                           <TouchableOpacity
+                            accessibilityRole="button"
+                            accessibilityLabel={`Remove image ${index + 1}`}
                             style={styles.button}
                             onPress={() => handleRemove(index)}
                           >
@@ -168,7 +172,11 @@ export default function PostFormUpload() {
                           </TouchableOpacity>
                         </>
                       ) : (
-                        <TouchableOpacity onPress={handleUpload}>
+                        <TouchableOpacity
+                          accessibilityRole="button"
+                          accessibilityLabel="Add image"
+                          onPress={handleUpload}
+                        >
                           <IconAddSquare
                             variant="outline"
                             size={PLACEHOLDER_WIDTH}

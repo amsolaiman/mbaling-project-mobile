@@ -55,6 +55,8 @@ export default function ManageCard({ item }: Props) {
 
       <View style={styles.actionWrapper}>
         <Button
+          accessibilityRole="button"
+          accessibilityLabel="Edit post"
           onPress={handleEdit}
           dense
           mode="contained"
@@ -64,7 +66,11 @@ export default function ManageCard({ item }: Props) {
           Edit
         </Button>
 
-        <TouchableOpacity onPress={handleDelete}>
+        <TouchableOpacity
+          accessibilityRole="button"
+          accessibilityLabel="Delete post"
+          onPress={handleDelete}
+        >
           <IconTrashBin size={24} color={COLOR_PRIMARY} />
         </TouchableOpacity>
       </View>

@@ -63,7 +63,11 @@ export default function PostCarousel({ data }: Props) {
   };
 
   const renderItem = ({ item }: { item: Omit<IPostUploads, 'postId'> }) => (
-    <Pressable onPress={() => handleOpenModal(item.imgUrl)}>
+    <Pressable
+      accessibilityRole="button"
+      accessibilityLabel="Open image modal"
+      onPress={() => handleOpenModal(item.imgUrl)}
+    >
       <Image source={{ uri: item.imgUrl }} style={styles.image} />
     </Pressable>
   );

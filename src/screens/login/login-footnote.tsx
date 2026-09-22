@@ -23,7 +23,12 @@ export default function LoginFootnote() {
 
   return (
     <View style={styles.container}>
-      <Pressable onPress={handleClick} style={styles.button}>
+      <Pressable
+        accessibilityRole="button"
+        accessibilityLabel="Sign up instruction"
+        onPress={handleClick}
+        style={styles.button}
+      >
         <Text style={styles.text}>Sign-up for an account</Text>
 
         <IconQuestionMark

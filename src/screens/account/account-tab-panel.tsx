@@ -38,7 +38,12 @@ const Tab: React.FC<TabProps> = ({ title, isActive, onPress, badgeCount }) => {
 
   return (
     <View>
-      <TouchableOpacity onPress={onPress}>
+      <TouchableOpacity
+        accessibilityRole="button"
+        accessibilityLabel={`${title} tab`}
+        accessibilityState={{ selected: isActive }}
+        onPress={onPress}
+      >
         {title === 'setup' && (
           <IconSettings
             variant={isActive ? 'solid' : 'outline'}

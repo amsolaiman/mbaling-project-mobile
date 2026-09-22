@@ -99,6 +99,8 @@ export default function PostFooter({ id, title, chatLink }: Props) {
       >
         {isStudent && (
           <Button
+            accessibilityRole="button"
+            accessibilityLabel="Send application"
             onPress={handleApply}
             labelStyle={styles.buttonLabel}
             disabled={
