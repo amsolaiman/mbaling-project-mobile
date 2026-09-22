@@ -53,7 +53,11 @@ export default function InfoBanner({
         )}
       </View>
 
-      <Pressable onPress={onPress}>
+      <Pressable
+        accessibilityRole="button"
+        accessibilityLabel="More information"
+        onPress={onPress}
+      >
         <IconQuestionMark
           variant="outline"
           size={42}

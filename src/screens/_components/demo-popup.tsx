@@ -32,7 +32,12 @@ export default function DemoPopop() {
   };
 
   return (
-    <Pressable onPress={handleClick} style={styles.button}>
+    <Pressable
+      accessibilityRole="button"
+      accessibilityLabel="View demo credentials"
+      onPress={handleClick}
+      style={styles.button}
+    >
       <IconQuestionMark
         variant="outline"
         size={36}

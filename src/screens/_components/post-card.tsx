@@ -74,7 +74,12 @@ export default function PostCard({ item, hideProfile = false }: Props) {
   return (
     <>
       <View style={styles.container}>
-        <Pressable onPress={handlePressPost} style={styles.imageWrapper}>
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel="View post"
+          onPress={handlePressPost}
+          style={styles.imageWrapper}
+        >
           <Image source={{ uri: imageUrl }} style={styles.image} />
 
           <Text numberOfLines={2} style={styles.title}>
@@ -85,6 +90,8 @@ export default function PostCard({ item, hideProfile = false }: Props) {
         {!hideProfile && (
           <View style={styles.infoWrapper}>
             <TouchableOpacity
+              accessibilityRole="button"
+              accessibilityLabel="View profile"
               onPress={handlePressProfile}
               style={styles.profile}
             >
@@ -99,7 +106,11 @@ export default function PostCard({ item, hideProfile = false }: Props) {
               </ThemedText>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => sheetRef.current?.show()}>
+            <TouchableOpacity
+              accessibilityRole="button"
+              accessibilityLabel="More actions"
+              onPress={() => sheetRef.current?.show()}
+            >
               <IconMenuDots size={24} color={colors.text} />
             </TouchableOpacity>
           </View>

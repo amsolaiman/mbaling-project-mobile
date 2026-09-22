@@ -48,7 +48,11 @@ export default function PostAvatar({
         </View>
       </View>
 
-      <TouchableOpacity onPress={handlePress}>
+      <TouchableOpacity
+        accessibilityRole="button"
+        accessibilityLabel="View profile"
+        onPress={handlePress}
+      >
         <IconArrow
           variant="outline"
           direction="right-up"

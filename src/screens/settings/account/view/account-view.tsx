@@ -20,7 +20,11 @@ export default function SettingsAccountView() {
       <SettingsHeader
         title="Account settings"
         actionLeft={
-          <Pressable onPress={router.back}>
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel="Go back"
+            onPress={router.back}
+          >
             <IconArrowAlt
               direction="left"
               variant="outline"

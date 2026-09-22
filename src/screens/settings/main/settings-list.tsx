@@ -58,6 +58,8 @@ export default function SettingsList() {
         if (item.isNotLive) {
           return (
             <TouchableOpacity
+              accessibilityRole="button"
+              accessibilityLabel={`${item.label} option`}
               onPress={() =>
                 alert({
                   title: 'Oops!',
@@ -86,7 +88,12 @@ export default function SettingsList() {
                 : undefined
             }
           >
-            <TouchableOpacity>{renderContent}</TouchableOpacity>
+            <TouchableOpacity
+              accessibilityRole="button"
+              accessibilityLabel={`${item.label} option`}
+            >
+              {renderContent}
+            </TouchableOpacity>
           </Link>
         );
       }}

@@ -40,7 +40,12 @@ export default function SettingsLogout() {
     <View style={styles.container}>
       <ThemedText style={styles.header}>Actions</ThemedText>
 
-      <TouchableOpacity onPress={handleLogout} style={styles.item}>
+      <TouchableOpacity
+        accessibilityRole="button"
+        accessibilityLabel="Log out"
+        onPress={handleLogout}
+        style={styles.item}
+      >
         <ThemedText font={600} numberOfLines={1} style={styles.title}>
           Log out
         </ThemedText>
