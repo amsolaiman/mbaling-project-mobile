@@ -1,5 +1,4 @@
 import { useFonts } from 'expo-font';
-import { NavigationBar } from 'expo-navigation-bar';
 import {
   DarkTheme as NativeDarkTheme,
   DefaultTheme as NativeDefaultTheme,
@@ -7,7 +6,6 @@ import {
   Stack,
   ThemeProvider,
 } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import { useColorScheme } from 'react-native';
 import {
@@ -16,7 +14,7 @@ import {
   PaperProvider,
   configureFonts,
 } from 'react-native-paper';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 // auth
 import { AuthConsumer, AuthProvider } from '@/auth/context';
@@ -94,9 +92,7 @@ export default function RootLayout() {
         <CustomAlertProvider>
           <SafeAreaProvider>
             <AuthProvider>
-              <StatusBar style={isDarkMode ? 'light' : 'dark'} />
               <Routes />
-              <NavigationBar style={isDarkMode ? 'light' : 'dark'} />
             </AuthProvider>
           </SafeAreaProvider>
         </CustomAlertProvider>
@@ -108,13 +104,11 @@ export default function RootLayout() {
 function Routes() {
   return (
     <AuthConsumer>
-      <SafeAreaView style={{ flex: 1 }}>
-        <Stack>
-          {ROOT_ROUTES.map(({ name, options }) => (
-            <Stack.Screen key={name} name={name} options={options} />
-          ))}
-        </Stack>
-      </SafeAreaView>
+      <Stack>
+        {ROOT_ROUTES.map(({ name, options }) => (
+          <Stack.Screen key={name} name={name} options={options} />
+        ))}
+      </Stack>
     </AuthConsumer>
   );
 }

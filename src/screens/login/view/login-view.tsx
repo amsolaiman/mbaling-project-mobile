@@ -1,7 +1,9 @@
 /* eslint-disable no-console */
 
 import { yupResolver } from '@hookform/resolvers/yup';
+import { NavigationBar } from 'expo-navigation-bar';
 import { router } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
 import { useCallback } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import {
@@ -11,6 +13,7 @@ import {
   View,
 } from 'react-native';
 import { Button } from 'react-native-paper';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import * as Yup from 'yup';
 
 // auth
@@ -83,46 +86,64 @@ export default function LoginView() {
   );
 
   return (
-    <FormProvider {...methods}>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-        <ThemedKeyboardAvoidingView>
-          <ThemedView
-            style={styles.container}
-            loadingState={isSubmitting}
-            loadingCaption="Logging in..."
+    <View style={styles.screen}>
+      <StatusBar style="light" />
+      <NavigationBar style="light" />
+
+      <SafeAreaView style={{ flex: 1 }}>
+        <FormProvider {...methods}>
+          <TouchableWithoutFeedback
+            onPress={Keyboard.dismiss}
+            accessible={false}
           >
-            {process.env.EXPO_PUBLIC_ENV === 'uat' && <DemoPopop />}
+            <ThemedKeyboardAvoidingView>
+              <ThemedView
+                style={styles.container}
+                loadingState={isSubmitting}
+                loadingCaption="Logging in..."
+              >
+                {process.env.EXPO_PUBLIC_ENV === 'uat' && <DemoPopop />}
 
-            <View style={styles.logo}>
-              <Logo disabledLink variant="vertical" color="light" />
-            </View>
+                <View style={styles.logo}>
+                  <Logo disabledLink variant="vertical" color="light" />
+                </View>
 
-            <LoginInputField name="username" label="username" />
+                <LoginInputField name="username" label="username" />
 
-            <LoginInputField name="password" label="password" secureTextEntry />
+                <LoginInputField
+                  name="password"
+                  label="password"
+                  secureTextEntry
+                />
 
-            <Button
-              accessibilityRole="button"
-              accessibilityLabel="Log in"
-              onPress={handleSubmit(onSubmit)}
-              style={styles.button}
-              //
-              buttonColor={COMMON_COLORS.white.main}
-              textColor={COLOR_PRIMARY}
-              labelStyle={styles.label}
-            >
-              log-in
-            </Button>
+                <Button
+                  accessibilityRole="button"
+                  accessibilityLabel="Log in"
+                  onPress={handleSubmit(onSubmit)}
+                  style={styles.button}
+                  //
+                  buttonColor={COMMON_COLORS.white.main}
+                  textColor={COLOR_PRIMARY}
+                  labelStyle={styles.label}
+                >
+                  log-in
+                </Button>
 
-            <LoginFootnote />
-          </ThemedView>
-        </ThemedKeyboardAvoidingView>
-      </TouchableWithoutFeedback>
-    </FormProvider>
+                <LoginFootnote />
+              </ThemedView>
+            </ThemedKeyboardAvoidingView>
+          </TouchableWithoutFeedback>
+        </FormProvider>
+      </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+    backgroundColor: COLOR_PRIMARY,
+  },
   container: {
     flex: 1,
     position: 'relative',
