@@ -1,9 +1,9 @@
-import { Redirect, Stack } from 'expo-router';
+import { Redirect } from 'expo-router';
 
 // auth
 import { useAuthContext } from '@/auth/hooks';
-// constants
-import { MAIN_ROUTES } from '@/constants/routes';
+// components
+import { AppMain } from '@/components/app-layouts';
 
 // ----------------------------------------------------------------------
 
@@ -14,11 +14,5 @@ export default function MainLayout() {
     return <Redirect href="/login" />;
   }
 
-  return (
-    <Stack>
-      {MAIN_ROUTES.map(({ name, options }) => (
-        <Stack.Screen key={name} name={name} options={options} />
-      ))}
-    </Stack>
-  );
+  return <AppMain />;
 }
