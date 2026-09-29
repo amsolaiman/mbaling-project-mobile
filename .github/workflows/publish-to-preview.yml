@@ -163,4 +163,4 @@ jobs:
       - name: Run EAS update
         run: |
           MESSAGE=$(git log -1 --pretty=%s)
-          eas update --channel preview --platform android --message "$MESSAGE" --non-interactive
+          eas update --channel preview --platform android --environment preview --message "$MESSAGE" --non-interactive
