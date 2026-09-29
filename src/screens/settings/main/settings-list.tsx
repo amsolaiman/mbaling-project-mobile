@@ -16,12 +16,13 @@ import { GREY_COLORS } from '@/constants/theme';
 // hooks
 import { useTheme } from '@/hooks/use-theme';
 // styles
-import { Spacing } from '@/styles';
+import { BOTTOM_TAB_BAR_INSET, Spacing } from '@/styles';
 // utils
 import { isExternalUrl } from '@/utils/url';
 
 //
 import SettingsLogout from './settings-logout';
+import SettingsUpdate from './settings-update';
 
 // ----------------------------------------------------------------------
 
@@ -101,7 +102,17 @@ export default function SettingsList() {
         <ThemedText style={styles.header}>{section.title}</ThemedText>
       )}
       //
-      ListFooterComponent={<SettingsLogout />}
+      ListFooterComponent={
+        <View style={styles.actionContainer}>
+          <ThemedText style={styles.header}>Actions</ThemedText>
+
+          <View style={{ gap: Spacing.four }}>
+            <SettingsUpdate />
+
+            <SettingsLogout />
+          </View>
+        </View>
+      }
       ItemSeparatorComponent={() => <View style={{ height: Spacing.four }} />}
     />
   );
@@ -111,6 +122,9 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: Spacing.five,
     paddingHorizontal: Spacing.four,
+  },
+  actionContainer: {
+    paddingBottom: BOTTOM_TAB_BAR_INSET + Spacing.five,
   },
   header: {
     marginBottom: Spacing.four,
