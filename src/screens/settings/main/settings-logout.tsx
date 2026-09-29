@@ -1,16 +1,12 @@
 import { router } from 'expo-router';
 import { useCallback } from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 
 // hooks
 import { useAuthContext } from '@/auth/hooks';
 // components
 import useCustomAlert from '@/components/custom-alert';
 import { ThemedText } from '@/components/themed-native';
-// constants
-import { GREY_COLORS } from '@/constants/theme';
-// styles
-import { BOTTOM_TAB_BAR_INSET, Spacing } from '@/styles';
 
 // ----------------------------------------------------------------------
 
@@ -37,33 +33,20 @@ export default function SettingsLogout() {
   }, [logout, alert]);
 
   return (
-    <View style={styles.container}>
-      <ThemedText style={styles.header}>Actions</ThemedText>
-
-      <TouchableOpacity
-        accessibilityRole="button"
-        accessibilityLabel="Log out"
-        onPress={handleLogout}
-        style={styles.item}
-      >
-        <ThemedText font={600} numberOfLines={1} style={styles.title}>
-          Log out
-        </ThemedText>
-      </TouchableOpacity>
-    </View>
+    <TouchableOpacity
+      accessibilityRole="button"
+      accessibilityLabel="Log out"
+      onPress={handleLogout}
+      style={styles.item}
+    >
+      <ThemedText font={600} numberOfLines={1} style={styles.title}>
+        Log out
+      </ThemedText>
+    </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingBottom: BOTTOM_TAB_BAR_INSET + Spacing.five,
-  },
-  header: {
-    marginBottom: Spacing.four,
-    fontSize: 14,
-    color: GREY_COLORS[600],
-  },
   item: {
     flexDirection: 'row',
     alignItems: 'center',
