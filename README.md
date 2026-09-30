@@ -47,7 +47,6 @@ copy .env.sample .env
 
 Configure these values in `.env`:
 
-- `SYSTEM_TYPE` - must be set to `app`
 - `EXPO_PUBLIC_HOST_API` - URL of the mBALING backend API
 - `EXPO_PUBLIC_PSGC_API` - URL of the PSGC geographic data API
 

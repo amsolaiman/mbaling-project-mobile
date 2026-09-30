@@ -69,6 +69,8 @@ const reducer = (state: AuthStateType, action: ActionsType) => {
 
 // ----------------------------------------------------------------------
 
+const SYSTEM_TYPE = 'app';
+
 const STORAGE_KEY = 'accessToken';
 
 type Props = {
@@ -130,7 +132,7 @@ export function AuthProvider({ children }: Props) {
     const data = {
       username,
       password,
-      medium: process.env.SYSTEM_TYPE ?? 'app',
+      medium: SYSTEM_TYPE,
     };
 
     const response = await axios.post(API_ENDPOINTS.auth.login, data);

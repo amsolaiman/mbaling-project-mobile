@@ -3,10 +3,7 @@ import * as Yup from 'yup';
 // ----------------------------------------------------------------------
 
 export const envSchema = Yup.object({
-  // SYSTEM
-  SYSTEM_TYPE: Yup.string()
-    .required('SYSTEM_TYPE is required')
-    .oneOf(['app'], 'SYSTEM_TYPE must be set to "app"'),
+  // APP
   EXPO_PUBLIC_ENV: Yup.string()
     .required('EXPO_PUBLIC_ENV is required')
     .oneOf(['dev', 'uat', 'prod']),
