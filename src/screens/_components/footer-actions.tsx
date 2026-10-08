@@ -1,12 +1,14 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
+// components
+import { ThemedView } from '@/components/themed-native';
 // constants
 import { COMMON_COLORS, GREY_COLORS } from '@/constants/theme';
 // hooks
 import { useColorScheme } from '@/hooks/use-color-scheme';
-import { Colors, Spacing } from '@/styles';
 // styles
+import { Spacing } from '@/styles';
 
 // ----------------------------------------------------------------------
 
@@ -32,12 +34,10 @@ export default function FooterActions({
   const scheme = useColorScheme();
 
   return (
-    <View
+    <ThemedView
       style={[
         styles.container,
         {
-          backgroundColor:
-            Colors[scheme === 'unspecified' ? 'light' : scheme].backgroundCard,
           borderTopColor:
             scheme === 'light' ? GREY_COLORS[100] : COMMON_COLORS.white[40],
         },
@@ -60,7 +60,7 @@ export default function FooterActions({
           </TouchableOpacity>
         )}
       </View>
-    </View>
+    </ThemedView>
   );
 }
 

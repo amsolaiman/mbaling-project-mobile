@@ -87,7 +87,7 @@ export default function SettingsUpdate() {
 
   const rotate = spin.interpolate({
     inputRange: [0, 1],
-    outputRange: ['0deg', '360deg'],
+    outputRange: ['360deg', '0deg'],
   });
 
   const renderIcon = () => {

@@ -1,6 +1,7 @@
 import { NavigationBar } from 'expo-navigation-bar';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
+import { useEffect } from 'react';
 import { useColorScheme } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -16,10 +17,17 @@ export default function AppMain() {
   const colorScheme = useColorScheme();
   const isDarkMode = colorScheme === 'dark';
 
+  const modeStyle = isDarkMode ? 'light' : 'dark';
+
+  useEffect(() => {
+    StatusBar.setStyle(modeStyle);
+    NavigationBar.setStyle(modeStyle);
+  }, [modeStyle]);
+
   return (
     <ThemedView style={{ flex: 1 }}>
-      <StatusBar style={isDarkMode ? 'light' : 'dark'} />
-      <NavigationBar style={isDarkMode ? 'light' : 'dark'} />
+      <StatusBar style={modeStyle} />
+      <NavigationBar style={modeStyle} />
 
       <SafeAreaView style={{ flex: 1 }}>
         <Stack>
