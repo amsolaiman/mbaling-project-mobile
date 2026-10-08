@@ -4,7 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { NavigationBar } from 'expo-navigation-bar';
 import { router } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import {
   Keyboard,
@@ -84,6 +84,11 @@ export default function LoginView() {
     },
     [alert, login, reset]
   );
+
+  useEffect(() => {
+    StatusBar.setStyle('light');
+    NavigationBar.setStyle('light');
+  }, []);
 
   return (
     <View style={styles.screen}>
