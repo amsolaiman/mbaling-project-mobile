@@ -2,6 +2,16 @@ name: Publish to Preview
 
 on:
   workflow_dispatch:
+    inputs:
+      mode:
+        description: 'How to publish: auto (check fingerprint), build (force new EAS Build), update (force OTA EAS Update)'
+        type: choice
+        required: true
+        default: auto
+        options:
+          - auto
+          - build
+          - update
 
 jobs:
   guard:
@@ -21,14 +31,30 @@ jobs:
           sleep 30
 
   check-fingerprint:
-    name: Check native fingerprint
+    name: Decide build or update (${{ inputs.mode }})
     needs: guard
     if: github.ref == 'refs/heads/uat'
     runs-on: ubuntu-latest
     outputs:
-      needs-build: ${{ steps.compare.outputs.needs-build }}
+      # Only one of these steps ever sets a value, the other is skipped (empty output)
+      needs-build: ${{ steps.compare.outputs.needs-build || steps.forced.outputs.needs-build }}
     steps:
+      # "build" / "update": skip the fingerprint check and force the outcome
+      - name: Use selected mode
+        id: forced
+        if: inputs.mode != 'auto'
+        run: |
+          if [ "${{ inputs.mode }}" = "build" ]; then
+            echo "⚙️ Mode 'build' selected — running new EAS Build"
+            echo "needs-build=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "⚙️ Mode 'update' selected — running EAS Update"
+            echo "needs-build=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      # "auto": everything below only runs in auto mode
       - name: Checkout repository
+        if: inputs.mode == 'auto'
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
@@ -37,10 +63,12 @@ jobs:
       # Install pnpm first before setting up Node.js
       # Version is read automatically from `packageManager` in package.json
       - name: Setup pnpm
+        if: inputs.mode == 'auto'
         uses: pnpm/action-setup@v4
 
       # Install Node.js
       - name: Setup Node.js
+        if: inputs.mode == 'auto'
         uses: actions/setup-node@v6
         with:
           node-version: 24.0.0
@@ -48,6 +76,7 @@ jobs:
 
       # Install Expo and EAS
       - name: Setup Expo and EAS
+        if: inputs.mode == 'auto'
         uses: expo/expo-github-action@v8
         with:
           eas-version: latest
@@ -55,12 +84,14 @@ jobs:
 
       # Install dependencies
       - name: Install dependencies
+        if: inputs.mode == 'auto'
         run: pnpm install --frozen-lockfile
 
       # Compute the fingerprint of the current native code/config on this commit
       # Requires `runtimeVersion.policy: "fingerprint"` in app.json/app.config.*
       - name: Generate current fingerprint
         id: current
+        if: inputs.mode == 'auto'
         run: |
           npx expo-updates fingerprint:generate --platform android > fingerprint.json
           HASH=$(jq -r '.hash' fingerprint.json)
@@ -70,6 +101,7 @@ jobs:
       # Look up whether a finished preview build already exists that matches the current fingerprint
       - name: Check for a compatible existing build
         id: compare
+        if: inputs.mode == 'auto'
         run: |
           eas build:list \
             --platform android \
